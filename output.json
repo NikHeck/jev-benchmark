@@ -1,0 +1,398 @@
+{
+  "generated_at_utc": "2026-09-21T14:37:14.678331+00:00",
+  "configuration": {
+    "number_samples": 1,
+    "full_dataset_iterations": 1,
+    "classifications_per_strategy": 29,
+    "input_file": "input.csv",
+    "category_file": "category_input.json",
+    "tests_in_input_file": 29,
+    "multilingual_prompt_note": "The item title may be in any language and is not necessarily English. Interpret the title in its original language before choosing the COICOP category.",
+    "sampling": "number_samples is the number of complete dataset iterations. In every iteration, each strategy classifies every row in input_file exactly once."
+  },
+  "models": {
+    "openai_luna": {
+      "direct": {
+        "samples": 29,
+        "successes": 16,
+        "wrong_predictions": 13,
+        "api_errors": 0,
+        "failures": 13,
+        "success_rate": 0.5517241379310345,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 29,
+            "correct": 25,
+            "accuracy": 0.8620689655172413
+          },
+          "level_2": {
+            "eligible_samples": 27,
+            "correct": 22,
+            "accuracy": 0.8148148148148148
+          },
+          "level_3": {
+            "eligible_samples": 24,
+            "correct": 18,
+            "accuracy": 0.75
+          },
+          "level_4": {
+            "eligible_samples": 22,
+            "correct": 14,
+            "accuracy": 0.6363636363636364
+          },
+          "level_5": {
+            "eligible_samples": 20,
+            "correct": 8,
+            "accuracy": 0.4
+          }
+        },
+        "timing": {
+          "total_seconds": 52.819166196995866,
+          "seconds_per_item": 1.8213505585170988
+        },
+        "usage": {
+          "input_tokens": 413590,
+          "cached_input_tokens": 53848,
+          "cache_write_tokens": 359655,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 0,
+          "output_tokens": 493,
+          "api_requests_with_usage": 29,
+          "api_requests_per_item": 1.0
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 29,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "direct",
+        "model": "gpt-5.6-luna",
+        "cost": {
+          "known_total_usd": 0.09159971,
+          "complete_cost_attempts_total_usd": 0.09159971,
+          "known_cost_per_known_attempt_usd": 0.0031586106896551724,
+          "known_cost_lower_bound_per_attempt_usd": 0.0031586106896551724,
+          "unknown_cost_attempts": 0,
+          "prices_usd_per_1m_tokens": {
+            "input": 0.2,
+            "cached_input": 0.02,
+            "cache_write": 0.25,
+            "output": 1.2
+          }
+        }
+      },
+      "recursive": {
+        "samples": 29,
+        "successes": 15,
+        "wrong_predictions": 14,
+        "api_errors": 0,
+        "failures": 14,
+        "success_rate": 0.5172413793103449,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 29,
+            "correct": 23,
+            "accuracy": 0.7931034482758621
+          },
+          "level_2": {
+            "eligible_samples": 27,
+            "correct": 19,
+            "accuracy": 0.7037037037037037
+          },
+          "level_3": {
+            "eligible_samples": 24,
+            "correct": 15,
+            "accuracy": 0.625
+          },
+          "level_4": {
+            "eligible_samples": 22,
+            "correct": 12,
+            "accuracy": 0.5454545454545454
+          },
+          "level_5": {
+            "eligible_samples": 20,
+            "correct": 9,
+            "accuracy": 0.45
+          }
+        },
+        "timing": {
+          "total_seconds": 170.30272224399414,
+          "seconds_per_item": 5.8725076635860045
+        },
+        "usage": {
+          "input_tokens": 32519,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 0,
+          "output_tokens": 1938,
+          "api_requests_with_usage": 114,
+          "api_requests_per_item": 3.9310344827586206
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 29,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "recursive",
+        "model": "gpt-5.6-luna",
+        "cost": {
+          "known_total_usd": 0.008829400000000001,
+          "complete_cost_attempts_total_usd": 0.008829400000000001,
+          "known_cost_per_known_attempt_usd": 0.0003044620689655173,
+          "known_cost_lower_bound_per_attempt_usd": 0.0003044620689655173,
+          "unknown_cost_attempts": 0,
+          "prices_usd_per_1m_tokens": {
+            "input": 0.2,
+            "cached_input": 0.02,
+            "cache_write": 0.25,
+            "output": 1.2
+          }
+        }
+      }
+    },
+    "deepseek_flash": {
+      "direct": {
+        "samples": 29,
+        "successes": 19,
+        "wrong_predictions": 10,
+        "api_errors": 0,
+        "failures": 10,
+        "success_rate": 0.6551724137931034,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 29,
+            "correct": 28,
+            "accuracy": 0.9655172413793104
+          },
+          "level_2": {
+            "eligible_samples": 27,
+            "correct": 26,
+            "accuracy": 0.9629629629629629
+          },
+          "level_3": {
+            "eligible_samples": 24,
+            "correct": 22,
+            "accuracy": 0.9166666666666666
+          },
+          "level_4": {
+            "eligible_samples": 22,
+            "correct": 17,
+            "accuracy": 0.7727272727272727
+          },
+          "level_5": {
+            "eligible_samples": 20,
+            "correct": 12,
+            "accuracy": 0.6
+          }
+        },
+        "timing": {
+          "total_seconds": 32.07248973099922,
+          "seconds_per_item": 1.105947921758594
+        },
+        "usage": {
+          "input_tokens": 375821,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_hit_tokens": 371200,
+          "cache_miss_tokens": 4621,
+          "output_tokens": 203,
+          "api_requests_with_usage": 29,
+          "api_requests_per_item": 1.0
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 29,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "direct",
+        "model": "deepseek-flash",
+        "cost": {
+          "peak": {
+            "known_total_usd": 0.0038571,
+            "complete_cost_attempts_total_usd": 0.0038571,
+            "known_cost_per_known_attempt_usd": 0.00013300344827586207,
+            "known_cost_lower_bound_per_attempt_usd": 0.00013300344827586207,
+            "unknown_cost_attempts": 0,
+            "prices_usd_per_1m_tokens": {
+              "cache_hit_input": 0.006,
+              "cache_miss_input": 0.3,
+              "output": 1.2
+            }
+          },
+          "off_peak": {
+            "known_total_usd": 0.00192855,
+            "complete_cost_attempts_total_usd": 0.00192855,
+            "known_cost_per_known_attempt_usd": 6.650172413793103e-05,
+            "known_cost_lower_bound_per_attempt_usd": 6.650172413793103e-05,
+            "unknown_cost_attempts": 0,
+            "prices_usd_per_1m_tokens": {
+              "cache_hit_input": 0.003,
+              "cache_miss_input": 0.15,
+              "output": 0.6
+            }
+          }
+        }
+      },
+      "recursive": {
+        "samples": 29,
+        "successes": 16,
+        "wrong_predictions": 13,
+        "api_errors": 0,
+        "failures": 13,
+        "success_rate": 0.5517241379310345,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 29,
+            "correct": 23,
+            "accuracy": 0.7931034482758621
+          },
+          "level_2": {
+            "eligible_samples": 27,
+            "correct": 20,
+            "accuracy": 0.7407407407407407
+          },
+          "level_3": {
+            "eligible_samples": 24,
+            "correct": 17,
+            "accuracy": 0.7083333333333334
+          },
+          "level_4": {
+            "eligible_samples": 22,
+            "correct": 13,
+            "accuracy": 0.5909090909090909
+          },
+          "level_5": {
+            "eligible_samples": 20,
+            "correct": 10,
+            "accuracy": 0.5
+          }
+        },
+        "timing": {
+          "total_seconds": 106.42652257000191,
+          "seconds_per_item": 3.669880088620755
+        },
+        "usage": {
+          "input_tokens": 33501,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_hit_tokens": 7936,
+          "cache_miss_tokens": 25565,
+          "output_tokens": 854,
+          "api_requests_with_usage": 122,
+          "api_requests_per_item": 4.206896551724138
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 29,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "recursive",
+        "model": "deepseek-flash",
+        "cost": {
+          "peak": {
+            "known_total_usd": 0.008741916,
+            "complete_cost_attempts_total_usd": 0.008741916,
+            "known_cost_per_known_attempt_usd": 0.00030144537931034486,
+            "known_cost_lower_bound_per_attempt_usd": 0.00030144537931034486,
+            "unknown_cost_attempts": 0,
+            "prices_usd_per_1m_tokens": {
+              "cache_hit_input": 0.006,
+              "cache_miss_input": 0.3,
+              "output": 1.2
+            }
+          },
+          "off_peak": {
+            "known_total_usd": 0.004370958,
+            "complete_cost_attempts_total_usd": 0.004370958,
+            "known_cost_per_known_attempt_usd": 0.00015072268965517243,
+            "known_cost_lower_bound_per_attempt_usd": 0.00015072268965517243,
+            "unknown_cost_attempts": 0,
+            "prices_usd_per_1m_tokens": {
+              "cache_hit_input": 0.003,
+              "cache_miss_input": 0.15,
+              "output": 0.6
+            }
+          }
+        }
+      }
+    },
+    "typesafe_jev": {
+      "recursive": {
+        "samples": 29,
+        "successes": 15,
+        "wrong_predictions": 14,
+        "api_errors": 0,
+        "failures": 14,
+        "success_rate": 0.5172413793103449,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 29,
+            "correct": 25,
+            "accuracy": 0.8620689655172413
+          },
+          "level_2": {
+            "eligible_samples": 27,
+            "correct": 20,
+            "accuracy": 0.7407407407407407
+          },
+          "level_3": {
+            "eligible_samples": 24,
+            "correct": 17,
+            "accuracy": 0.7083333333333334
+          },
+          "level_4": {
+            "eligible_samples": 22,
+            "correct": 13,
+            "accuracy": 0.5909090909090909
+          },
+          "level_5": {
+            "eligible_samples": 20,
+            "correct": 10,
+            "accuracy": 0.5
+          }
+        },
+        "timing": {
+          "total_seconds": 52.23274546099492,
+          "seconds_per_item": 1.801129153827411
+        },
+        "usage": {
+          "input_tokens": 74499,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 0,
+          "output_tokens": 12875,
+          "api_requests_with_usage": 123,
+          "api_requests_per_item": 4.241379310344827
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 29,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "recursive",
+        "model": "jev-latest",
+        "cost": {
+          "known_total_usd": 0.003128958,
+          "complete_cost_attempts_total_usd": 0.003128958,
+          "known_cost_per_known_attempt_usd": 0.00010789510344827586,
+          "known_cost_lower_bound_per_attempt_usd": 0.00010789510344827586,
+          "unknown_cost_attempts": 0,
+          "input_price_usd_per_1m_tokens": 0.042,
+          "output_price_usd_per_1m_tokens": 0.0
+        }
+      }
+    }
+  }
+}

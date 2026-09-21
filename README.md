@@ -1,0 +1,221 @@
+# COICOP model benchmark
+
+Benchmark category classification against the official **COICOP 2018** taxonomy using:
+
+- OpenAI **GPT-5.6 Luna** (`gpt-5.6-luna`) — direct + recursive
+- DeepSeek **V4.1 Flash** (`deepseek-flash`) — direct + recursive
+- TypeSafe AI **Jev** (`jev-latest`) — recursive
+
+The project uses [`uv`](https://docs.astral.sh/uv/) for Python/dependency management.
+
+## Experiment matrix
+
+| Backend | Direct, all categories | Recursive tree walk |
+|---|---:|---:|
+| OpenAI Luna | yes | yes |
+| DeepSeek Flash | yes | yes |
+| TypeSafe Jev | no | yes |
+
+Every classification prompt explicitly states that **the item title may be in any language and is not necessarily English**.
+
+## Setup
+
+```bash
+uv sync --dev
+export OPENAI_API_KEY="..."
+export DEEPSEEK_API_KEY="..."
+export TYPESAFE_API_KEY="..."
+```
+
+Model IDs can be overridden with `OPENAI_MODEL`, `DEEPSEEK_MODEL`, and `TYPESAFE_MODEL`.
+
+## 1. Build the COICOP category tree
+
+```bash
+uv run python build_category_input.py
+```
+
+The script downloads the official UN COICOP 2018 Excel structure and creates `category_input.json`. IDs start at 0 and increase by 1 in source order after redundant pass-through categories are collapsed. By default, only household-expenditure divisions **01–13** are included; divisions 14–15 describe NPISH/government expenditure and are not candidates for ordinary consumer expenses.
+
+Each category contains the original requested fields plus explicit tree metadata:
+
+```json
+{
+  "id": 2,
+  "code": "01.1.1",
+  "title": "Cereals and cereal products",
+  "parent_id": 1,
+  "level": 3,
+  "is_optional_detail": false,
+  "children_ids": [3, 4],
+  "is_leaf": false
+}
+```
+
+### Collapsing redundant pass-through categories
+
+COICOP can repeat the same semantic category across adjacent levels. For example, a parent may be named `Breakfast cereals (ND)` while its only child is `Breakfast cereals`, or a standard class can be repeated as a trailing-zero subclass such as `01.2.3` -> `01.2.3.0`. Presenting both nodes would give a classifier duplicate valid answers.
+
+The build script therefore collapses a node when **both** conditions hold:
+
+1. it has exactly one direct child; and
+2. the parent/child titles are equivalent after normalizing punctuation/whitespace and stripping a trailing COICOP durability marker (`ND`, `SD`, `D`, `S`).
+
+Collapse is transitive. In an equivalent chain `A -> B -> C`, only the deepest category remains and the removed codes are retained as metadata:
+
+```json
+{
+  "id": 42,
+  "code": "01.2.3.0",
+  "title": "Tea, maté and other plant-derived products for infusion",
+  "collapsed_codes": ["01.2.3"],
+  "parent_id": 39,
+  "level": 4,
+  "is_optional_detail": false,
+  "children_ids": [],
+  "is_leaf": true
+}
+```
+
+The retained `level` is the original code depth, so the collapsed tree can intentionally skip redundant levels. The UN workbook also contains optional high-detail categories below the standard four COICOP levels; these are retained for receipt-line classification and marked with `is_optional_detail: true`. Because collapsing/filtering reassigns dense numeric IDs, regenerate or update `input.csv` after rebuilding `category_input.json`.
+
+The canonical tree is therefore produced once by the preparation script instead of reconstructed differently by each classifier. `benchmark.py` can still read an older flat category JSON and derive the tree for compatibility.
+
+Useful options:
+
+```bash
+uv run python build_category_input.py --help
+uv run python build_category_input.py --reuse-excel
+# Include the complete institutional COICOP scope, including divisions 14-15:
+uv run python build_category_input.py --include-all-divisions
+```
+
+## 2. Create `input.csv`
+
+The benchmark input requires exactly two semantic columns: `category_id` and `title`. `category_id` is the correct numeric category ID from the freshly generated `category_input.json`. Any other CSV columns are ignored, so you can keep your own `sample_id`, notes, merchant metadata, etc. in the file. Standard CSV quoting is supported, so titles may contain commas.
+
+```csv
+category_id,title
+42,Persil Color Waschmittel 4in1 Discs
+17,"Bio Vollmilch 3,8% 1L"
+```
+
+This is also valid; the extra columns do not affect the benchmark:
+
+```csv
+sample_id,category_id,title,notes
+1,42,Persil Color Waschmittel 4in1 Discs,difficult German receipt abbreviation
+2,17,"Bio Vollmilch 3,8% 1L",control
+```
+
+Titles may be German, English, or any other language. Rows with a missing/invalid `category_id` or an empty `title` are rejected before any paid API calls are made.
+
+## 3. Run
+
+```bash
+uv run python benchmark.py --number-samples 5
+```
+
+Defaults:
+
+- `--input-file input.csv`
+- `--output-file output.json`
+- `--category-file category_input.json`
+
+`--number-samples N` means **N complete passes over the entire input CSV**. Every strategy classifies every row once per pass. For example, with 30 input rows and `--number-samples 5`, each strategy performs 150 classifications.
+
+With `R` rows in `input.csv`, every strategy performs `N × R` classification attempts. Across the five configured strategies, the run performs `5 × N × R` classification attempts in total. For example, with 30 rows and `N=5`:
+
+- OpenAI direct: 150
+- OpenAI recursive: 150
+- DeepSeek direct: 150
+- DeepSeek recursive: 150
+- Jev recursive: 150
+- Total across strategies: 750
+
+A recursive classification attempt can contain several API requests; request counts and per-item request averages are reported separately.
+
+## Direct vs recursive classification
+
+### Direct
+
+OpenAI/DeepSeek receive the entire COICOP category list and choose one category in a single API request.
+
+### Recursive
+
+All recursive implementations use the same tree semantics:
+
+1. choose one root category;
+2. at the selected category, choose either the **current category itself** (stop) or one of its direct children;
+3. continue until the model stops or reaches a leaf.
+
+This makes OpenAI recursive, DeepSeek recursive, and Jev recursive directly comparable at the decision-strategy level.
+
+## Output structure
+
+Each strategy gets its own independent statistics object:
+
+```json
+{
+  "models": {
+    "openai_luna": {
+      "direct": { "...": "..." },
+      "recursive": { "...": "..." }
+    },
+    "deepseek_flash": {
+      "direct": { "...": "..." },
+      "recursive": { "...": "..." }
+    },
+    "typesafe_jev": {
+      "recursive": { "...": "..." }
+    }
+  }
+}
+```
+
+Each strategy reports:
+
+- exact successes, wrong predictions, API errors and success rate;
+- accuracy at each COICOP hierarchy level;
+- total and per-item latency;
+- token usage;
+- API requests and API requests per item;
+- measured cost and cost coverage;
+- up to five API/error examples.
+
+### Hierarchy accuracy
+
+Exact category accuracy treats every wrong final category equally. The hierarchy metrics also show whether the prediction remained on the correct branch. For example, predicting `Food -> Meat -> Pork` when the answer is `Food -> Meat -> Beef` can still be correct at levels 1 and 2.
+
+For each level, `eligible_samples` includes only tests whose expected category reaches that level. API errors count as incorrect for every eligible level.
+
+## Cost handling
+
+Correct and wrong model responses both count their full measured cost. If an API/parse failure still exposes usage, that usage is retained. If complete usage cannot be recovered, the attempt is marked `unknown_cost_attempts`, and `known_total_usd` is explicitly only a lower bound.
+
+For recursive classification, successful earlier subcalls remain counted even if a later subcall fails.
+
+DeepSeek reports **both peak and off-peak counterfactual costs** from the exact same measured token usage:
+
+| Token type | Peak | Off-peak |
+|---|---:|---:|
+| Cache-hit input / 1M | $0.006 | $0.003 |
+| Cache-miss input / 1M | $0.30 | $0.15 |
+| Output / 1M | $1.20 | $0.60 |
+
+Pricing constants are near the top of `benchmark.py`; verify them before important/long runs because provider pricing can change.
+
+## Tests
+
+```bash
+uv run pytest
+```
+
+The tests are local and do not call any paid model API.
+
+## Official references used when creating the repo
+
+- UN COICOP 2018: https://unstats.un.org/unsd/classifications/coicop
+- OpenAI models: https://developers.openai.com/api/docs/models
+- DeepSeek pricing: https://api-docs.deepseek.com/quick_start/pricing/
+- TypeSafe Choice: https://docs.typesafe.ai/primitives/choice

@@ -1,0 +1,7773 @@
+[
+  {
+    "code": "01",
+    "title": "Food and non-alcoholic beverages",
+    "id": 0,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      1,
+      53,
+      663
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1",
+    "title": "Food",
+    "id": 1,
+    "parent_id": 0,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      2,
+      6,
+      11,
+      18,
+      23,
+      27,
+      36,
+      44,
+      49
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.1",
+    "title": "Cereals and cereal products (ND)",
+    "id": 2,
+    "parent_id": 1,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      3,
+      4,
+      5,
+      415,
+      416,
+      417
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.1.1",
+    "title": "Cereals (ND)",
+    "id": 3,
+    "parent_id": 2,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      395,
+      396,
+      397,
+      398,
+      399,
+      400,
+      401,
+      402,
+      403
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.1.2",
+    "title": "Flour of cereals (ND)",
+    "id": 4,
+    "parent_id": 2,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      404,
+      405,
+      406,
+      407,
+      408,
+      409,
+      410,
+      411,
+      412
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.1.3",
+    "title": "Bread and bakery products (ND)",
+    "id": 5,
+    "parent_id": 2,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      413,
+      414
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.2",
+    "title": "Live animals, and meat and other parts of slaughtered land animals (ND)",
+    "id": 6,
+    "parent_id": 1,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      7,
+      8,
+      9,
+      10,
+      435
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.2.1",
+    "title": "Live land animals (ND)",
+    "id": 7,
+    "parent_id": 6,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      418,
+      419,
+      420,
+      421,
+      422,
+      423
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.2.2",
+    "title": "Meat, fresh, chilled or frozen (ND)",
+    "id": 8,
+    "parent_id": 6,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      424,
+      425,
+      426,
+      427,
+      428,
+      429,
+      430,
+      431
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.2.3",
+    "title": "Meat, dried, salted, in brine or smoked (ND)",
+    "id": 9,
+    "parent_id": 6,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      432,
+      433,
+      434
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.2.5",
+    "title": "Preparations of meat, offal, blood and other parts of slaughtered animals (ND)",
+    "id": 10,
+    "parent_id": 6,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      436,
+      437,
+      438,
+      439
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.3",
+    "title": "Fish and other seafood (ND)",
+    "id": 11,
+    "parent_id": 1,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      472
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.3.1",
+    "title": "Fish, live, fresh, chilled or frozen (ND)",
+    "id": 12,
+    "parent_id": 11,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      440,
+      441,
+      442,
+      443,
+      444,
+      445,
+      446
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.3.2",
+    "title": "Fish, dried, salted, in brine or smoked (ND)",
+    "id": 13,
+    "parent_id": 11,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      447,
+      448,
+      449
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.3.3",
+    "title": "Fish preparations (ND)",
+    "id": 14,
+    "parent_id": 11,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      450,
+      451,
+      452,
+      453
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.3.4",
+    "title": "Other seafood, live, fresh, chilled or frozen (ND)",
+    "id": 15,
+    "parent_id": 11,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      454,
+      455,
+      456,
+      457,
+      458,
+      459
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.3.5",
+    "title": "Other seafood, dried, salted, in brine or smoked (ND)",
+    "id": 16,
+    "parent_id": 11,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      460,
+      461,
+      462,
+      463,
+      464,
+      465
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.3.6",
+    "title": "Other seafood preparations (ND)",
+    "id": 17,
+    "parent_id": 11,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      466,
+      467,
+      468,
+      469,
+      470,
+      471
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.4",
+    "title": "Milk, other dairy products and eggs (ND)",
+    "id": 18,
+    "parent_id": 1,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      19,
+      20,
+      21,
+      22,
+      478,
+      489,
+      490,
+      491,
+      495
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.4.1",
+    "title": "Raw and whole milk (ND)",
+    "id": 19,
+    "parent_id": 18,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      473,
+      474,
+      475,
+      476,
+      477
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.4.3",
+    "title": "Other milk and cream (ND)",
+    "id": 20,
+    "parent_id": 18,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      479,
+      480,
+      481,
+      482
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.4.4",
+    "title": "Non-animal milk (ND)",
+    "id": 21,
+    "parent_id": 18,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      483,
+      484,
+      485,
+      486,
+      487,
+      488
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.4.8",
+    "title": "Eggs (ND)",
+    "id": 22,
+    "parent_id": 18,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      492,
+      493,
+      494
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.5",
+    "title": "Oils and fats (ND)",
+    "id": 23,
+    "parent_id": 1,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      24,
+      25,
+      26,
+      506
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.5.1",
+    "title": "Vegetable oils (ND)",
+    "id": 24,
+    "parent_id": 23,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      496,
+      497,
+      498,
+      499,
+      500,
+      501,
+      502,
+      503
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.5.2",
+    "title": "Butter and other oils and fats derived from milk (ND)",
+    "id": 25,
+    "parent_id": 23,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      504,
+      505
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.5.9",
+    "title": "Other animal oils and fats (ND)",
+    "id": 26,
+    "parent_id": 23,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      507,
+      508,
+      509,
+      510
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.6",
+    "title": "Fruits and nuts (ND)",
+    "id": 27,
+    "parent_id": 1,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      547
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.6.1",
+    "title": "Dates, figs and tropical fruits, fresh (ND)",
+    "id": 28,
+    "parent_id": 27,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      511,
+      512,
+      513,
+      514,
+      515,
+      516,
+      517,
+      518,
+      519
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.6.2",
+    "title": "Citrus fruits, fresh (ND)",
+    "id": 29,
+    "parent_id": 27,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      520,
+      521,
+      522,
+      523,
+      524
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.6.3",
+    "title": "Stone fruits and pome fruits, fresh (ND)",
+    "id": 30,
+    "parent_id": 27,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      525,
+      526,
+      527,
+      528,
+      529,
+      530,
+      531
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.6.4",
+    "title": "Berries, fresh (ND)",
+    "id": 31,
+    "parent_id": 27,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      532,
+      533,
+      534,
+      535,
+      536,
+      537,
+      538,
+      539
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.6.5",
+    "title": "Other fruits, fresh (ND)",
+    "id": 32,
+    "parent_id": 27,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      540,
+      541,
+      542,
+      543,
+      544,
+      545,
+      546
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.6.7",
+    "title": "Fruits, dried and dehydrated (ND)",
+    "id": 33,
+    "parent_id": 27,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      548,
+      549,
+      550
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.6.8",
+    "title": "Nuts, in shell or shelled (ND)",
+    "id": 34,
+    "parent_id": 27,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      551,
+      552,
+      553,
+      554,
+      555,
+      556,
+      557,
+      558,
+      559
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.6.9",
+    "title": "Fruits and nuts, ground, and in other preparations (ND)",
+    "id": 35,
+    "parent_id": 27,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      560,
+      561,
+      562,
+      563,
+      564
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.7",
+    "title": "Vegetables, tubers, plantains, cooking bananas and pulses (ND)",
+    "id": 36,
+    "parent_id": 1,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      612,
+      613
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.7.1",
+    "title": "Leafy or stem vegetables, fresh or chilled (ND)",
+    "id": 37,
+    "parent_id": 36,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      565,
+      566,
+      567,
+      568,
+      569,
+      570,
+      571,
+      572
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.7.2",
+    "title": "Fruit-bearing vegetables, fresh or chilled (ND)",
+    "id": 38,
+    "parent_id": 36,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      573,
+      574,
+      575,
+      576,
+      577,
+      578,
+      579
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.7.3",
+    "title": "Green leguminous vegetables, fresh or chilled (ND)",
+    "id": 39,
+    "parent_id": 36,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      580,
+      581,
+      582,
+      583,
+      584,
+      585
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.7.4",
+    "title": "Other vegetables, fresh or chilled (ND)",
+    "id": 40,
+    "parent_id": 36,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      586,
+      587,
+      588,
+      589,
+      590,
+      591,
+      592,
+      593,
+      594
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.7.5",
+    "title": "Tubers, plantains and cooking bananas, fresh or chilled (ND)",
+    "id": 41,
+    "parent_id": 36,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      595,
+      596,
+      597,
+      598,
+      599,
+      600,
+      601,
+      602
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.7.6",
+    "title": "Pulses (ND)",
+    "id": 42,
+    "parent_id": 36,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      603,
+      604,
+      605,
+      606,
+      607,
+      608,
+      609,
+      610,
+      611
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.7.9",
+    "title": "Vegetables, tubers, plantains, cooking bananas and pulses, ground, and in other preparations (ND)",
+    "id": 43,
+    "parent_id": 36,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      614,
+      615,
+      616,
+      617,
+      618,
+      619,
+      620
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.8",
+    "title": "Sugar, confectionery and desserts (ND)",
+    "id": 44,
+    "parent_id": 1,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      45,
+      46,
+      47,
+      48,
+      623,
+      626,
+      631
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.8.1",
+    "title": "Cane sugar and beet sugar (ND)",
+    "id": 45,
+    "parent_id": 44,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      621,
+      622
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.8.3",
+    "title": "Jams, marmalades, fruit jellies, purées and pastes, and honey (ND)",
+    "id": 46,
+    "parent_id": 44,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      624,
+      625
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.8.5",
+    "title": "Chocolate, cocoa and cocoa-based food products (ND)",
+    "id": 47,
+    "parent_id": 44,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      627,
+      628,
+      629,
+      630
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.8.9",
+    "title": "Other sugar confectionery and desserts n.e.c. (ND)",
+    "id": 48,
+    "parent_id": 44,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      632,
+      633
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.9",
+    "title": "Ready-made food and other food products (ND)",
+    "id": 49,
+    "parent_id": 1,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      50,
+      51,
+      52,
+      647,
+      648
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.9.1",
+    "title": "Ready-made food (ND)",
+    "id": 50,
+    "parent_id": 49,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      634,
+      635,
+      636,
+      637,
+      638,
+      639,
+      640
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.9.2",
+    "title": "Baby food (ND)",
+    "id": 51,
+    "parent_id": 49,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      641,
+      642,
+      643,
+      644
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.1.9.3",
+    "title": "Salt, condiments and sauces (ND)",
+    "id": 52,
+    "parent_id": 49,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      645,
+      646
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.2",
+    "title": "Non-alcoholic beverages",
+    "id": 53,
+    "parent_id": 0,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      54,
+      55,
+      649,
+      659,
+      660,
+      661,
+      662
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.2.2.0",
+    "title": "Coffee and coffee substitutes (ND)",
+    "collapsed_codes": [
+      "01.2.2"
+    ],
+    "id": 54,
+    "parent_id": 53,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      650,
+      651,
+      652
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "01.2.3.0",
+    "title": "Tea, maté and other plant-derived products for infusion (ND)",
+    "collapsed_codes": [
+      "01.2.3"
+    ],
+    "id": 55,
+    "parent_id": 53,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [
+      653,
+      654,
+      655,
+      656,
+      657,
+      658
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "02",
+    "title": "Alcoholic beverages, tobacco and narcotics",
+    "id": 56,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      57,
+      64,
+      65,
+      69
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "02.1",
+    "title": "Alcoholic beverages",
+    "id": 57,
+    "parent_id": 56,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      58,
+      59,
+      62,
+      63
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "02.1.1.0",
+    "title": "Spirits and liquors (ND)",
+    "collapsed_codes": [
+      "02.1.1"
+    ],
+    "id": 58,
+    "parent_id": 57,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "02.1.2",
+    "title": "Wine (ND)",
+    "id": 59,
+    "parent_id": 57,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      60,
+      61
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "02.1.2.1",
+    "title": "Wine from grapes (ND)",
+    "id": 60,
+    "parent_id": 59,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "02.1.2.2",
+    "title": "Wine from other sources (ND)",
+    "id": 61,
+    "parent_id": 59,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "02.1.3.0",
+    "title": "Beer (ND)",
+    "collapsed_codes": [
+      "02.1.3"
+    ],
+    "id": 62,
+    "parent_id": 57,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "02.1.9.0",
+    "title": "Other alcoholic beverages (ND)",
+    "collapsed_codes": [
+      "02.1.9"
+    ],
+    "id": 63,
+    "parent_id": 57,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "02.2.0.0",
+    "title": "Alcohol production services (S)",
+    "collapsed_codes": [
+      "02.2",
+      "02.2.0"
+    ],
+    "id": 64,
+    "parent_id": 56,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "02.3.0",
+    "title": "Tobacco (ND)",
+    "collapsed_codes": [
+      "02.3"
+    ],
+    "id": 65,
+    "parent_id": 56,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      66,
+      67,
+      68
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "02.3.0.1",
+    "title": "Cigarettes (ND)",
+    "id": 66,
+    "parent_id": 65,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "02.3.0.2",
+    "title": "Cigars (ND)",
+    "id": 67,
+    "parent_id": 65,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "02.3.0.9",
+    "title": "Other tobacco products (ND)",
+    "id": 68,
+    "parent_id": 65,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "02.4.0.0",
+    "title": "Narcotics (ND)",
+    "collapsed_codes": [
+      "02.4",
+      "02.4.0"
+    ],
+    "id": 69,
+    "parent_id": 56,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03",
+    "title": "Clothing and footwear",
+    "id": 70,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      71,
+      84
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "03.1",
+    "title": "Clothing",
+    "id": 71,
+    "parent_id": 70,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      72,
+      73,
+      78,
+      81
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "03.1.1.0",
+    "title": "Clothing materials (SD)",
+    "collapsed_codes": [
+      "03.1.1"
+    ],
+    "id": 72,
+    "parent_id": 71,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03.1.2",
+    "title": "Garments (SD)",
+    "id": 73,
+    "parent_id": 71,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      74,
+      75,
+      76,
+      77
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "03.1.2.1",
+    "title": "Garments for men or boys (SD)",
+    "id": 74,
+    "parent_id": 73,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03.1.2.2",
+    "title": "Garments for women or girls (SD)",
+    "id": 75,
+    "parent_id": 73,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03.1.2.3",
+    "title": "Garments for infants (under 2 years of age) (SD)",
+    "id": 76,
+    "parent_id": 73,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03.1.2.4",
+    "title": "School uniforms (SD)",
+    "id": 77,
+    "parent_id": 73,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03.1.3",
+    "title": "Other articles of clothing and clothing accessories (SD)",
+    "id": 78,
+    "parent_id": 71,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      79,
+      80
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "03.1.3.1",
+    "title": "Other articles of clothing (SD)",
+    "id": 79,
+    "parent_id": 78,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03.1.3.2",
+    "title": "Clothing accessories (SD)",
+    "id": 80,
+    "parent_id": 78,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03.1.4",
+    "title": "Cleaning, repair, tailoring and hire of clothing (S)",
+    "id": 81,
+    "parent_id": 71,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      82,
+      83
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "03.1.4.1",
+    "title": "Cleaning of clothing (S)",
+    "id": 82,
+    "parent_id": 81,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03.1.4.2",
+    "title": "Repair, tailoring and hire of clothing (S)",
+    "id": 83,
+    "parent_id": 81,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03.2",
+    "title": "Footwear",
+    "id": 84,
+    "parent_id": 70,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      85,
+      89
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "03.2.1",
+    "title": "Shoes and other footwear (SD)",
+    "id": 85,
+    "parent_id": 84,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      86,
+      87,
+      88
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "03.2.1.1",
+    "title": "Footwear for men (SD)",
+    "id": 86,
+    "parent_id": 85,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03.2.1.2",
+    "title": "Footwear for women (SD)",
+    "id": 87,
+    "parent_id": 85,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03.2.1.3",
+    "title": "Footwear for infants and children (SD)",
+    "id": 88,
+    "parent_id": 85,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "03.2.2.0",
+    "title": "Cleaning, repair and hire of footwear (S)",
+    "collapsed_codes": [
+      "03.2.2"
+    ],
+    "id": 89,
+    "parent_id": 84,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04",
+    "title": "Housing, water, electricity, gas and other fuels",
+    "id": 90,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      91,
+      96,
+      99,
+      104,
+      115
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.1",
+    "title": "Actual rental payments made for housing",
+    "id": 91,
+    "parent_id": 90,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      92,
+      93
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.1.1.0",
+    "title": "Actual rental payments made by tenants for main residence (S)",
+    "collapsed_codes": [
+      "04.1.1"
+    ],
+    "id": 92,
+    "parent_id": 91,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.1.2",
+    "title": "Other actual rental payments (S)",
+    "id": 93,
+    "parent_id": 91,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      94,
+      95
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.1.2.1",
+    "title": "Actual rental payments made by tenants for secondary residences (S)",
+    "id": 94,
+    "parent_id": 93,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.1.2.2",
+    "title": "Garage rental payments and other rental payments made by tenants (S)",
+    "id": 95,
+    "parent_id": 93,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.2",
+    "title": "Imputed rental payments for housing",
+    "id": 96,
+    "parent_id": 90,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      97,
+      98
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.2.1.0",
+    "title": "Imputed rental payments of owner-occupiers for their main residence (S)",
+    "collapsed_codes": [
+      "04.2.1"
+    ],
+    "id": 97,
+    "parent_id": 96,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.2.2.0",
+    "title": "Other imputed rentals (S)",
+    "collapsed_codes": [
+      "04.2.2"
+    ],
+    "id": 98,
+    "parent_id": 96,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.3",
+    "title": "Maintenance, repair and security of the dwelling",
+    "id": 99,
+    "parent_id": 90,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      100,
+      103
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.3.1",
+    "title": "Security equipment and materials for dwelling maintenance and repair",
+    "id": 100,
+    "parent_id": 99,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      101,
+      102
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.3.1.1",
+    "title": "Materials for the maintenance and repair of the dwelling (ND)",
+    "id": 101,
+    "parent_id": 100,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.3.1.2",
+    "title": "Security equipment (SD)",
+    "id": 102,
+    "parent_id": 100,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.3.2.0",
+    "title": "Services for the maintenance, repair and security of the dwelling (S)",
+    "collapsed_codes": [
+      "04.3.2"
+    ],
+    "id": 103,
+    "parent_id": 99,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.4",
+    "title": "Water supply and miscellaneous services relating to the dwelling",
+    "id": 104,
+    "parent_id": 90,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      105,
+      108,
+      109,
+      112
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.4.1",
+    "title": "Water supply (ND)",
+    "id": 105,
+    "parent_id": 104,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      106,
+      107
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.4.1.1",
+    "title": "Water supply delivered through network systems (ND)",
+    "id": 106,
+    "parent_id": 105,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.4.1.2",
+    "title": "Water supply delivered through other systems (ND)",
+    "id": 107,
+    "parent_id": 105,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.4.2.0",
+    "title": "Refuse collection (S)",
+    "collapsed_codes": [
+      "04.4.2"
+    ],
+    "id": 108,
+    "parent_id": 104,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.4.3",
+    "title": "Sewage collection (S)",
+    "id": 109,
+    "parent_id": 104,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      110,
+      111
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.4.3.1",
+    "title": "Sewage collection through sewer systems (S)",
+    "id": 110,
+    "parent_id": 109,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.4.3.2",
+    "title": "Sewage collection through on-site sanitation systems (S)",
+    "id": 111,
+    "parent_id": 109,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.4.4",
+    "title": "Other services related to the dwelling (S)",
+    "id": 112,
+    "parent_id": 104,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      113,
+      114
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.4.4.1",
+    "title": "Charges for maintenance of multi-occupied buildings (S)",
+    "id": 113,
+    "parent_id": 112,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.4.4.9",
+    "title": "Other services related to the dwelling n.e.c. (S)",
+    "id": 114,
+    "parent_id": 112,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.5",
+    "title": "Electricity, gas and other fuels",
+    "id": 115,
+    "parent_id": 90,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      116,
+      117,
+      120,
+      121,
+      126
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.5.1.0",
+    "title": "Electricity (ND)",
+    "collapsed_codes": [
+      "04.5.1"
+    ],
+    "id": 116,
+    "parent_id": 115,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.5.2",
+    "title": "Gas (ND)",
+    "id": 117,
+    "parent_id": 115,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      118,
+      119
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.5.2.1",
+    "title": "Natural gas through networks (ND)",
+    "id": 118,
+    "parent_id": 117,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.5.2.2",
+    "title": "Liquefied hydrocarbons (ND)",
+    "id": 119,
+    "parent_id": 117,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.5.3.0",
+    "title": "Liquid fuels (ND)",
+    "collapsed_codes": [
+      "04.5.3"
+    ],
+    "id": 120,
+    "parent_id": 115,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.5.4",
+    "title": "Solid fuels (ND)",
+    "id": 121,
+    "parent_id": 115,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      122,
+      123,
+      124,
+      125
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "04.5.4.1",
+    "title": "Coal, coal briquettes, peat and peat briquettes (ND)",
+    "id": 122,
+    "parent_id": 121,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.5.4.2",
+    "title": "Wood fuel, including pellets and briquettes (ND)",
+    "id": 123,
+    "parent_id": 121,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.5.4.3",
+    "title": "Charcoal (ND)",
+    "id": 124,
+    "parent_id": 121,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.5.4.9",
+    "title": "Other solid fuels (ND)",
+    "id": 125,
+    "parent_id": 121,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "04.5.5.0",
+    "title": "Other energy for heating and cooling (ND)",
+    "collapsed_codes": [
+      "04.5.5"
+    ],
+    "id": 126,
+    "parent_id": 115,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05",
+    "title": "Furnishings, household equipment and routine household maintenance",
+    "id": 127,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      128,
+      135,
+      142,
+      154,
+      159,
+      165
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.1",
+    "title": "Furniture, furnishings, and loose carpets",
+    "id": 128,
+    "parent_id": 127,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      129,
+      134
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.1.1",
+    "title": "Furniture, furnishings and loose carpets (D)",
+    "id": 129,
+    "parent_id": 128,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      130,
+      131,
+      132,
+      133
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.1.1.1",
+    "title": "Household furniture (D)",
+    "id": 130,
+    "parent_id": 129,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.1.1.2",
+    "title": "Garden and camping furniture (D)",
+    "id": 131,
+    "parent_id": 129,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.1.1.3",
+    "title": "Lighting equipment (D)",
+    "id": 132,
+    "parent_id": 129,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.1.1.4",
+    "title": "Furnishings, loose carpets and rugs (D)",
+    "id": 133,
+    "parent_id": 129,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.1.2.0",
+    "title": "Repair, installation and hire of furniture, furnishings and loose carpets (S)",
+    "collapsed_codes": [
+      "05.1.2"
+    ],
+    "id": 134,
+    "parent_id": 128,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.2",
+    "title": "Household textiles",
+    "id": 135,
+    "parent_id": 127,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      136,
+      141
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.2.1",
+    "title": "Household textiles (SD)",
+    "id": 136,
+    "parent_id": 135,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      137,
+      138,
+      139,
+      140
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.2.1.1",
+    "title": "Furnishing fabrics and curtains (SD)",
+    "id": 137,
+    "parent_id": 136,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.2.1.2",
+    "title": "Bed linen and bedding (SD)",
+    "id": 138,
+    "parent_id": 136,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.2.1.3",
+    "title": "Table linen and bathroom linen (SD)",
+    "id": 139,
+    "parent_id": 136,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.2.1.9",
+    "title": "Other household textiles (SD)",
+    "id": 140,
+    "parent_id": 136,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.2.2.0",
+    "title": "Repair, hire and sewing services of household textiles (S)",
+    "collapsed_codes": [
+      "05.2.2"
+    ],
+    "id": 141,
+    "parent_id": 135,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.3",
+    "title": "Household appliances",
+    "id": 142,
+    "parent_id": 127,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      143,
+      149,
+      153
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.3.1",
+    "title": "Major electric and other household appliances (D)",
+    "id": 143,
+    "parent_id": 142,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      144,
+      145,
+      146,
+      147,
+      148
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.3.1.1",
+    "title": "Major kitchen appliances (D)",
+    "id": 144,
+    "parent_id": 143,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.3.1.2",
+    "title": "Major laundry appliances (D)",
+    "id": 145,
+    "parent_id": 143,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.3.1.3",
+    "title": "Heaters and air conditioners (D)",
+    "id": 146,
+    "parent_id": 143,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.3.1.4",
+    "title": "Cleaning equipment (D)",
+    "id": 147,
+    "parent_id": 143,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.3.1.9",
+    "title": "Other major household appliances (D)",
+    "id": 148,
+    "parent_id": 143,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.3.2",
+    "title": "Small household appliances (SD)",
+    "id": 149,
+    "parent_id": 142,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      150,
+      151,
+      152
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.3.2.1",
+    "title": "Small appliances for the cooking and processing of food (SD)",
+    "id": 150,
+    "parent_id": 149,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.3.2.2",
+    "title": "Small appliances for the preparation of beverages (SD)",
+    "id": 151,
+    "parent_id": 149,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.3.2.9",
+    "title": "Other small household appliances (SD)",
+    "id": 152,
+    "parent_id": 149,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.3.3.0",
+    "title": "Repair, installation and hire of household appliances (S)",
+    "collapsed_codes": [
+      "05.3.3"
+    ],
+    "id": 153,
+    "parent_id": 142,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.4.0",
+    "title": "Glassware, tableware and household utensils (SD)",
+    "collapsed_codes": [
+      "05.4"
+    ],
+    "id": 154,
+    "parent_id": 127,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      155,
+      156,
+      157,
+      158
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.4.0.1",
+    "title": "Glassware, crystal ware, ceramic ware and china ware (SD)",
+    "id": 155,
+    "parent_id": 154,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.4.0.2",
+    "title": "Cutlery, flatware and silverware (SD)",
+    "id": 156,
+    "parent_id": 154,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.4.0.3",
+    "title": "Kitchen utensils and articles (SD)",
+    "id": 157,
+    "parent_id": 154,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.4.0.4",
+    "title": "Repair and hire of glassware, tableware and household utensils (S)",
+    "id": 158,
+    "parent_id": 154,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.5",
+    "title": "Tools and equipment for house and garden",
+    "id": 159,
+    "parent_id": 127,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      160,
+      161,
+      164
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.5.1.0",
+    "title": "Motorized tools and equipment (D)",
+    "collapsed_codes": [
+      "05.5.1"
+    ],
+    "id": 160,
+    "parent_id": 159,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.5.2",
+    "title": "Non-motorized tools and miscellaneous accessories (SD)",
+    "id": 161,
+    "parent_id": 159,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      162,
+      163
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.5.2.1",
+    "title": "Non-motorized tools (SD)",
+    "id": 162,
+    "parent_id": 161,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.5.2.2",
+    "title": "Miscellaneous accessories (SD)",
+    "id": 163,
+    "parent_id": 161,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.5.3.0",
+    "title": "Repair and hire of motorized and non-motorized tools and equipment (S)",
+    "collapsed_codes": [
+      "05.5.3"
+    ],
+    "id": 164,
+    "parent_id": 159,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.6",
+    "title": "Goods and services for routine household maintenance",
+    "id": 165,
+    "parent_id": 127,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      166,
+      169
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.6.1",
+    "title": "Non-durable household goods (ND)",
+    "id": 166,
+    "parent_id": 165,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      167,
+      168
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.6.1.1",
+    "title": "Household cleaning and maintenance products (ND)",
+    "id": 167,
+    "parent_id": 166,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.6.1.9",
+    "title": "Other non-durable household goods (ND)",
+    "id": 168,
+    "parent_id": 166,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.6.2",
+    "title": "Domestic services and household services (S)",
+    "id": 169,
+    "parent_id": 165,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      170,
+      171
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "05.6.2.1",
+    "title": "Domestic services provided by paid staff (S)",
+    "id": 170,
+    "parent_id": 169,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "05.6.2.9",
+    "title": "Other household services (S)",
+    "id": 171,
+    "parent_id": 169,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06",
+    "title": "Health",
+    "id": 172,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      173,
+      186,
+      196,
+      199
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "06.1",
+    "title": "Medicines and health products",
+    "id": 173,
+    "parent_id": 172,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      174,
+      177,
+      181,
+      185
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "06.1.1",
+    "title": "Medicines (ND)",
+    "id": 174,
+    "parent_id": 173,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      175,
+      176
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "06.1.1.1",
+    "title": "Medicines, vaccines and other pharmaceutical preparations (ND)",
+    "id": 175,
+    "parent_id": 174,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.1.1.2",
+    "title": "Herbal medicines and homeopathic products (ND)",
+    "id": 176,
+    "parent_id": 174,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.1.2",
+    "title": "Medical products (ND)",
+    "id": 177,
+    "parent_id": 173,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      178,
+      179,
+      180
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "06.1.2.1",
+    "title": "Medical diagnostic products (ND)",
+    "id": 178,
+    "parent_id": 177,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.1.2.2",
+    "title": "Preventive and protective devices (ND)",
+    "id": 179,
+    "parent_id": 177,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.1.2.3",
+    "title": "Treatment devices for personal use (ND)",
+    "id": 180,
+    "parent_id": 177,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.1.3",
+    "title": "Assistive products (D)",
+    "id": 181,
+    "parent_id": 173,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      182,
+      183,
+      184
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "06.1.3.1",
+    "title": "Assistive products for vision (D)",
+    "id": 182,
+    "parent_id": 181,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.1.3.2",
+    "title": "Assistive products for hearing and communication (D)",
+    "id": 183,
+    "parent_id": 181,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.1.3.3",
+    "title": "Assistive products for mobility and daily living (D)",
+    "id": 184,
+    "parent_id": 181,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.1.4.0",
+    "title": "Repair, rental and maintenance of medical and assistive products (S)",
+    "collapsed_codes": [
+      "06.1.4"
+    ],
+    "id": 185,
+    "parent_id": 173,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.2",
+    "title": "Outpatient care services",
+    "id": 186,
+    "parent_id": 172,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      187,
+      190,
+      193
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "06.2.1",
+    "title": "Preventive care services (S)",
+    "id": 187,
+    "parent_id": 186,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      188,
+      189
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "06.2.1.1",
+    "title": "Immunization services (S)",
+    "id": 188,
+    "parent_id": 187,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.2.1.9",
+    "title": "Other preventive care services (S)",
+    "id": 189,
+    "parent_id": 187,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.2.2",
+    "title": "Outpatient dental services (S)",
+    "id": 190,
+    "parent_id": 186,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      191,
+      192
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "06.2.2.1",
+    "title": "Dental preventive services (S)",
+    "id": 191,
+    "parent_id": 190,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.2.2.9",
+    "title": "Other outpatient dental services (S)",
+    "id": 192,
+    "parent_id": 190,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.2.3",
+    "title": "Other outpatient care services (S)",
+    "id": 193,
+    "parent_id": 186,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      194,
+      195
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "06.2.3.1",
+    "title": "Outpatient curative and rehabilitative services (S)",
+    "id": 194,
+    "parent_id": 193,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.2.3.2",
+    "title": "Outpatient long-term care services (S)",
+    "id": 195,
+    "parent_id": 193,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.3",
+    "title": "Inpatient care services",
+    "id": 196,
+    "parent_id": 172,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      197,
+      198
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "06.3.1.0",
+    "title": "Inpatient curative and rehabilitative services (S)",
+    "collapsed_codes": [
+      "06.3.1"
+    ],
+    "id": 197,
+    "parent_id": 196,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.3.2.0",
+    "title": "Inpatient long-term care services (S)",
+    "collapsed_codes": [
+      "06.3.2"
+    ],
+    "id": 198,
+    "parent_id": 196,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.4",
+    "title": "Other health services",
+    "id": 199,
+    "parent_id": 172,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      200,
+      201
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "06.4.1.0",
+    "title": "Diagnostic imaging services and medical laboratory services (S)",
+    "collapsed_codes": [
+      "06.4.1"
+    ],
+    "id": 200,
+    "parent_id": 199,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "06.4.2.0",
+    "title": "Patient emergency transportation and emergency rescue services (S)",
+    "collapsed_codes": [
+      "06.4.2"
+    ],
+    "id": 201,
+    "parent_id": 199,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07",
+    "title": "Transport",
+    "id": 202,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      203,
+      210,
+      226,
+      241
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.1",
+    "title": "Purchase of vehicles",
+    "id": 203,
+    "parent_id": 202,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      204,
+      207,
+      208,
+      209
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.1.1",
+    "title": "Motor cars (D)",
+    "id": 204,
+    "parent_id": 203,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      205,
+      206
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.1.1.1",
+    "title": "New motor cars (D)",
+    "id": 205,
+    "parent_id": 204,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.1.1.2",
+    "title": "Second-hand motor cars (D)",
+    "id": 206,
+    "parent_id": 204,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.1.2.0",
+    "title": "Motorcycles (D)",
+    "collapsed_codes": [
+      "07.1.2"
+    ],
+    "id": 207,
+    "parent_id": 203,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.1.3.0",
+    "title": "Bicycles (D)",
+    "collapsed_codes": [
+      "07.1.3"
+    ],
+    "id": 208,
+    "parent_id": 203,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.1.4.0",
+    "title": "Animal-drawn vehicles (D)",
+    "collapsed_codes": [
+      "07.1.4"
+    ],
+    "id": 209,
+    "parent_id": 203,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.2",
+    "title": "Operation of personal transport equipment",
+    "id": 210,
+    "parent_id": 202,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      211,
+      215,
+      220,
+      221
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.2.1",
+    "title": "Parts and accessories for personal transport equipment (SD)",
+    "id": 211,
+    "parent_id": 210,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      212,
+      213,
+      214
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.2.1.1",
+    "title": "Tyres (SD)",
+    "id": 212,
+    "parent_id": 211,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.2.1.2",
+    "title": "Parts for personal transport equipment (SD)",
+    "id": 213,
+    "parent_id": 211,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.2.1.3",
+    "title": "Accessories for personal transport equipment (SD)",
+    "id": 214,
+    "parent_id": 211,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.2.2",
+    "title": "Fuels and lubricants for personal transport equipment (ND)",
+    "id": 215,
+    "parent_id": 210,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      216,
+      217,
+      218,
+      219
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.2.2.1",
+    "title": "Diesel (ND)",
+    "id": 216,
+    "parent_id": 215,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.2.2.2",
+    "title": "Petrol (ND)",
+    "id": 217,
+    "parent_id": 215,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.2.2.3",
+    "title": "Other fuels for personal transport equipment (ND)",
+    "id": 218,
+    "parent_id": 215,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.2.2.4",
+    "title": "Lubricants (ND)",
+    "id": 219,
+    "parent_id": 215,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.2.3.0",
+    "title": "Maintenance and repair of personal transport equipment (S)",
+    "collapsed_codes": [
+      "07.2.3"
+    ],
+    "id": 220,
+    "parent_id": 210,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.2.4",
+    "title": "Other services related to personal transport equipment (S)",
+    "id": 221,
+    "parent_id": 210,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      222,
+      223,
+      224,
+      225
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.2.4.1",
+    "title": "Parking services (S)",
+    "id": 222,
+    "parent_id": 221,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.2.4.2",
+    "title": "Toll facilities (S)",
+    "id": 223,
+    "parent_id": 221,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.2.4.3",
+    "title": "Driving lessons, tests, licences and roadworthiness tests (S)",
+    "id": 224,
+    "parent_id": 221,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.2.4.4",
+    "title": "Hire of personal transport equipment without driver (S)",
+    "id": 225,
+    "parent_id": 221,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.3",
+    "title": "Passenger transport services",
+    "id": 226,
+    "parent_id": 202,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      227,
+      230,
+      235,
+      238,
+      239,
+      240
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.3.1",
+    "title": "Passenger transport by railway (S)",
+    "id": 227,
+    "parent_id": 226,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      228,
+      229
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.3.1.1",
+    "title": "Passenger transport by train (S)",
+    "id": 228,
+    "parent_id": 227,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.3.1.2",
+    "title": "Passenger transport by rapid transit and tram (S)",
+    "id": 229,
+    "parent_id": 227,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.3.2",
+    "title": "Passenger transport by road (S)",
+    "id": 230,
+    "parent_id": 226,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      231,
+      232,
+      233,
+      234
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.3.2.1",
+    "title": "Passenger transport by bus and coach (S)",
+    "id": 231,
+    "parent_id": 230,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.3.2.2",
+    "title": "Passenger transport by taxi and hired vehicle with driver (S)",
+    "id": 232,
+    "parent_id": 230,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.3.2.3",
+    "title": "Passenger transport for students to and from school (S)",
+    "id": 233,
+    "parent_id": 230,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.3.2.9",
+    "title": "Other passenger transport by road (S)",
+    "id": 234,
+    "parent_id": 230,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.3.3",
+    "title": "Passenger transport by air (S)",
+    "id": 235,
+    "parent_id": 226,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      236,
+      237
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.3.3.1",
+    "title": "Passenger transport by air, domestic (S)",
+    "id": 236,
+    "parent_id": 235,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.3.3.2",
+    "title": "Passenger transport by air, international (S)",
+    "id": 237,
+    "parent_id": 235,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.3.4.0",
+    "title": "Passenger transport by sea and inland waterway (S)",
+    "collapsed_codes": [
+      "07.3.4"
+    ],
+    "id": 238,
+    "parent_id": 226,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.3.5.0",
+    "title": "Combined passenger transport (S)",
+    "collapsed_codes": [
+      "07.3.5"
+    ],
+    "id": 239,
+    "parent_id": 226,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.3.6.0",
+    "title": "Other passenger transport services (S)",
+    "collapsed_codes": [
+      "07.3.6"
+    ],
+    "id": 240,
+    "parent_id": 226,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.4",
+    "title": "Transport services for goods",
+    "id": 241,
+    "parent_id": 202,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      242,
+      245
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.4.1",
+    "title": "Postal and courier services (S)",
+    "id": 242,
+    "parent_id": 241,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      243,
+      244
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.4.1.1",
+    "title": "Letter handling services (S)",
+    "id": 243,
+    "parent_id": 242,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.4.1.2",
+    "title": "Courier and parcel delivery services (S)",
+    "id": 244,
+    "parent_id": 242,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.4.9",
+    "title": "Other transport of goods (S)",
+    "id": 245,
+    "parent_id": 241,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      246,
+      247
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "07.4.9.1",
+    "title": "Removal and storage services (S)",
+    "id": 246,
+    "parent_id": 245,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "07.4.9.2",
+    "title": "Delivery of goods (S)",
+    "id": 247,
+    "parent_id": 245,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08",
+    "title": "Information and communication",
+    "id": 248,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      249,
+      260,
+      261
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "08.1",
+    "title": "Information and communication equipment",
+    "id": 249,
+    "parent_id": 248,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      250,
+      251,
+      252,
+      255,
+      256,
+      257
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "08.1.1.0",
+    "title": "Fixed telephone equipment (D)",
+    "collapsed_codes": [
+      "08.1.1"
+    ],
+    "id": 250,
+    "parent_id": 249,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.1.2.0",
+    "title": "Mobile telephone equipment (D)",
+    "collapsed_codes": [
+      "08.1.2"
+    ],
+    "id": 251,
+    "parent_id": 249,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.1.3",
+    "title": "Information processing equipment (D)",
+    "id": 252,
+    "parent_id": 249,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      253,
+      254
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "08.1.3.1",
+    "title": "Computers, laptops and tablets (D)",
+    "id": 253,
+    "parent_id": 252,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.1.3.2",
+    "title": "Peripheral equipment and its consumable components (D)",
+    "id": 254,
+    "parent_id": 252,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.1.4.0",
+    "title": "Equipment for the reception, recording and reproduction of sound and vision (D)",
+    "collapsed_codes": [
+      "08.1.4"
+    ],
+    "id": 255,
+    "parent_id": 249,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.1.5.0",
+    "title": "Unrecorded recording media (SD)",
+    "collapsed_codes": [
+      "08.1.5"
+    ],
+    "id": 256,
+    "parent_id": 249,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.1.9",
+    "title": "Other information and communication equipment and accessories (D)",
+    "id": 257,
+    "parent_id": 249,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      258,
+      259
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "08.1.9.1",
+    "title": "Other information and communication equipment (D)",
+    "id": 258,
+    "parent_id": 257,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.1.9.2",
+    "title": "Other information and communication accessories (SD)",
+    "id": 259,
+    "parent_id": 257,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.2.0.0",
+    "title": "Software, excluding games (S)",
+    "collapsed_codes": [
+      "08.2",
+      "08.2.0"
+    ],
+    "id": 260,
+    "parent_id": 248,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.3",
+    "title": "Information and communication services",
+    "id": 261,
+    "parent_id": 248,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      262,
+      263,
+      264,
+      265,
+      266,
+      267
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "08.3.1.0",
+    "title": "Fixed communication services (S)",
+    "collapsed_codes": [
+      "08.3.1"
+    ],
+    "id": 262,
+    "parent_id": 261,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.3.2.0",
+    "title": "Mobile communication services (S)",
+    "collapsed_codes": [
+      "08.3.2"
+    ],
+    "id": 263,
+    "parent_id": 261,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.3.3.0",
+    "title": "Internet access provision services and online storage services (S)",
+    "collapsed_codes": [
+      "08.3.3"
+    ],
+    "id": 264,
+    "parent_id": 261,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.3.4.0",
+    "title": "Bundled telecommunication services (S)",
+    "collapsed_codes": [
+      "08.3.4"
+    ],
+    "id": 265,
+    "parent_id": 261,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.3.5.0",
+    "title": "Repair and rental of information and communication equipment (S)",
+    "collapsed_codes": [
+      "08.3.5"
+    ],
+    "id": 266,
+    "parent_id": 261,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.3.9",
+    "title": "Other information and communication services (S)",
+    "id": 267,
+    "parent_id": 261,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      268,
+      269,
+      270
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "08.3.9.1",
+    "title": "Television and radio licences and fees (S)",
+    "id": 268,
+    "parent_id": 267,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.3.9.2",
+    "title": "Subscriptions to audiovisual streaming services and rental of audiovisual content (S)",
+    "id": 269,
+    "parent_id": 267,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "08.3.9.9",
+    "title": "Other information and communication services n.e.c. (S)",
+    "id": 270,
+    "parent_id": 267,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09",
+    "title": "Recreation, sport and culture",
+    "id": 271,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      272,
+      283,
+      291,
+      298,
+      313,
+      316,
+      321,
+      330
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.1",
+    "title": "Recreational durables",
+    "id": 272,
+    "parent_id": 271,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      273,
+      277
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.1.1",
+    "title": "Photographic and cinematographic equipment and optical instruments (D)",
+    "id": 273,
+    "parent_id": 272,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      274,
+      275,
+      276
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.1.1.1",
+    "title": "Cameras (D)",
+    "id": 274,
+    "parent_id": 273,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.1.1.2",
+    "title": "Accessories for photographic and cinematographic equipment (D)",
+    "id": 275,
+    "parent_id": 273,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.1.1.3",
+    "title": "Optical instruments (D)",
+    "id": 276,
+    "parent_id": 273,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.1.2",
+    "title": "Major recreational durables (D)",
+    "id": 277,
+    "parent_id": 272,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      278,
+      279,
+      280,
+      281,
+      282
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.1.2.1",
+    "title": "Camper vans, caravans and trailers (D)",
+    "id": 278,
+    "parent_id": 277,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.1.2.2",
+    "title": "Aeroplanes, microlight aircraft, gliders, hang gliders and hot-air balloons (D)",
+    "id": 279,
+    "parent_id": 277,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.1.2.3",
+    "title": "Boats, yachts, outboard motors and other water-sport equipment (D)",
+    "id": 280,
+    "parent_id": 277,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.1.2.4",
+    "title": "Horses, ponies, camels and dromedaries and accessories (D)",
+    "id": 281,
+    "parent_id": 277,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.1.2.9",
+    "title": "Other major recreational durables (D)",
+    "id": 282,
+    "parent_id": 277,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.2",
+    "title": "Other recreational goods",
+    "id": 283,
+    "parent_id": 271,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      284,
+      288
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.2.1",
+    "title": "Games, toys and hobby-related articles (SD)",
+    "id": 284,
+    "parent_id": 283,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      285,
+      286,
+      287
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.2.1.1",
+    "title": "Video game computers, consoles, game applications and software (SD)",
+    "id": 285,
+    "parent_id": 284,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.2.1.2",
+    "title": "Other games, toys and hobby-related articles (SD)",
+    "id": 286,
+    "parent_id": 284,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.2.1.3",
+    "title": "Celebration articles (ND)",
+    "id": 287,
+    "parent_id": 284,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.2.2",
+    "title": "Sporting, camping and open-air recreation equipment (SD)",
+    "id": 288,
+    "parent_id": 283,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      289,
+      290
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.2.2.1",
+    "title": "Sporting equipment (SD)",
+    "id": 289,
+    "parent_id": 288,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.2.2.2",
+    "title": "Camping and open-air recreation equipment (SD)",
+    "id": 290,
+    "parent_id": 288,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.3",
+    "title": "Garden products and pets",
+    "id": 291,
+    "parent_id": 271,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      292,
+      295
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.3.1",
+    "title": "Garden products, plants and flowers (ND)",
+    "id": 292,
+    "parent_id": 291,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      293,
+      294
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.3.1.1",
+    "title": "Garden products (ND)",
+    "id": 293,
+    "parent_id": 292,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.3.1.2",
+    "title": "Plants, seeds and flowers (ND)",
+    "id": 294,
+    "parent_id": 292,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.3.2",
+    "title": "Pets and pet products (D)",
+    "id": 295,
+    "parent_id": 291,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      296,
+      297
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.3.2.1",
+    "title": "Pets (D)",
+    "id": 296,
+    "parent_id": 295,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.3.2.2",
+    "title": "Products for pets and other household animals (ND)",
+    "id": 297,
+    "parent_id": 295,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.4",
+    "title": "Recreational services",
+    "id": 298,
+    "parent_id": 271,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      299,
+      300,
+      303,
+      306,
+      307,
+      308,
+      312
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.4.1.0",
+    "title": "Hire and repair of photographic and cinematographic equipment and optical instruments (S)",
+    "collapsed_codes": [
+      "09.4.1"
+    ],
+    "id": 299,
+    "parent_id": 298,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.4.2",
+    "title": "Hire, maintenance and repair of major recreational durables (S)",
+    "id": 300,
+    "parent_id": 298,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      301,
+      302
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.4.2.1",
+    "title": "Hire, maintenance and repair of camper vans and caravans (S)",
+    "id": 301,
+    "parent_id": 300,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.4.2.2",
+    "title": "Hire, maintenance and repair of other major recreational durables (S)",
+    "id": 302,
+    "parent_id": 300,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.4.3",
+    "title": "Hire and repair of games, toys and hobby-related articles (S)",
+    "id": 303,
+    "parent_id": 298,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      304,
+      305
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.4.3.1",
+    "title": "Hire of game software and subscription to online games (S)",
+    "id": 304,
+    "parent_id": 303,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.4.3.2",
+    "title": "Hire and repair of other games, toys and hobby-related articles (S)",
+    "id": 305,
+    "parent_id": 303,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.4.4.0",
+    "title": "Hire and repair of sporting, camping and open-air recreational equipment (S)",
+    "collapsed_codes": [
+      "09.4.4"
+    ],
+    "id": 306,
+    "parent_id": 298,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.4.5.0",
+    "title": "Veterinary and other services for pets (S)",
+    "collapsed_codes": [
+      "09.4.5"
+    ],
+    "id": 307,
+    "parent_id": 298,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.4.6",
+    "title": "Recreational and sporting services (S)",
+    "id": 308,
+    "parent_id": 298,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      309,
+      310,
+      311
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.4.6.1",
+    "title": "Recreational and leisure services (S)",
+    "id": 309,
+    "parent_id": 308,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.4.6.2",
+    "title": "Services associated with the practice of sports (S)",
+    "id": 310,
+    "parent_id": 308,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.4.6.3",
+    "title": "Services associated with attendance at sporting events (S)",
+    "id": 311,
+    "parent_id": 308,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.4.7.0",
+    "title": "Games of chance (S)",
+    "collapsed_codes": [
+      "09.4.7"
+    ],
+    "id": 312,
+    "parent_id": 298,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.5",
+    "title": "Cultural goods",
+    "id": 313,
+    "parent_id": 271,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      314,
+      315
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.5.1.0",
+    "title": "Musical instruments (D)",
+    "collapsed_codes": [
+      "09.5.1"
+    ],
+    "id": 314,
+    "parent_id": 313,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.5.2.0",
+    "title": "Audiovisual media (SD)",
+    "collapsed_codes": [
+      "09.5.2"
+    ],
+    "id": 315,
+    "parent_id": 313,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.6",
+    "title": "Cultural services",
+    "id": 316,
+    "parent_id": 271,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      317,
+      318,
+      319,
+      320
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.6.1.0",
+    "title": "Services provided by cinemas, theatres and concert venues (S)",
+    "collapsed_codes": [
+      "09.6.1"
+    ],
+    "id": 317,
+    "parent_id": 316,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.6.2.0",
+    "title": "Services provided by museums, libraries and cultural sites (S)",
+    "collapsed_codes": [
+      "09.6.2"
+    ],
+    "id": 318,
+    "parent_id": 316,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.6.3.0",
+    "title": "Photographic services (S)",
+    "collapsed_codes": [
+      "09.6.3"
+    ],
+    "id": 319,
+    "parent_id": 316,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.6.9.0",
+    "title": "Other cultural services (S)",
+    "collapsed_codes": [
+      "09.6.9"
+    ],
+    "id": 320,
+    "parent_id": 316,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.7",
+    "title": "Newspapers, books and stationery",
+    "id": 321,
+    "parent_id": 271,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      322,
+      325,
+      328,
+      329
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.7.1",
+    "title": "Books (SD)",
+    "id": 322,
+    "parent_id": 321,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      323,
+      324
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.7.1.1",
+    "title": "Educational books and textbooks (SD)",
+    "id": 323,
+    "parent_id": 322,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.7.1.9",
+    "title": "Other books (SD)",
+    "id": 324,
+    "parent_id": 322,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.7.2",
+    "title": "Newspapers and periodicals (ND)",
+    "id": 325,
+    "parent_id": 321,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      326,
+      327
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "09.7.2.1",
+    "title": "Newspapers (ND)",
+    "id": 326,
+    "parent_id": 325,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.7.2.2",
+    "title": "Magazines and periodicals (ND)",
+    "id": 327,
+    "parent_id": 325,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.7.3.0",
+    "title": "Miscellaneous printed matter (ND)",
+    "collapsed_codes": [
+      "09.7.3"
+    ],
+    "id": 328,
+    "parent_id": 321,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.7.4.0",
+    "title": "Stationery and drawing materials (ND)",
+    "collapsed_codes": [
+      "09.7.4"
+    ],
+    "id": 329,
+    "parent_id": 321,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "09.8.0.0",
+    "title": "Package holidays (S)",
+    "collapsed_codes": [
+      "09.8",
+      "09.8.0"
+    ],
+    "id": 330,
+    "parent_id": 271,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "10",
+    "title": "Education services",
+    "id": 331,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      332,
+      335,
+      336,
+      337,
+      338
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "10.1.0",
+    "title": "Early childhood and primary education (S)",
+    "collapsed_codes": [
+      "10.1"
+    ],
+    "id": 332,
+    "parent_id": 331,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      333,
+      334
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "10.1.0.1",
+    "title": "Early childhood education (S)",
+    "id": 333,
+    "parent_id": 332,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "10.1.0.2",
+    "title": "Primary education (S)",
+    "id": 334,
+    "parent_id": 332,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "10.2.0.0",
+    "title": "Secondary education (S)",
+    "collapsed_codes": [
+      "10.2",
+      "10.2.0"
+    ],
+    "id": 335,
+    "parent_id": 331,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "10.3.0.0",
+    "title": "Post-secondary non-tertiary education (S)",
+    "collapsed_codes": [
+      "10.3",
+      "10.3.0"
+    ],
+    "id": 336,
+    "parent_id": 331,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "10.4.0.0",
+    "title": "Tertiary education (S)",
+    "collapsed_codes": [
+      "10.4",
+      "10.4.0"
+    ],
+    "id": 337,
+    "parent_id": 331,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "10.5.0",
+    "title": "Education not defined by level (S)",
+    "collapsed_codes": [
+      "10.5"
+    ],
+    "id": 338,
+    "parent_id": 331,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      339,
+      340
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "10.5.0.1",
+    "title": "Tutoring (S)",
+    "id": 339,
+    "parent_id": 338,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "10.5.0.9",
+    "title": "Other education not defined by level (S)",
+    "id": 340,
+    "parent_id": 338,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "11",
+    "title": "Restaurants and accommodation services",
+    "id": 341,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      342,
+      349
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "11.1",
+    "title": "Food and beverage serving services",
+    "id": 342,
+    "parent_id": 341,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      343,
+      346
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "11.1.1",
+    "title": "Restaurants, cafés and the like (S)",
+    "id": 343,
+    "parent_id": 342,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      344,
+      345
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "11.1.1.1",
+    "title": "Restaurants, cafés and the like – with full service (S)",
+    "id": 344,
+    "parent_id": 343,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "11.1.1.2",
+    "title": "Restaurants, cafés and the like – with limited service (S)",
+    "id": 345,
+    "parent_id": 343,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "11.1.2",
+    "title": "Canteens, cafeterias and refectories (S)",
+    "id": 346,
+    "parent_id": 342,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      347,
+      348
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "11.1.2.1",
+    "title": "Canteens and cafeterias of universities, schools and kindergartens (S)",
+    "id": 347,
+    "parent_id": 346,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "11.1.2.9",
+    "title": "Other canteens, cafeterias and refectories (S)",
+    "id": 348,
+    "parent_id": 346,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "11.2.0",
+    "title": "Accommodation services (S)",
+    "collapsed_codes": [
+      "11.2"
+    ],
+    "id": 349,
+    "parent_id": 341,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      350,
+      351,
+      352,
+      353
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "11.2.0.1",
+    "title": "Hotels, motels, inns and similar accommodation services (S)",
+    "id": 350,
+    "parent_id": 349,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "11.2.0.2",
+    "title": "Holiday centres, camping sites, youth hostels and similar accommodation services (S)",
+    "id": 351,
+    "parent_id": 349,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "11.2.0.3",
+    "title": "Accommodation services of boarding schools, universities and other educational establishments (S)",
+    "id": 352,
+    "parent_id": 349,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "11.2.0.9",
+    "title": "Other accommodation services (S)",
+    "id": 353,
+    "parent_id": 349,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "12",
+    "title": "Insurance and financial services",
+    "id": 354,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      355,
+      363
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "12.1",
+    "title": "Insurance",
+    "id": 355,
+    "parent_id": 354,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      356,
+      357,
+      358,
+      359,
+      362
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "12.1.1.0",
+    "title": "Life and accident insurance (S)",
+    "collapsed_codes": [
+      "12.1.1"
+    ],
+    "id": 356,
+    "parent_id": 355,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "12.1.2.0",
+    "title": "Insurance connected with health (S)",
+    "collapsed_codes": [
+      "12.1.2"
+    ],
+    "id": 357,
+    "parent_id": 355,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "12.1.3.0",
+    "title": "Insurance connected with dwellings (S)",
+    "collapsed_codes": [
+      "12.1.3"
+    ],
+    "id": 358,
+    "parent_id": 355,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "12.1.4",
+    "title": "Insurance connected with transport (S)",
+    "id": 359,
+    "parent_id": 355,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      360,
+      361
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "12.1.4.1",
+    "title": "Personal transport insurance (S)",
+    "id": 360,
+    "parent_id": 359,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "12.1.4.2",
+    "title": "Travel insurance (S)",
+    "id": 361,
+    "parent_id": 359,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "12.1.9.0",
+    "title": "Other insurance (S)",
+    "collapsed_codes": [
+      "12.1.9"
+    ],
+    "id": 362,
+    "parent_id": 355,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "12.2",
+    "title": "Financial services",
+    "id": 363,
+    "parent_id": 354,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      364,
+      365,
+      366
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "12.2.1.0",
+    "title": "Financial intermediation services indirectly measured (S)",
+    "collapsed_codes": [
+      "12.2.1"
+    ],
+    "id": 364,
+    "parent_id": 363,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "12.2.2.0",
+    "title": "Explicit charges by deposit-taking corporations (S)",
+    "collapsed_codes": [
+      "12.2.2"
+    ],
+    "id": 365,
+    "parent_id": 363,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "12.2.9",
+    "title": "Other financial services (S)",
+    "id": 366,
+    "parent_id": 363,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      367,
+      368
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "12.2.9.1",
+    "title": "Remittances fees (S)",
+    "id": 367,
+    "parent_id": 366,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "12.2.9.9",
+    "title": "Other financial services n.e.c. (S)",
+    "id": 368,
+    "parent_id": 366,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13",
+    "title": "Personal care, social protection and miscellaneous goods and services",
+    "id": 369,
+    "parent_id": null,
+    "level": 1,
+    "is_optional_detail": false,
+    "children_ids": [
+      370,
+      378,
+      386,
+      391
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "13.1",
+    "title": "Personal care",
+    "id": 370,
+    "parent_id": 369,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      371,
+      374,
+      375
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "13.1.1",
+    "title": "Electric appliances for personal care (SD)",
+    "id": 371,
+    "parent_id": 370,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      372,
+      373
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "13.1.1.1",
+    "title": "Purchase of electric appliances for personal care (SD)",
+    "id": 372,
+    "parent_id": 371,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.1.1.2",
+    "title": "Repair of electric appliances for personal care (S)",
+    "id": 373,
+    "parent_id": 371,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.1.2.0",
+    "title": "Other appliances, articles and products for personal care (ND)",
+    "collapsed_codes": [
+      "13.1.2"
+    ],
+    "id": 374,
+    "parent_id": 370,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.1.3",
+    "title": "Hairdressing salons and personal grooming establishments (S)",
+    "id": 375,
+    "parent_id": 370,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      376,
+      377
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "13.1.3.1",
+    "title": "Hairdressing (S)",
+    "id": 376,
+    "parent_id": 375,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.1.3.2",
+    "title": "Personal grooming treatments (S)",
+    "id": 377,
+    "parent_id": 375,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.2",
+    "title": "Other personal effects",
+    "id": 378,
+    "parent_id": 369,
+    "level": 2,
+    "is_optional_detail": false,
+    "children_ids": [
+      379,
+      382,
+      383
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "13.2.1",
+    "title": "Jewellery and watches (D)",
+    "id": 379,
+    "parent_id": 378,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      380,
+      381
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "13.2.1.1",
+    "title": "Purchase of jewellery and watches (D)",
+    "id": 380,
+    "parent_id": 379,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.2.1.2",
+    "title": "Repair and hire of jewellery, clocks and watches (S)",
+    "id": 381,
+    "parent_id": 379,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.2.2.0",
+    "title": "Devotional articles and articles for religious and ritual celebrations (SD)",
+    "collapsed_codes": [
+      "13.2.2"
+    ],
+    "id": 382,
+    "parent_id": 378,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.2.9",
+    "title": "Other personal effects n.e.c. (SD)",
+    "id": 383,
+    "parent_id": 378,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      384,
+      385
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "13.2.9.1",
+    "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)",
+    "id": 384,
+    "parent_id": 383,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.2.9.2",
+    "title": "Repair and hire of other personal effects (S)",
+    "id": 385,
+    "parent_id": 383,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.3.0",
+    "title": "Social protection (S)",
+    "collapsed_codes": [
+      "13.3"
+    ],
+    "id": 386,
+    "parent_id": 369,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      387,
+      388,
+      389,
+      390
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "13.3.0.1",
+    "title": "Childcare services (S)",
+    "id": 387,
+    "parent_id": 386,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.3.0.2",
+    "title": "Retirement homes for elderly persons and residences for disabled persons, not providing medical care (S)",
+    "id": 388,
+    "parent_id": 386,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.3.0.3",
+    "title": "Home care services for elderly and disabled (S)",
+    "id": 389,
+    "parent_id": 386,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.3.0.9",
+    "title": "Other social protection services (S)",
+    "id": 390,
+    "parent_id": 386,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.9.0",
+    "title": "Other services (S)",
+    "collapsed_codes": [
+      "13.9"
+    ],
+    "id": 391,
+    "parent_id": 369,
+    "level": 3,
+    "is_optional_detail": false,
+    "children_ids": [
+      392,
+      393,
+      394
+    ],
+    "is_leaf": false
+  },
+  {
+    "code": "13.9.0.1",
+    "title": "Prostitution (S)",
+    "id": 392,
+    "parent_id": 391,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.9.0.2",
+    "title": "Religious services (S)",
+    "id": 393,
+    "parent_id": 391,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "13.9.0.9",
+    "title": "Other services n.e.c. (S)",
+    "id": 394,
+    "parent_id": 391,
+    "level": 4,
+    "is_optional_detail": false,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.1.1",
+    "title": "Wheat",
+    "id": 395,
+    "parent_id": 3,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.1.2",
+    "title": "Rice",
+    "id": 396,
+    "parent_id": 3,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.1.3",
+    "title": "Sorghum",
+    "id": 397,
+    "parent_id": 3,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.1.4",
+    "title": "Barley",
+    "id": 398,
+    "parent_id": 3,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.1.5",
+    "title": "Millet",
+    "id": 399,
+    "parent_id": 3,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.1.6",
+    "title": "Maize (corn)",
+    "id": 400,
+    "parent_id": 3,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.1.7",
+    "title": "Quinoa",
+    "id": 401,
+    "parent_id": 3,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.1.8",
+    "title": "Teff",
+    "id": 402,
+    "parent_id": 3,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.1.9",
+    "title": "Other cereals",
+    "id": 403,
+    "parent_id": 3,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.2.1",
+    "title": "Flour of wheat",
+    "id": 404,
+    "parent_id": 4,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.2.2",
+    "title": "Flour of rice",
+    "id": 405,
+    "parent_id": 4,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.2.3",
+    "title": "Flour of sorghum",
+    "id": 406,
+    "parent_id": 4,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.2.4",
+    "title": "Flour of barley",
+    "id": 407,
+    "parent_id": 4,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.2.5",
+    "title": "Flour of millet",
+    "id": 408,
+    "parent_id": 4,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.2.6",
+    "title": "Flour of maize or cornmeal",
+    "id": 409,
+    "parent_id": 4,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.2.7",
+    "title": "Flour of quinoa",
+    "id": 410,
+    "parent_id": 4,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.2.8",
+    "title": "Flour of teff",
+    "id": 411,
+    "parent_id": 4,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.2.9",
+    "title": "Other flours of cereals",
+    "id": 412,
+    "parent_id": 4,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.3.1",
+    "title": "Bread",
+    "id": 413,
+    "parent_id": 5,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.3.9",
+    "title": "Other bakery products",
+    "id": 414,
+    "parent_id": 5,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.4.0",
+    "title": "Breakfast cereals",
+    "collapsed_codes": [
+      "01.1.1.4"
+    ],
+    "id": 415,
+    "parent_id": 2,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.5.0",
+    "title": "Macaroni, noodles, couscous and similar pasta products",
+    "collapsed_codes": [
+      "01.1.1.5"
+    ],
+    "id": 416,
+    "parent_id": 2,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.1.9.0",
+    "title": "Other milled cereal and grain products",
+    "collapsed_codes": [
+      "01.1.1.9"
+    ],
+    "id": 417,
+    "parent_id": 2,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.1.1",
+    "title": "Bovine animal, live",
+    "id": 418,
+    "parent_id": 7,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.1.2",
+    "title": "Pigs, live",
+    "id": 419,
+    "parent_id": 7,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.1.3",
+    "title": "Goats, lambs and sheep, live",
+    "id": 420,
+    "parent_id": 7,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.1.4",
+    "title": "Poultry, live",
+    "id": 421,
+    "parent_id": 7,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.1.5",
+    "title": "Hares and rabbits, live",
+    "id": 422,
+    "parent_id": 7,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.1.9",
+    "title": "Other live animals",
+    "id": 423,
+    "parent_id": 7,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.2.1",
+    "title": "Meat of bovine animals, fresh, chilled or frozen",
+    "id": 424,
+    "parent_id": 8,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.2.2",
+    "title": "Meat of pigs, fresh, chilled or frozen",
+    "id": 425,
+    "parent_id": 8,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.2.3",
+    "title": "Meat of goats, lambs and sheep, fresh, chilled or frozen",
+    "id": 426,
+    "parent_id": 8,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.2.4",
+    "title": "Meat of poultry, fresh, chilled or frozen",
+    "id": 427,
+    "parent_id": 8,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.2.5",
+    "title": "Meat of hares and rabbits, fresh, chilled or frozen",
+    "id": 428,
+    "parent_id": 8,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.2.6",
+    "title": "Meat of horses and other equines, fresh, chilled or frozen",
+    "id": 429,
+    "parent_id": 8,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.2.7",
+    "title": "Meat of camels and camelids, fresh, chilled or frozen",
+    "id": 430,
+    "parent_id": 8,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.2.9",
+    "title": "Other meat, fresh, chilled or frozen",
+    "id": 431,
+    "parent_id": 8,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.3.1",
+    "title": "Meat of bovine, salted, dried or smoked",
+    "id": 432,
+    "parent_id": 9,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.3.2",
+    "title": "Meat of pigs, cuts, salted, dried or smoked (bacon and ham)",
+    "id": 433,
+    "parent_id": 9,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.3.9",
+    "title": "Other meat, dried, salted or smoked",
+    "id": 434,
+    "parent_id": 9,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.4.0",
+    "title": "Offal, blood and other parts of slaughtered animals fresh, chilled or frozen, dried, salted, in brine or smoked",
+    "collapsed_codes": [
+      "01.1.2.4"
+    ],
+    "id": 435,
+    "parent_id": 6,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.5.1",
+    "title": "Sausages and similar products of meat, offal or blood",
+    "id": 436,
+    "parent_id": 10,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.5.2",
+    "title": "Canned meat",
+    "id": 437,
+    "parent_id": 10,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.5.3",
+    "title": "Pâté, including liver pâté",
+    "id": 438,
+    "parent_id": 10,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.2.5.9",
+    "title": "Other preparations of meat, offal or blood n.e.c.",
+    "id": 439,
+    "parent_id": 10,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.1.1",
+    "title": "Freshwater fish, live, fresh, chilled or frozen",
+    "id": 440,
+    "parent_id": 12,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.1.2",
+    "title": "Salmonoidae, live, fresh, chilled or frozen",
+    "id": 441,
+    "parent_id": 12,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.1.3",
+    "title": "Flatfish, live, fresh, chilled, or frozen",
+    "id": 442,
+    "parent_id": 12,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.1.4",
+    "title": "Gadiformes, live, fresh, chilled, or frozen",
+    "id": 443,
+    "parent_id": 12,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.1.5",
+    "title": "Tunas, skipjack or stripe-bellied bonito, live, fresh, chilled, or frozen",
+    "id": 444,
+    "parent_id": 12,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.1.6",
+    "title": "Other pelagic fish, live, fresh, chilled, or frozen",
+    "id": 445,
+    "parent_id": 12,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.1.9",
+    "title": "Other fish, live, fresh, chilled, or frozen",
+    "id": 446,
+    "parent_id": 12,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.2.1",
+    "title": "Salmonoidae, smoked",
+    "id": 447,
+    "parent_id": 13,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.2.2",
+    "title": "Gadiformes, dried, salted or in brine",
+    "id": 448,
+    "parent_id": 13,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.2.9",
+    "title": "Other fish, dried, salted, in brine, smoked",
+    "id": 449,
+    "parent_id": 13,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.3.1",
+    "title": "Tunas, skipjack or stripe-bellied bonito, prepared or preserved",
+    "id": 450,
+    "parent_id": 14,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.3.2",
+    "title": "Other pelagic fish, prepared or preserved",
+    "id": 451,
+    "parent_id": 14,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.3.3",
+    "title": "Caviar and caviar substitutes",
+    "id": 452,
+    "parent_id": 14,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.3.9",
+    "title": "Other fish, prepared or preserved",
+    "id": 453,
+    "parent_id": 14,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.4.1",
+    "title": "Shrimps and prawns, live, fresh, chilled or frozen",
+    "id": 454,
+    "parent_id": 15,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.4.2",
+    "title": "Other crustaceans, live, fresh, chilled or frozen",
+    "id": 455,
+    "parent_id": 15,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.4.3",
+    "title": "Bivalves, live, fresh, chilled or frozen",
+    "id": 456,
+    "parent_id": 15,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.4.4",
+    "title": "Cephalopods, live, fresh, chilled or frozen",
+    "id": 457,
+    "parent_id": 15,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.4.5",
+    "title": "Other molluscs, live, fresh, chilled or frozen",
+    "id": 458,
+    "parent_id": 15,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.4.9",
+    "title": "Other aquatic invertebrates, live, fresh, chilled or frozen",
+    "id": 459,
+    "parent_id": 15,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.5.1",
+    "title": "Shrimps and prawns, dried, salted or in brine; smoked",
+    "id": 460,
+    "parent_id": 16,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.5.2",
+    "title": "Other crustaceans, dried, salted or in brine; smoked",
+    "id": 461,
+    "parent_id": 16,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.5.3",
+    "title": "Bivalves, dried, salted or in brine; smoked",
+    "id": 462,
+    "parent_id": 16,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.5.4",
+    "title": "Cephalopods, dried, salted or in brine; smoked",
+    "id": 463,
+    "parent_id": 16,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.5.5",
+    "title": "Other molluscs, dried, salted or in brine; smoked",
+    "id": 464,
+    "parent_id": 16,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.5.9",
+    "title": "Other aquatic invertebrates, dried, salted or in brine; smoked",
+    "id": 465,
+    "parent_id": 16,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.6.1",
+    "title": "Shrimps and prawns, prepared or preserved",
+    "id": 466,
+    "parent_id": 17,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.6.2",
+    "title": "Other crustaceans, prepared or preserved",
+    "id": 467,
+    "parent_id": 17,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.6.3",
+    "title": "Bivalves, prepared or preserved",
+    "id": 468,
+    "parent_id": 17,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.6.4",
+    "title": "Cephalopods, prepared or preserved",
+    "id": 469,
+    "parent_id": 17,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.6.5",
+    "title": "Other molluscs, prepared or preserved",
+    "id": 470,
+    "parent_id": 17,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.6.9",
+    "title": "Other aquatic invertebrates, prepared or preserved",
+    "id": 471,
+    "parent_id": 17,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.3.7.0",
+    "title": "Livers, roes and other offal of fish and of other seafood in all forms",
+    "collapsed_codes": [
+      "01.1.3.7"
+    ],
+    "id": 472,
+    "parent_id": 11,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.1.1",
+    "title": "Raw and whole milk of cattle",
+    "id": 473,
+    "parent_id": 19,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.1.2",
+    "title": "Raw and whole milk of buffaloes",
+    "id": 474,
+    "parent_id": 19,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.1.3",
+    "title": "Raw and whole milk of sheep and goats",
+    "id": 475,
+    "parent_id": 19,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.1.4",
+    "title": "Raw and whole milk of camels",
+    "id": 476,
+    "parent_id": 19,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.1.9",
+    "title": "Other raw and whole milk",
+    "id": 477,
+    "parent_id": 19,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.2.0",
+    "title": "Skimmed milk",
+    "collapsed_codes": [
+      "01.1.4.2"
+    ],
+    "id": 478,
+    "parent_id": 18,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.3.1",
+    "title": "Condensed or evaporated milk",
+    "id": 479,
+    "parent_id": 20,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.3.2",
+    "title": "Powdered milk",
+    "id": 480,
+    "parent_id": 20,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.3.3",
+    "title": "Cream",
+    "id": 481,
+    "parent_id": 20,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.3.9",
+    "title": "Other milk",
+    "id": 482,
+    "parent_id": 20,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.4.1",
+    "title": "Coconut milk",
+    "id": 483,
+    "parent_id": 21,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.4.2",
+    "title": "Almond milk",
+    "id": 484,
+    "parent_id": 21,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.4.3",
+    "title": "Soy milk",
+    "id": 485,
+    "parent_id": 21,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.4.4",
+    "title": "Rice milk",
+    "id": 486,
+    "parent_id": 21,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.4.5",
+    "title": "Oat milk",
+    "id": 487,
+    "parent_id": 21,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.4.9",
+    "title": "Other non-animal milk",
+    "id": 488,
+    "parent_id": 21,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.5.0",
+    "title": "Cheese",
+    "collapsed_codes": [
+      "01.1.4.5"
+    ],
+    "id": 489,
+    "parent_id": 18,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.6.0",
+    "title": "Yoghurt and similar products",
+    "collapsed_codes": [
+      "01.1.4.6"
+    ],
+    "id": 490,
+    "parent_id": 18,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.7.0",
+    "title": "Milk-based dessert and beverages",
+    "collapsed_codes": [
+      "01.1.4.7"
+    ],
+    "id": 491,
+    "parent_id": 18,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.8.1",
+    "title": "Eggs of hen and other birds, in shell, fresh",
+    "id": 492,
+    "parent_id": 22,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.8.2",
+    "title": "Eggs of other animals, in shell, fresh",
+    "id": 493,
+    "parent_id": 22,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.8.9",
+    "title": "Other egg products",
+    "id": 494,
+    "parent_id": 22,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.4.9.0",
+    "title": "Other dairy products",
+    "collapsed_codes": [
+      "01.1.4.9"
+    ],
+    "id": 495,
+    "parent_id": 18,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.1.1",
+    "title": "Sunflower-seed and safflower-seed oil",
+    "id": 496,
+    "parent_id": 24,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.1.2",
+    "title": "Palm oil",
+    "id": 497,
+    "parent_id": 24,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.1.3",
+    "title": "Olive oil",
+    "id": 498,
+    "parent_id": 24,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.1.4",
+    "title": "Soya bean oil",
+    "id": 499,
+    "parent_id": 24,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.1.5",
+    "title": "Groundnut oil",
+    "id": 500,
+    "parent_id": 24,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.1.6",
+    "title": "Coconut oil",
+    "id": 501,
+    "parent_id": 24,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.1.7",
+    "title": "Corn oil",
+    "id": 502,
+    "parent_id": 24,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.1.9",
+    "title": "Other edible vegetable oils n.e.c.",
+    "id": 503,
+    "parent_id": 24,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.2.1",
+    "title": "Butter",
+    "id": 504,
+    "parent_id": 25,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.2.9",
+    "title": "Other oils and fats derived from milk",
+    "id": 505,
+    "parent_id": 25,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.3.0",
+    "title": "Margarine and similar preparations",
+    "collapsed_codes": [
+      "01.1.5.3"
+    ],
+    "id": 506,
+    "parent_id": 23,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.9.1",
+    "title": "Lard",
+    "id": 507,
+    "parent_id": 26,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.9.2",
+    "title": "Tallow",
+    "id": 508,
+    "parent_id": 26,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.9.3",
+    "title": "Edible oils and fats of fish",
+    "id": 509,
+    "parent_id": 26,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.5.9.9",
+    "title": "Other animal oils and fats n.e.c.",
+    "id": 510,
+    "parent_id": 26,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.1.1",
+    "title": "Avocados, fresh",
+    "id": 511,
+    "parent_id": 28,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.1.2",
+    "title": "Bananas, fresh",
+    "id": 512,
+    "parent_id": 28,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.1.3",
+    "title": "Dates, fresh",
+    "id": 513,
+    "parent_id": 28,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.1.4",
+    "title": "Figs, fresh",
+    "id": 514,
+    "parent_id": 28,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.1.5",
+    "title": "Mangoes, guavas and mangosteens, fresh",
+    "id": 515,
+    "parent_id": 28,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.1.6",
+    "title": "Papayas, fresh",
+    "id": 516,
+    "parent_id": 28,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.1.7",
+    "title": "Pineapples, fresh",
+    "id": 517,
+    "parent_id": 28,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.1.8",
+    "title": "Coconuts, fresh",
+    "id": 518,
+    "parent_id": 28,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.1.9",
+    "title": "Other tropical fruits, fresh",
+    "id": 519,
+    "parent_id": 28,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.2.1",
+    "title": "Pomelos and grapefruits, fresh",
+    "id": 520,
+    "parent_id": 29,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.2.2",
+    "title": "Lemons and limes, fresh",
+    "id": 521,
+    "parent_id": 29,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.2.3",
+    "title": "Oranges, fresh",
+    "id": 522,
+    "parent_id": 29,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.2.4",
+    "title": "Tangerines, mandarins and clementines, fresh",
+    "id": 523,
+    "parent_id": 29,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.2.9",
+    "title": "Other citrus fruits, fresh",
+    "id": 524,
+    "parent_id": 29,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.3.1",
+    "title": "Apples, fresh",
+    "id": 525,
+    "parent_id": 30,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.3.2",
+    "title": "Pears and quinces, fresh",
+    "id": 526,
+    "parent_id": 30,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.3.3",
+    "title": "Apricots, fresh",
+    "id": 527,
+    "parent_id": 30,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.3.4",
+    "title": "Cherries, fresh",
+    "id": 528,
+    "parent_id": 30,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.3.5",
+    "title": "Peaches and nectarines, fresh",
+    "id": 529,
+    "parent_id": 30,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.3.6",
+    "title": "Plums and sloes, fresh",
+    "id": 530,
+    "parent_id": 30,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.3.9",
+    "title": "Other stone fruits and pome fruits, fresh",
+    "id": 531,
+    "parent_id": 30,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.4.1",
+    "title": "Currants, fresh",
+    "id": 532,
+    "parent_id": 31,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.4.2",
+    "title": "Gooseberries, fresh",
+    "id": 533,
+    "parent_id": 31,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.4.3",
+    "title": "Raspberries, fresh",
+    "id": 534,
+    "parent_id": 31,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.4.4",
+    "title": "Blackberries, mulberries and loganberries, fresh",
+    "id": 535,
+    "parent_id": 31,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.4.5",
+    "title": "Strawberries, fresh",
+    "id": 536,
+    "parent_id": 31,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.4.6",
+    "title": "Blueberries, fresh",
+    "id": 537,
+    "parent_id": 31,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.4.7",
+    "title": "Cranberries, fresh",
+    "id": 538,
+    "parent_id": 31,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.4.9",
+    "title": "Other berries, fresh",
+    "id": 539,
+    "parent_id": 31,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.5.1",
+    "title": "Grapes, fresh",
+    "id": 540,
+    "parent_id": 32,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.5.2",
+    "title": "Kiwi fruits, fresh",
+    "id": 541,
+    "parent_id": 32,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.5.3",
+    "title": "Cantaloupes and other melons, fresh",
+    "id": 542,
+    "parent_id": 32,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.5.4",
+    "title": "Watermelons, fresh",
+    "id": 543,
+    "parent_id": 32,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.5.5",
+    "title": "Persimmons, fresh",
+    "id": 544,
+    "parent_id": 32,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.5.6",
+    "title": "Cashew apples, fresh",
+    "id": 545,
+    "parent_id": 32,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.5.9",
+    "title": "Other fruits or mixtures of fruit, fresh, n.e.c.",
+    "id": 546,
+    "parent_id": 32,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.6.0",
+    "title": "Fruits, frozen",
+    "collapsed_codes": [
+      "01.1.6.6"
+    ],
+    "id": 547,
+    "parent_id": 27,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.7.1",
+    "title": "Raisins",
+    "id": 548,
+    "parent_id": 33,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.7.2",
+    "title": "Prunes",
+    "id": 549,
+    "parent_id": 33,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.7.9",
+    "title": "Other dried fruit",
+    "id": 550,
+    "parent_id": 33,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.8.1",
+    "title": "Almonds, in shell or shelled",
+    "id": 551,
+    "parent_id": 34,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.8.2",
+    "title": "Cashew nuts, in shell or shelled",
+    "id": 552,
+    "parent_id": 34,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.8.3",
+    "title": "Chestnuts, in shell or shelled",
+    "id": 553,
+    "parent_id": 34,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.8.4",
+    "title": "Hazelnuts, in shell or shelled",
+    "id": 554,
+    "parent_id": 34,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.8.5",
+    "title": "Pistachios, in shell or shelled",
+    "id": 555,
+    "parent_id": 34,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.8.6",
+    "title": "Walnuts, in shell or shelled",
+    "id": 556,
+    "parent_id": 34,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.8.7",
+    "title": "Brazil nuts, in shell or shelled",
+    "id": 557,
+    "parent_id": 34,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.8.8",
+    "title": "Groundnuts, in shell or shelled",
+    "id": 558,
+    "parent_id": 34,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.8.9",
+    "title": "Other nuts, in shell or shelled",
+    "id": 559,
+    "parent_id": 34,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.9.1",
+    "title": "Fruit and nuts flour",
+    "id": 560,
+    "parent_id": 35,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.9.2",
+    "title": "Canned fruit",
+    "id": 561,
+    "parent_id": 35,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.9.3",
+    "title": "Homogenized fruit preparations",
+    "id": 562,
+    "parent_id": 35,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.9.4",
+    "title": "Nuts and seeds roasted, salted or otherwise prepared",
+    "id": 563,
+    "parent_id": 35,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.6.9.9",
+    "title": "Other fruit and nuts preparations",
+    "id": 564,
+    "parent_id": 35,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.1.1",
+    "title": "Asparagus, fresh or chilled",
+    "id": 565,
+    "parent_id": 37,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.1.2",
+    "title": "Cabbages, fresh or chilled",
+    "id": 566,
+    "parent_id": 37,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.1.3",
+    "title": "Cauliflowers and broccoli, fresh or chilled",
+    "id": 567,
+    "parent_id": 37,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.1.4",
+    "title": "Lettuce and chicory, fresh or chilled",
+    "id": 568,
+    "parent_id": 37,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.1.5",
+    "title": "Spinach, fresh or chilled",
+    "id": 569,
+    "parent_id": 37,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.1.6",
+    "title": "Artichokes, fresh or chilled",
+    "id": 570,
+    "parent_id": 37,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.1.7",
+    "title": "Cassava leaves, fresh or chilled",
+    "id": 571,
+    "parent_id": 37,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.1.9",
+    "title": "Other leafy or stem vegetables, fresh or chilled",
+    "id": 572,
+    "parent_id": 37,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.2.1",
+    "title": "Chillies and peppers, fresh or chilled",
+    "id": 573,
+    "parent_id": 38,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.2.2",
+    "title": "Cucumbers and gherkins, fresh or chilled",
+    "id": 574,
+    "parent_id": 38,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.2.3",
+    "title": "Eggplants (aubergines), fresh or chilled",
+    "id": 575,
+    "parent_id": 38,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.2.4",
+    "title": "Tomatoes, fresh or chilled",
+    "id": 576,
+    "parent_id": 38,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.2.5",
+    "title": "Pumpkins, squash and gourds, fresh or chilled",
+    "id": 577,
+    "parent_id": 38,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.2.6",
+    "title": "Okra, fresh or chilled",
+    "id": 578,
+    "parent_id": 38,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.2.9",
+    "title": "Other fruit-bearing vegetables, fresh or chilled",
+    "id": 579,
+    "parent_id": 38,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.3.1",
+    "title": "Beans, fresh or chilled",
+    "id": 580,
+    "parent_id": 39,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.3.2",
+    "title": "String beans, fresh or chilled",
+    "id": 581,
+    "parent_id": 39,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.3.3",
+    "title": "Peas, fresh or chilled",
+    "id": 582,
+    "parent_id": 39,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.3.4",
+    "title": "Broad beans and horse beans, fresh or chilled",
+    "id": 583,
+    "parent_id": 39,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.3.5",
+    "title": "Soya beans, fresh or chilled",
+    "id": 584,
+    "parent_id": 39,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.3.9",
+    "title": "Other green leguminous vegetables, fresh or chilled",
+    "id": 585,
+    "parent_id": 39,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.4.1",
+    "title": "Carrots and turnips, fresh or chilled",
+    "id": 586,
+    "parent_id": 40,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.4.2",
+    "title": "Garlic, fresh or chilled",
+    "id": 587,
+    "parent_id": 40,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.4.3",
+    "title": "Onions and shallots, fresh or chilled",
+    "id": 588,
+    "parent_id": 40,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.4.4",
+    "title": "Leeks and other alliaceous vegetables, fresh or chilled",
+    "id": 589,
+    "parent_id": 40,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.4.5",
+    "title": "Mushrooms and truffles, fresh or chilled",
+    "id": 590,
+    "parent_id": 40,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.4.6",
+    "title": "Edible seaweeds and other aquatic plants, fresh or chilled",
+    "id": 591,
+    "parent_id": 40,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.4.7",
+    "title": "Olives, fresh or chilled",
+    "id": 592,
+    "parent_id": 40,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.4.8",
+    "title": "Green maize (green corn)",
+    "id": 593,
+    "parent_id": 40,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.4.9",
+    "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled",
+    "id": 594,
+    "parent_id": 40,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.5.1",
+    "title": "Potatoes",
+    "id": 595,
+    "parent_id": 41,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.5.2",
+    "title": "Sweet potatoes",
+    "id": 596,
+    "parent_id": 41,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.5.3",
+    "title": "Cassava (manioc, yuca)",
+    "id": 597,
+    "parent_id": 41,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.5.4",
+    "title": "Yams",
+    "id": 598,
+    "parent_id": 41,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.5.5",
+    "title": "Taro",
+    "id": 599,
+    "parent_id": 41,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.5.6",
+    "title": "Yautia",
+    "id": 600,
+    "parent_id": 41,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.5.7",
+    "title": "Plantains and cooking bananas",
+    "id": 601,
+    "parent_id": 41,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.5.9",
+    "title": "Other tubers",
+    "id": 602,
+    "parent_id": 41,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.6.1",
+    "title": "Beans, dried",
+    "id": 603,
+    "parent_id": 42,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.6.2",
+    "title": "Broad beans and horse beans, dried",
+    "id": 604,
+    "parent_id": 42,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.6.3",
+    "title": "Chickpeas, dried",
+    "id": 605,
+    "parent_id": 42,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.6.4",
+    "title": "Lentils, dried",
+    "id": 606,
+    "parent_id": 42,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.6.5",
+    "title": "Peas, dried",
+    "id": 607,
+    "parent_id": 42,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.6.6",
+    "title": "Cow peas, dried",
+    "id": 608,
+    "parent_id": 42,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.6.7",
+    "title": "Pigeon peas, dried",
+    "id": 609,
+    "parent_id": 42,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.6.8",
+    "title": "Bambara beans, dried",
+    "id": 610,
+    "parent_id": 42,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.6.9",
+    "title": "Other pulses",
+    "id": 611,
+    "parent_id": 42,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.7.0",
+    "title": "Other vegetables, tubers, plantains and cooking bananas, dried and dehydrated",
+    "collapsed_codes": [
+      "01.1.7.7"
+    ],
+    "id": 612,
+    "parent_id": 36,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.8.0",
+    "title": "Vegetables, tubers, plantains and cooking bananas, frozen",
+    "collapsed_codes": [
+      "01.1.7.8"
+    ],
+    "id": 613,
+    "parent_id": 36,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.9.1",
+    "title": "Flour of vegetables, pulses, tubers, plantains and cooking bananas",
+    "id": 614,
+    "parent_id": 43,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.9.2",
+    "title": "Canned vegetables",
+    "id": 615,
+    "parent_id": 43,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.9.3",
+    "title": "Preserved olives",
+    "id": 616,
+    "parent_id": 43,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.9.4",
+    "title": "Chipped potatoes, frozen",
+    "id": 617,
+    "parent_id": 43,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.9.5",
+    "title": "Tofu",
+    "id": 618,
+    "parent_id": 43,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.9.6",
+    "title": "Tempeh, soy meat and burgers",
+    "id": 619,
+    "parent_id": 43,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.7.9.9",
+    "title": "Other vegetables, pulses and tubers preserved or processed",
+    "id": 620,
+    "parent_id": 43,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.1.1",
+    "title": "Cane sugar",
+    "id": 621,
+    "parent_id": 45,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.1.2",
+    "title": "Beet sugar",
+    "id": 622,
+    "parent_id": 45,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.2.0",
+    "title": "Other sugars and sugar substitutes",
+    "collapsed_codes": [
+      "01.1.8.2"
+    ],
+    "id": 623,
+    "parent_id": 44,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.3.1",
+    "title": "Honey",
+    "id": 624,
+    "parent_id": 46,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.3.9",
+    "title": "Other jams, marmalades, fruit jellies, purées and pastes",
+    "id": 625,
+    "parent_id": 46,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.4.0",
+    "title": "Nut purées, nut butters and nut pastes",
+    "collapsed_codes": [
+      "01.1.8.4"
+    ],
+    "id": 626,
+    "parent_id": 44,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.5.1",
+    "title": "Chocolate",
+    "id": 627,
+    "parent_id": 47,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.5.2",
+    "title": "Cocoa beans",
+    "id": 628,
+    "parent_id": 47,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.5.3",
+    "title": "Cocoa powder",
+    "id": 629,
+    "parent_id": 47,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.5.9",
+    "title": "Other cocoa-based foods and cocoa-based dessert preparations",
+    "id": 630,
+    "parent_id": 47,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.6.0",
+    "title": "Ice, ice cream and sorbets",
+    "collapsed_codes": [
+      "01.1.8.6"
+    ],
+    "id": 631,
+    "parent_id": 44,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.9.1",
+    "title": "Vegetables, fruits, nuts, fruit peel and other parts of plants, preserved by sugar",
+    "id": 632,
+    "parent_id": 48,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.8.9.9",
+    "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)",
+    "id": 633,
+    "parent_id": 48,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.1.1",
+    "title": "Precooked dishes based on pasta and cereals",
+    "id": 634,
+    "parent_id": 50,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.1.2",
+    "title": "Precooked dishes based on meat and/or fish",
+    "id": 635,
+    "parent_id": 50,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.1.3",
+    "title": "Mixed salads and prepared dishes based on vegetables",
+    "id": 636,
+    "parent_id": 50,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.1.4",
+    "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not",
+    "id": 637,
+    "parent_id": 50,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.1.5",
+    "title": "Omelettes, crepes and other ready-made food based on eggs",
+    "id": 638,
+    "parent_id": 50,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.1.6",
+    "title": "Ready-made soups",
+    "id": 639,
+    "parent_id": 50,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.1.9",
+    "title": "Other prepared ready-made dishes and meals n.e.c.",
+    "id": 640,
+    "parent_id": 50,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.2.1",
+    "title": "Baby formula",
+    "id": 641,
+    "parent_id": 51,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.2.2",
+    "title": "Baby rice cereals and flours for baby meals",
+    "id": 642,
+    "parent_id": 51,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.2.3",
+    "title": "Homogenized baby food",
+    "id": 643,
+    "parent_id": 51,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.2.9",
+    "title": "Other baby food",
+    "id": 644,
+    "parent_id": 51,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.3.1",
+    "title": "Salt",
+    "id": 645,
+    "parent_id": 52,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.3.9",
+    "title": "Other condiments and sauces",
+    "id": 646,
+    "parent_id": 52,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.4.0",
+    "title": "Spices, culinary herbs and seeds",
+    "collapsed_codes": [
+      "01.1.9.4"
+    ],
+    "id": 647,
+    "parent_id": 49,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.1.9.9.0",
+    "title": "Other food products n.e.c.",
+    "collapsed_codes": [
+      "01.1.9.9"
+    ],
+    "id": 648,
+    "parent_id": 49,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.1.0.0",
+    "title": "Fruit and vegetable juices",
+    "collapsed_codes": [
+      "01.2.1",
+      "01.2.1.0"
+    ],
+    "id": 649,
+    "parent_id": 53,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.2.0.1",
+    "title": "Coffee",
+    "id": 650,
+    "parent_id": 54,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.2.0.2",
+    "title": "Coffee substitutes",
+    "id": 651,
+    "parent_id": 54,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.2.0.9",
+    "title": "Other coffee",
+    "id": 652,
+    "parent_id": 54,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.3.0.1",
+    "title": "Green tea, leaves",
+    "id": 653,
+    "parent_id": 55,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.3.0.2",
+    "title": "Black tea, leaves",
+    "id": 654,
+    "parent_id": 55,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.3.0.3",
+    "title": "Iced tea",
+    "id": 655,
+    "parent_id": 55,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.3.0.4",
+    "title": "Instant tea powder",
+    "id": 656,
+    "parent_id": 55,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.3.0.5",
+    "title": "Maté",
+    "id": 657,
+    "parent_id": 55,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.3.0.9",
+    "title": "Other tea products and plant-derived products for infusion",
+    "id": 658,
+    "parent_id": 55,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.4.0.0",
+    "title": "Cocoa drinks",
+    "collapsed_codes": [
+      "01.2.4",
+      "01.2.4.0"
+    ],
+    "id": 659,
+    "parent_id": 53,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.5.0.0",
+    "title": "Water",
+    "collapsed_codes": [
+      "01.2.5",
+      "01.2.5.0"
+    ],
+    "id": 660,
+    "parent_id": 53,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.6.0.0",
+    "title": "Soft drinks",
+    "collapsed_codes": [
+      "01.2.6",
+      "01.2.6.0"
+    ],
+    "id": 661,
+    "parent_id": 53,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.2.9.0.0",
+    "title": "Other non-alcoholic beverages",
+    "collapsed_codes": [
+      "01.2.9",
+      "01.2.9.0"
+    ],
+    "id": 662,
+    "parent_id": 53,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  },
+  {
+    "code": "01.3.0.0.0",
+    "title": "Services for processing primary goods for food and non-alcoholic beverages",
+    "collapsed_codes": [
+      "01.3",
+      "01.3.0",
+      "01.3.0.0"
+    ],
+    "id": 663,
+    "parent_id": 0,
+    "level": 5,
+    "is_optional_detail": true,
+    "children_ids": [],
+    "is_leaf": true
+  }
+]

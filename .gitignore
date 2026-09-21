@@ -1,0 +1,20 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# COICOP source spreadsheets
+*.xlsx
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# uv / virtual environment
+.venv/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
