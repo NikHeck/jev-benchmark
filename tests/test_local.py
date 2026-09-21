@@ -342,3 +342,54 @@ def test_number_samples_means_full_dataset_iterations(tmp_path: Path) -> None:
     assert config["tests_in_input_file"] == 30
     assert config["classifications_per_strategy"] == 150
     assert "complete dataset iterations" in config["sampling"]
+
+
+def test_build_output_prediction_log_is_separate_top_level_element(tmp_path: Path) -> None:
+    args = argparse.Namespace(
+        number_samples=1,
+        input_file=tmp_path / "input.csv",
+        output_file=tmp_path / "output.json",
+        category_file=tmp_path / "category_input.json",
+    )
+    stats = {
+        "openai_luna.direct": Stats(),
+        "openai_luna.recursive": Stats(),
+        "deepseek_flash.direct": Stats(),
+        "deepseek_flash.recursive": Stats(),
+        "typesafe_jev.recursive": Stats(),
+    }
+    log = [
+        {
+            "iteration": 1,
+            "sample_index": 1,
+            "model": "openai_luna",
+            "strategy": "direct",
+            "title": "Bread",
+            "expected": {"category_id": 2, "code": "01.1.1", "title": "Bread"},
+            "predicted": {"category_id": 2, "code": "01.1.1", "title": "Bread"},
+            "correct": True,
+            "status": "correct",
+            "error": None,
+        }
+    ]
+    output = build_output(stats, args, test_count=1, prediction_log=log)
+    assert output["prediction_log"] == log
+    assert "prediction_log" not in output["models"]
+
+
+def test_build_output_defaults_prediction_log_to_empty_list(tmp_path: Path) -> None:
+    args = argparse.Namespace(
+        number_samples=1,
+        input_file=tmp_path / "input.csv",
+        output_file=tmp_path / "output.json",
+        category_file=tmp_path / "category_input.json",
+    )
+    stats = {
+        "openai_luna.direct": Stats(),
+        "openai_luna.recursive": Stats(),
+        "deepseek_flash.direct": Stats(),
+        "deepseek_flash.recursive": Stats(),
+        "typesafe_jev.recursive": Stats(),
+    }
+    output = build_output(stats, args, test_count=1)
+    assert output["prediction_log"] == []

@@ -1,6 +1,6 @@
 [project]
 name = "coicop-model-benchmark"
-version = "0.3.1"
+version = "0.3.2"
 description = "Benchmark COICOP category classification across OpenAI GPT-5.6 Luna, DeepSeek V4.1 Flash, and TypeSafe Jev."
 readme = "README.md"
 requires-python = ">=3.11"

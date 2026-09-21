@@ -699,7 +699,12 @@ def strategy_output(provider: str, strategy: str, stats: Stats) -> dict[str, Any
     return result
 
 
-def build_output(stats: dict[str, Stats], args: argparse.Namespace, test_count: int) -> dict[str, Any]:
+def build_output(
+    stats: dict[str, Stats],
+    args: argparse.Namespace,
+    test_count: int,
+    prediction_log: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     return {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "configuration": {
@@ -728,6 +733,9 @@ def build_output(stats: dict[str, Stats], args: argparse.Namespace, test_count: 
                 "recursive": strategy_output("typesafe_jev", "recursive", stats["typesafe_jev.recursive"]),
             },
         },
+        # Intentionally separate from aggregate statistics so consumers can drop this
+        # key entirely when they only need summary metrics.
+        "prediction_log": prediction_log or [],
     }
 
 
@@ -763,6 +771,7 @@ def main() -> None:
         JevClassifier(categories),
     ]
     stats = {classifier.key: Stats() for classifier in classifiers}
+    prediction_log: list[dict[str, Any]] = []
 
     attempts_per_strategy = args.number_samples * len(tests)
     for iteration in range(1, args.number_samples + 1):
@@ -785,14 +794,66 @@ def main() -> None:
                     elapsed = time.perf_counter() - started
                     predicted = by_id[result.category_id]
                     stats[classifier.key].record_prediction(elapsed, result.usage, expected, predicted, by_id)
+                    prediction_log.append(
+                        {
+                            "iteration": iteration,
+                            "sample_index": row_index,
+                            "overall_sample_index": overall_sample,
+                            "model": classifier.provider,
+                            "strategy": classifier.strategy,
+                            "classifier": classifier.key,
+                            "title": test.title,
+                            "expected": {
+                                "category_id": expected.id,
+                                "code": expected.code,
+                                "title": expected.title,
+                            },
+                            "predicted": {
+                                "category_id": predicted.id,
+                                "code": predicted.code,
+                                "title": predicted.title,
+                            },
+                            "correct": predicted.id == expected.id,
+                            "status": "correct" if predicted.id == expected.id else "wrong_prediction",
+                            "elapsed_seconds": elapsed,
+                            "api_requests": result.usage.requests,
+                            "error": None,
+                        }
+                    )
                     status = "OK" if predicted.id == expected.id else f"FAIL predicted={predicted.id}"
                     print(f"  {classifier.key}: {status} ({elapsed:.3f}s, requests={result.usage.requests})")
                 except Exception as exc:
                     elapsed = time.perf_counter() - started
                     stats[classifier.key].record_error(elapsed, exc, expected)
+                    error_usage = exc.usage if isinstance(exc, ClassificationError) else None
+                    prediction_log.append(
+                        {
+                            "iteration": iteration,
+                            "sample_index": row_index,
+                            "overall_sample_index": overall_sample,
+                            "model": classifier.provider,
+                            "strategy": classifier.strategy,
+                            "classifier": classifier.key,
+                            "title": test.title,
+                            "expected": {
+                                "category_id": expected.id,
+                                "code": expected.code,
+                                "title": expected.title,
+                            },
+                            "predicted": None,
+                            "correct": False,
+                            "status": "api_error",
+                            "elapsed_seconds": elapsed,
+                            "api_requests": error_usage.requests if error_usage is not None else None,
+                            "error": {
+                                "type": type(exc).__name__,
+                                "message": str(exc),
+                            },
+                        }
+                    )
                     print(f"  {classifier.key}: ERROR {type(exc).__name__}: {exc}")
 
-    output = build_output(stats, args, len(tests))
+    output = build_output(stats, args, len(tests), prediction_log)
     args.output_file.parent.mkdir(parents=True, exist_ok=True)
     args.output_file.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote benchmark results to {args.output_file}")

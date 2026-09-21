@@ -189,6 +189,31 @@ Exact category accuracy treats every wrong final category equally. The hierarchy
 
 For each level, `eligible_samples` includes only tests whose expected category reaches that level. API errors count as incorrect for every eligible level.
 
+### Prediction log
+
+`output.json` also contains a top-level `prediction_log` array. It is intentionally separate from `models`, so it can be removed or ignored without affecting aggregate benchmark statistics. There is one entry for every dataset iteration × input row × backend strategy. Each entry records the iteration and sample, item title, backend/strategy, expected category, final predicted category, correctness, elapsed time, request count, and any API error. Recursive strategies log their final category prediction; their internal hierarchy choices are not expanded into separate log rows.
+
+Example:
+
+```json
+{
+  "prediction_log": [
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "title": "Espresso Pulver",
+      "expected": {"category_id": 650, "code": "01.2.2.0.1", "title": "Coffee"},
+      "predicted": {"category_id": 650, "code": "01.2.2.0.1", "title": "Coffee"},
+      "correct": true,
+      "status": "correct",
+      "error": null
+    }
+  ]
+}
+```
+
 ## Cost handling
 
 Correct and wrong model responses both count their full measured cost. If an API/parse failure still exposes usage, that usage is retained. If complete usage cannot be recovered, the attempt is marked `unknown_cost_attempts`, and `known_total_usd` is explicitly only a lower bound.
