@@ -1,0 +1,5588 @@
+{
+  "generated_at_utc": "2026-09-23T07:00:17.185711+00:00",
+  "configuration": {
+    "number_samples": 1,
+    "full_dataset_iterations": 1,
+    "classifications_per_strategy": 30,
+    "input_file": "input_english.csv",
+    "category_file": "category_input.json",
+    "tests_in_input_file": 30,
+    "multilingual_prompt_note": "The item title may be in any language and is not necessarily English. Interpret the title in its original language before choosing the COICOP category.",
+    "sampling": "number_samples is the number of complete dataset iterations. In every iteration, each strategy classifies every row in input_file exactly once."
+  },
+  "models": {
+    "openai_luna": {
+      "direct": {
+        "samples": 30,
+        "successes": 30,
+        "wrong_predictions": 0,
+        "api_errors": 0,
+        "failures": 0,
+        "success_rate": 1.0,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 30,
+            "correct": 30,
+            "accuracy": 1.0
+          },
+          "level_2": {
+            "eligible_samples": 28,
+            "correct": 28,
+            "accuracy": 1.0
+          },
+          "level_3": {
+            "eligible_samples": 23,
+            "correct": 23,
+            "accuracy": 1.0
+          },
+          "level_4": {
+            "eligible_samples": 27,
+            "correct": 27,
+            "accuracy": 1.0
+          },
+          "level_5": {
+            "eligible_samples": 14,
+            "correct": 14,
+            "accuracy": 1.0
+          }
+        },
+        "timing": {
+          "total_seconds": 52.764318307949,
+          "seconds_per_item": 1.7588106102649665
+        },
+        "usage": {
+          "input_tokens": 427861,
+          "cached_input_tokens": 41006,
+          "cache_write_tokens": 386765,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 0,
+          "output_tokens": 510,
+          "api_requests_with_usage": 30,
+          "api_requests_per_item": 1.0
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 30,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "direct",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "cost": {
+          "known_total_usd": 0.049019685,
+          "complete_cost_attempts_total_usd": 0.049019685,
+          "known_cost_per_known_attempt_usd": 0.0016339895,
+          "known_cost_lower_bound_per_attempt_usd": 0.0016339895,
+          "unknown_cost_attempts": 0,
+          "prices_usd_per_1m_tokens": {
+            "input": 0.1,
+            "cached_input": 0.01,
+            "cache_write": 0.125,
+            "output": 0.5
+          }
+        }
+      },
+      "recursive": {
+        "samples": 30,
+        "successes": 23,
+        "wrong_predictions": 7,
+        "api_errors": 0,
+        "failures": 7,
+        "success_rate": 0.7666666666666667,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 30,
+            "correct": 26,
+            "accuracy": 0.8666666666666667
+          },
+          "level_2": {
+            "eligible_samples": 28,
+            "correct": 22,
+            "accuracy": 0.7857142857142857
+          },
+          "level_3": {
+            "eligible_samples": 23,
+            "correct": 17,
+            "accuracy": 0.7391304347826086
+          },
+          "level_4": {
+            "eligible_samples": 27,
+            "correct": 20,
+            "accuracy": 0.7407407407407407
+          },
+          "level_5": {
+            "eligible_samples": 14,
+            "correct": 12,
+            "accuracy": 0.8571428571428571
+          }
+        },
+        "timing": {
+          "total_seconds": 133.2670919400407,
+          "seconds_per_item": 4.442236398001357
+        },
+        "usage": {
+          "input_tokens": 31945,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 0,
+          "output_tokens": 1955,
+          "api_requests_with_usage": 115,
+          "api_requests_per_item": 3.8333333333333335
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 30,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "recursive",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "cost": {
+          "known_total_usd": 0.004172,
+          "complete_cost_attempts_total_usd": 0.004172,
+          "known_cost_per_known_attempt_usd": 0.00013906666666666667,
+          "known_cost_lower_bound_per_attempt_usd": 0.00013906666666666667,
+          "unknown_cost_attempts": 0,
+          "prices_usd_per_1m_tokens": {
+            "input": 0.1,
+            "cached_input": 0.01,
+            "cache_write": 0.125,
+            "output": 0.5
+          }
+        }
+      }
+    },
+    "openai_sol": {
+      "direct": {
+        "samples": 30,
+        "successes": 30,
+        "wrong_predictions": 0,
+        "api_errors": 0,
+        "failures": 0,
+        "success_rate": 1.0,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 30,
+            "correct": 30,
+            "accuracy": 1.0
+          },
+          "level_2": {
+            "eligible_samples": 28,
+            "correct": 28,
+            "accuracy": 1.0
+          },
+          "level_3": {
+            "eligible_samples": 23,
+            "correct": 23,
+            "accuracy": 1.0
+          },
+          "level_4": {
+            "eligible_samples": 27,
+            "correct": 27,
+            "accuracy": 1.0
+          },
+          "level_5": {
+            "eligible_samples": 14,
+            "correct": 14,
+            "accuracy": 1.0
+          }
+        },
+        "timing": {
+          "total_seconds": 45.78413322099368,
+          "seconds_per_item": 1.5261377740331228
+        },
+        "usage": {
+          "input_tokens": 427861,
+          "cached_input_tokens": 41006,
+          "cache_write_tokens": 386765,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 0,
+          "output_tokens": 510,
+          "api_requests_with_usage": 30,
+          "api_requests_per_item": 1.0
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 30,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "direct",
+        "model": "gpt-6-sol",
+        "reasoning_effort": "none",
+        "cost": {
+          "known_total_usd": 0.9803937,
+          "complete_cost_attempts_total_usd": 0.9803937,
+          "known_cost_per_known_attempt_usd": 0.03267979,
+          "known_cost_lower_bound_per_attempt_usd": 0.03267979,
+          "unknown_cost_attempts": 0,
+          "prices_usd_per_1m_tokens": {
+            "input": 2.0,
+            "cached_input": 0.2,
+            "cache_write": 2.5,
+            "output": 10.0
+          }
+        }
+      },
+      "recursive": {
+        "samples": 30,
+        "successes": 24,
+        "wrong_predictions": 6,
+        "api_errors": 0,
+        "failures": 6,
+        "success_rate": 0.8,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 30,
+            "correct": 28,
+            "accuracy": 0.9333333333333333
+          },
+          "level_2": {
+            "eligible_samples": 28,
+            "correct": 24,
+            "accuracy": 0.8571428571428571
+          },
+          "level_3": {
+            "eligible_samples": 23,
+            "correct": 19,
+            "accuracy": 0.8260869565217391
+          },
+          "level_4": {
+            "eligible_samples": 27,
+            "correct": 21,
+            "accuracy": 0.7777777777777778
+          },
+          "level_5": {
+            "eligible_samples": 14,
+            "correct": 12,
+            "accuracy": 0.8571428571428571
+          }
+        },
+        "timing": {
+          "total_seconds": 159.72790111694485,
+          "seconds_per_item": 5.324263370564828
+        },
+        "usage": {
+          "input_tokens": 33101,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 0,
+          "output_tokens": 2040,
+          "api_requests_with_usage": 120,
+          "api_requests_per_item": 4.0
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 30,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "recursive",
+        "model": "gpt-6-sol",
+        "reasoning_effort": "none",
+        "cost": {
+          "known_total_usd": 0.086602,
+          "complete_cost_attempts_total_usd": 0.086602,
+          "known_cost_per_known_attempt_usd": 0.0028867333333333334,
+          "known_cost_lower_bound_per_attempt_usd": 0.0028867333333333334,
+          "unknown_cost_attempts": 0,
+          "prices_usd_per_1m_tokens": {
+            "input": 2.0,
+            "cached_input": 0.2,
+            "cache_write": 2.5,
+            "output": 10.0
+          }
+        }
+      }
+    },
+    "deepseek_flash": {
+      "direct": {
+        "samples": 30,
+        "successes": 29,
+        "wrong_predictions": 1,
+        "api_errors": 0,
+        "failures": 1,
+        "success_rate": 0.9666666666666667,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 30,
+            "correct": 30,
+            "accuracy": 1.0
+          },
+          "level_2": {
+            "eligible_samples": 28,
+            "correct": 28,
+            "accuracy": 1.0
+          },
+          "level_3": {
+            "eligible_samples": 23,
+            "correct": 23,
+            "accuracy": 1.0
+          },
+          "level_4": {
+            "eligible_samples": 27,
+            "correct": 26,
+            "accuracy": 0.9629629629629629
+          },
+          "level_5": {
+            "eligible_samples": 14,
+            "correct": 14,
+            "accuracy": 1.0
+          }
+        },
+        "timing": {
+          "total_seconds": 34.30081852708827,
+          "seconds_per_item": 1.143360617569609
+        },
+        "usage": {
+          "input_tokens": 388785,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_hit_tokens": 384000,
+          "cache_miss_tokens": 4785,
+          "output_tokens": 210,
+          "api_requests_with_usage": 30,
+          "api_requests_per_item": 1.0
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 30,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "direct",
+        "model": "deepseek-flash",
+        "cost": {
+          "peak": {
+            "known_total_usd": 0.003991499999999999,
+            "complete_cost_attempts_total_usd": 0.003991499999999999,
+            "known_cost_per_known_attempt_usd": 0.00013304999999999998,
+            "known_cost_lower_bound_per_attempt_usd": 0.00013304999999999998,
+            "unknown_cost_attempts": 0,
+            "prices_usd_per_1m_tokens": {
+              "cache_hit_input": 0.006,
+              "cache_miss_input": 0.3,
+              "output": 1.2
+            }
+          },
+          "off_peak": {
+            "known_total_usd": 0.0019957499999999997,
+            "complete_cost_attempts_total_usd": 0.0019957499999999997,
+            "known_cost_per_known_attempt_usd": 6.652499999999999e-05,
+            "known_cost_lower_bound_per_attempt_usd": 6.652499999999999e-05,
+            "unknown_cost_attempts": 0,
+            "prices_usd_per_1m_tokens": {
+              "cache_hit_input": 0.003,
+              "cache_miss_input": 0.15,
+              "output": 0.6
+            }
+          }
+        }
+      },
+      "recursive": {
+        "samples": 30,
+        "successes": 21,
+        "wrong_predictions": 9,
+        "api_errors": 0,
+        "failures": 9,
+        "success_rate": 0.7,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 30,
+            "correct": 25,
+            "accuracy": 0.8333333333333334
+          },
+          "level_2": {
+            "eligible_samples": 28,
+            "correct": 22,
+            "accuracy": 0.7857142857142857
+          },
+          "level_3": {
+            "eligible_samples": 23,
+            "correct": 15,
+            "accuracy": 0.6521739130434783
+          },
+          "level_4": {
+            "eligible_samples": 27,
+            "correct": 18,
+            "accuracy": 0.6666666666666666
+          },
+          "level_5": {
+            "eligible_samples": 14,
+            "correct": 12,
+            "accuracy": 0.8571428571428571
+          }
+        },
+        "timing": {
+          "total_seconds": 105.18392189498991,
+          "seconds_per_item": 3.506130729832997
+        },
+        "usage": {
+          "input_tokens": 31544,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_hit_tokens": 7808,
+          "cache_miss_tokens": 23736,
+          "output_tokens": 826,
+          "api_requests_with_usage": 118,
+          "api_requests_per_item": 3.933333333333333
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 30,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "recursive",
+        "model": "deepseek-flash",
+        "cost": {
+          "peak": {
+            "known_total_usd": 0.008158848,
+            "complete_cost_attempts_total_usd": 0.008158848,
+            "known_cost_per_known_attempt_usd": 0.00027196159999999997,
+            "known_cost_lower_bound_per_attempt_usd": 0.00027196159999999997,
+            "unknown_cost_attempts": 0,
+            "prices_usd_per_1m_tokens": {
+              "cache_hit_input": 0.006,
+              "cache_miss_input": 0.3,
+              "output": 1.2
+            }
+          },
+          "off_peak": {
+            "known_total_usd": 0.004079424,
+            "complete_cost_attempts_total_usd": 0.004079424,
+            "known_cost_per_known_attempt_usd": 0.00013598079999999998,
+            "known_cost_lower_bound_per_attempt_usd": 0.00013598079999999998,
+            "unknown_cost_attempts": 0,
+            "prices_usd_per_1m_tokens": {
+              "cache_hit_input": 0.003,
+              "cache_miss_input": 0.15,
+              "output": 0.6
+            }
+          }
+        }
+      }
+    },
+    "typesafe_jev": {
+      "recursive": {
+        "samples": 30,
+        "successes": 22,
+        "wrong_predictions": 8,
+        "api_errors": 0,
+        "failures": 8,
+        "success_rate": 0.7333333333333333,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 30,
+            "correct": 27,
+            "accuracy": 0.9
+          },
+          "level_2": {
+            "eligible_samples": 28,
+            "correct": 22,
+            "accuracy": 0.7857142857142857
+          },
+          "level_3": {
+            "eligible_samples": 23,
+            "correct": 17,
+            "accuracy": 0.7391304347826086
+          },
+          "level_4": {
+            "eligible_samples": 27,
+            "correct": 19,
+            "accuracy": 0.7037037037037037
+          },
+          "level_5": {
+            "eligible_samples": 14,
+            "correct": 11,
+            "accuracy": 0.7857142857142857
+          }
+        },
+        "timing": {
+          "total_seconds": 42.503486339963274,
+          "seconds_per_item": 1.416782877998776
+        },
+        "usage": {
+          "input_tokens": 69099,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 0,
+          "output_tokens": 12002,
+          "api_requests_with_usage": 118,
+          "api_requests_per_item": 3.933333333333333
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 30,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "recursive",
+        "model": "jev-latest",
+        "cost": {
+          "known_total_usd": 0.0029021579999999997,
+          "complete_cost_attempts_total_usd": 0.0029021579999999997,
+          "known_cost_per_known_attempt_usd": 9.67386e-05,
+          "known_cost_lower_bound_per_attempt_usd": 9.67386e-05,
+          "unknown_cost_attempts": 0,
+          "input_price_usd_per_1m_tokens": 0.042,
+          "output_price_usd_per_1m_tokens": 0.0
+        }
+      }
+    }
+  },
+  "prediction_log": [
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Wholegrain sourdough loaf",
+      "expected": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "predicted": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.182926994981244,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Wholegrain sourdough loaf",
+      "expected": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "predicted": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 7.16948292197776,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Wholegrain sourdough loaf",
+      "expected": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "predicted": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4336156199860852,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Wholegrain sourdough loaf",
+      "expected": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "predicted": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.229814293998061,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Wholegrain sourdough loaf",
+      "expected": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "predicted": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.1708641109871678,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Wholegrain sourdough loaf",
+      "expected": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "predicted": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.089693453977816,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Wholegrain sourdough loaf",
+      "expected": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "predicted": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.7408100400061812,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Whole cow's milk 1 L",
+      "expected": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "predicted": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.8512334449915215,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Whole cow's milk 1 L",
+      "expected": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "predicted": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.136038021999411,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Whole cow's milk 1 L",
+      "expected": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "predicted": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.566649624001002,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Whole cow's milk 1 L",
+      "expected": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "predicted": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.219065420998959,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Whole cow's milk 1 L",
+      "expected": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "predicted": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3277098510006908,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Whole cow's milk 1 L",
+      "expected": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "predicted": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.246406363003189,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Whole cow's milk 1 L",
+      "expected": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "predicted": {
+        "category_id": 473,
+        "code": "01.1.4.1.1",
+        "title": "Raw and whole milk of cattle"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6829074019915424,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Aged cheddar cheese block",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5451898600149434,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Aged cheddar cheese block",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.01739173399983,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Aged cheddar cheese block",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3311563949973788,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Aged cheddar cheese block",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.262328029988566,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Aged cheddar cheese block",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0478220060176682,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Aged cheddar cheese block",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.300127471011365,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Aged cheddar cheese block",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3422241390217096,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Loose Granny Smith apples",
+      "expected": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "predicted": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5024500950239599,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Loose Granny Smith apples",
+      "expected": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "predicted": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.0624020579853095,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Loose Granny Smith apples",
+      "expected": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "predicted": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6044595489802305,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Loose Granny Smith apples",
+      "expected": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "predicted": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.717928713012952,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Loose Granny Smith apples",
+      "expected": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "predicted": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2907989689847454,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Loose Granny Smith apples",
+      "expected": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "predicted": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.915993286005687,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Loose Granny Smith apples",
+      "expected": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "predicted": {
+        "category_id": 525,
+        "code": "01.1.6.3.1",
+        "title": "Apples, fresh"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.8424905860156287,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Fresh chicken thighs",
+      "expected": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "predicted": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5347275559906848,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Fresh chicken thighs",
+      "expected": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "predicted": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.17511724299402,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Fresh chicken thighs",
+      "expected": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "predicted": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2232444370165467,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Fresh chicken thighs",
+      "expected": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "predicted": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.361651357001392,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Fresh chicken thighs",
+      "expected": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "predicted": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 0.7828952920099255,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Fresh chicken thighs",
+      "expected": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "predicted": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.275995231990237,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Fresh chicken thighs",
+      "expected": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "predicted": {
+        "category_id": 427,
+        "code": "01.1.2.2.4",
+        "title": "Meat of poultry, fresh, chilled or frozen"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6320401249977294,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Washed baking potatoes 2 kg",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.33451425601379,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Washed baking potatoes 2 kg",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.071831765002571,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Washed baking potatoes 2 kg",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.5826337600010447,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Washed baking potatoes 2 kg",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.286386655003298,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Washed baking potatoes 2 kg",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0847388220136054,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Washed baking potatoes 2 kg",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.097048653988168,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Washed baking potatoes 2 kg",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.7403612849884667,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Dried spaghetti 500 g",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6459112439770252,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Dried spaghetti 500 g",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.094044366007438,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Dried spaghetti 500 g",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4725457570166327,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Dried spaghetti 500 g",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.781688246992417,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Dried spaghetti 500 g",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0107253729947843,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Dried spaghetti 500 g",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.3781655769853387,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Dried spaghetti 500 g",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4349721169855911,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Decaffeinated ground coffee",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.8401487449882552,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Decaffeinated ground coffee",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.267871130985441,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Decaffeinated ground coffee",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.281729637994431,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Decaffeinated ground coffee",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.324977665004553,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Decaffeinated ground coffee",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2103238920099102,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Decaffeinated ground coffee",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.8893604390032124,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Decaffeinated ground coffee",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 648,
+        "code": "01.1.9.9.0",
+        "title": "Other food products n.e.c."
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.4483965079998598,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Sparkling mineral water 1.5 L",
+      "expected": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "predicted": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.530966182006523,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Sparkling mineral water 1.5 L",
+      "expected": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "predicted": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.265349477995187,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Sparkling mineral water 1.5 L",
+      "expected": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "predicted": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2358663660124876,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Sparkling mineral water 1.5 L",
+      "expected": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "predicted": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.604102690995205,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Sparkling mineral water 1.5 L",
+      "expected": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "predicted": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.334707466972759,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Sparkling mineral water 1.5 L",
+      "expected": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "predicted": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.658331951999571,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Sparkling mineral water 1.5 L",
+      "expected": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "predicted": {
+        "category_id": 660,
+        "code": "01.2.5.0.0",
+        "title": "Water"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2281986550078727,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Dark chocolate bar 70% cocoa",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6433001980185509,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Dark chocolate bar 70% cocoa",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.3617994239903055,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Dark chocolate bar 70% cocoa",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4399598900054116,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Dark chocolate bar 70% cocoa",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 7.374920909991488,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Dark chocolate bar 70% cocoa",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 0.9839604050212074,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Dark chocolate bar 70% cocoa",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.290806276985677,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Dark chocolate bar 70% cocoa",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5836026270117145,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Set of two red wine glasses",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5483112040092237,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Set of two red wine glasses",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.037721245986177,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Set of two red wine glasses",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3798398950020783,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Set of two red wine glasses",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.1752140920143574,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Set of two red wine glasses",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3274033199995756,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Set of two red wine glasses",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.7640482379938476,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Set of two red wine glasses",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2294106729968917,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Dishwasher cleaning tablets",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5663110280002002,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Dishwasher cleaning tablets",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.044745677005267,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Dishwasher cleaning tablets",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3495427719899453,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Dishwasher cleaning tablets",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.475276112993015,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Dishwasher cleaning tablets",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 0.8762597060122062,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Dishwasher cleaning tablets",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.2431483370019123,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Dishwasher cleaning tablets",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3633846669981722,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "SPF 50 facial sunscreen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.5633923150016926,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "SPF 50 facial sunscreen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.4840018060058355,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "SPF 50 facial sunscreen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.057024179986911,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "SPF 50 facial sunscreen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.775212363980245,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "SPF 50 facial sunscreen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.125385491992347,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "SPF 50 facial sunscreen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.532293469994329,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "SPF 50 facial sunscreen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0508930500072893,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Disposable baby diapers size 4",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4535878129827324,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Disposable baby diapers size 4",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.7700372470135335,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Disposable baby diapers size 4",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3532529629883356,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Disposable baby diapers size 4",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.8188251809915528,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Disposable baby diapers size 4",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3812575229967479,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Disposable baby diapers size 4",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.5842687839758582,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Disposable baby diapers size 4",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.2296087340218946,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Ibuprofen 200 mg tablets",
+      "expected": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "predicted": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.0805592859978788,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Ibuprofen 200 mg tablets",
+      "expected": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "predicted": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.6859240920166485,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Ibuprofen 200 mg tablets",
+      "expected": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "predicted": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.4859610730200075,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Ibuprofen 200 mg tablets",
+      "expected": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "predicted": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.560080586001277,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Ibuprofen 200 mg tablets",
+      "expected": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "predicted": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3415102950239088,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Ibuprofen 200 mg tablets",
+      "expected": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "predicted": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.5821142199856695,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Ibuprofen 200 mg tablets",
+      "expected": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "predicted": {
+        "category_id": 175,
+        "code": "06.1.1.1",
+        "title": "Medicines, vaccines and other pharmaceutical preparations (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.639509560976876,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Routine dental cleaning appointment",
+      "expected": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "predicted": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5402120460057631,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Routine dental cleaning appointment",
+      "expected": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "predicted": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.0943828799936455,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Routine dental cleaning appointment",
+      "expected": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "predicted": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4424965780053753,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Routine dental cleaning appointment",
+      "expected": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "predicted": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.5181369640049525,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Routine dental cleaning appointment",
+      "expected": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "predicted": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.1245671279903036,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Routine dental cleaning appointment",
+      "expected": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "predicted": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.4832301050191745,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Routine dental cleaning appointment",
+      "expected": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "predicted": {
+        "category_id": 191,
+        "code": "06.2.2.1",
+        "title": "Dental preventive services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4334013639891054,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Two hours of city-centre parking",
+      "expected": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "predicted": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4342870239925105,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Two hours of city-centre parking",
+      "expected": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "predicted": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.40312476301915,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Two hours of city-centre parking",
+      "expected": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "predicted": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.818147694983054,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Two hours of city-centre parking",
+      "expected": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "predicted": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.677853800007142,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Two hours of city-centre parking",
+      "expected": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "predicted": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0806634559994563,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Two hours of city-centre parking",
+      "expected": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "predicted": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.19911253999453,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Two hours of city-centre parking",
+      "expected": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "predicted": {
+        "category_id": 222,
+        "code": "07.2.4.1",
+        "title": "Parking services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2279967270151246,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Taxi ride home from the airport",
+      "expected": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "predicted": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5723196670005564,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Taxi ride home from the airport",
+      "expected": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "predicted": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.106622298015282,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Taxi ride home from the airport",
+      "expected": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "predicted": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.518005065008765,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Taxi ride home from the airport",
+      "expected": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "predicted": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.1158606840181164,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Taxi ride home from the airport",
+      "expected": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "predicted": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.1241304040013347,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Taxi ride home from the airport",
+      "expected": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "predicted": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.1760081939864904,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Taxi ride home from the airport",
+      "expected": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "predicted": {
+        "category_id": 232,
+        "code": "07.3.2.2",
+        "title": "Passenger transport by taxi and hired vehicle with driver (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4353889669873752,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Replacement ink cartridge for home printer",
+      "expected": {
+        "category_id": 254,
+        "code": "08.1.3.2",
+        "title": "Peripheral equipment and its consumable components (D)"
+      },
+      "predicted": {
+        "category_id": 254,
+        "code": "08.1.3.2",
+        "title": "Peripheral equipment and its consumable components (D)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5432291489851195,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Replacement ink cartridge for home printer",
+      "expected": {
+        "category_id": 254,
+        "code": "08.1.3.2",
+        "title": "Peripheral equipment and its consumable components (D)"
+      },
+      "predicted": {
+        "category_id": 127,
+        "code": "05",
+        "title": "Furnishings, household equipment and routine household maintenance"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.0417242069961503,
+      "api_requests": 2,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Replacement ink cartridge for home printer",
+      "expected": {
+        "category_id": 254,
+        "code": "08.1.3.2",
+        "title": "Peripheral equipment and its consumable components (D)"
+      },
+      "predicted": {
+        "category_id": 254,
+        "code": "08.1.3.2",
+        "title": "Peripheral equipment and its consumable components (D)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.332691478979541,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Replacement ink cartridge for home printer",
+      "expected": {
+        "category_id": 254,
+        "code": "08.1.3.2",
+        "title": "Peripheral equipment and its consumable components (D)"
+      },
+      "predicted": {
+        "category_id": 254,
+        "code": "08.1.3.2",
+        "title": "Peripheral equipment and its consumable components (D)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.3239865499781445,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Replacement ink cartridge for home printer",
+      "expected": {
+        "category_id": 254,
+        "code": "08.1.3.2",
+        "title": "Peripheral equipment and its consumable components (D)"
+      },
+      "predicted": {
+        "category_id": 254,
+        "code": "08.1.3.2",
+        "title": "Peripheral equipment and its consumable components (D)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2259009429835714,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Replacement ink cartridge for home printer",
+      "expected": {
+        "category_id": 254,
+        "code": "08.1.3.2",
+        "title": "Peripheral equipment and its consumable components (D)"
+      },
+      "predicted": {
+        "category_id": 149,
+        "code": "05.3.2",
+        "title": "Small household appliances (SD)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.49268822799786,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Replacement ink cartridge for home printer",
+      "expected": {
+        "category_id": 254,
+        "code": "08.1.3.2",
+        "title": "Peripheral equipment and its consumable components (D)"
+      },
+      "predicted": {
+        "category_id": 259,
+        "code": "08.1.9.2",
+        "title": "Other information and communication accessories (SD)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.603064431983512,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Annual photo-editing software subscription",
+      "expected": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "predicted": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4229487589909695,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Annual photo-editing software subscription",
+      "expected": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "predicted": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.1355334210093133,
+      "api_requests": 2,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Annual photo-editing software subscription",
+      "expected": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "predicted": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6172368749976158,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Annual photo-editing software subscription",
+      "expected": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "predicted": {
+        "category_id": 313,
+        "code": "09.5",
+        "title": "Cultural goods"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.9815892830083612,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Annual photo-editing software subscription",
+      "expected": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "predicted": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 0.9174259320134297,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Annual photo-editing software subscription",
+      "expected": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "predicted": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.827490067022154,
+      "api_requests": 2,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Annual photo-editing software subscription",
+      "expected": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "predicted": {
+        "category_id": 260,
+        "code": "08.2.0.0",
+        "title": "Software, excluding games (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 0.786499431997072,
+      "api_requests": 2,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Monthly film streaming subscription",
+      "expected": {
+        "category_id": 269,
+        "code": "08.3.9.2",
+        "title": "Subscriptions to audiovisual streaming services and rental of audiovisual content (S)"
+      },
+      "predicted": {
+        "category_id": 269,
+        "code": "08.3.9.2",
+        "title": "Subscriptions to audiovisual streaming services and rental of audiovisual content (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.8760422990017105,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Monthly film streaming subscription",
+      "expected": {
+        "category_id": 269,
+        "code": "08.3.9.2",
+        "title": "Subscriptions to audiovisual streaming services and rental of audiovisual content (S)"
+      },
+      "predicted": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.995599816000322,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Monthly film streaming subscription",
+      "expected": {
+        "category_id": 269,
+        "code": "08.3.9.2",
+        "title": "Subscriptions to audiovisual streaming services and rental of audiovisual content (S)"
+      },
+      "predicted": {
+        "category_id": 269,
+        "code": "08.3.9.2",
+        "title": "Subscriptions to audiovisual streaming services and rental of audiovisual content (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5591227959957905,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Monthly film streaming subscription",
+      "expected": {
+        "category_id": 269,
+        "code": "08.3.9.2",
+        "title": "Subscriptions to audiovisual streaming services and rental of audiovisual content (S)"
+      },
+      "predicted": {
+        "category_id": 320,
+        "code": "09.6.9.0",
+        "title": "Other cultural services (S)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.769701057986822,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Monthly film streaming subscription",
+      "expected": {
+        "category_id": 269,
+        "code": "08.3.9.2",
+        "title": "Subscriptions to audiovisual streaming services and rental of audiovisual content (S)"
+      },
+      "predicted": {
+        "category_id": 269,
+        "code": "08.3.9.2",
+        "title": "Subscriptions to audiovisual streaming services and rental of audiovisual content (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.222028581018094,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Monthly film streaming subscription",
+      "expected": {
+        "category_id": 269,
+        "code": "08.3.9.2",
+        "title": "Subscriptions to audiovisual streaming services and rental of audiovisual content (S)"
+      },
+      "predicted": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.662015446985606,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Monthly film streaming subscription",
+      "expected": {
+        "category_id": 269,
+        "code": "08.3.9.2",
+        "title": "Subscriptions to audiovisual streaming services and rental of audiovisual content (S)"
+      },
+      "predicted": {
+        "category_id": 320,
+        "code": "09.6.9.0",
+        "title": "Other cultural services (S)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.0244131989893503,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Clumping cat litter 10 L",
+      "expected": {
+        "category_id": 297,
+        "code": "09.3.2.2",
+        "title": "Products for pets and other household animals (ND)"
+      },
+      "predicted": {
+        "category_id": 297,
+        "code": "09.3.2.2",
+        "title": "Products for pets and other household animals (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.354705701000057,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Clumping cat litter 10 L",
+      "expected": {
+        "category_id": 297,
+        "code": "09.3.2.2",
+        "title": "Products for pets and other household animals (ND)"
+      },
+      "predicted": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.504609235998942,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Clumping cat litter 10 L",
+      "expected": {
+        "category_id": 297,
+        "code": "09.3.2.2",
+        "title": "Products for pets and other household animals (ND)"
+      },
+      "predicted": {
+        "category_id": 297,
+        "code": "09.3.2.2",
+        "title": "Products for pets and other household animals (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2323053080181126,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Clumping cat litter 10 L",
+      "expected": {
+        "category_id": 297,
+        "code": "09.3.2.2",
+        "title": "Products for pets and other household animals (ND)"
+      },
+      "predicted": {
+        "category_id": 297,
+        "code": "09.3.2.2",
+        "title": "Products for pets and other household animals (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.076404257997638,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Clumping cat litter 10 L",
+      "expected": {
+        "category_id": 297,
+        "code": "09.3.2.2",
+        "title": "Products for pets and other household animals (ND)"
+      },
+      "predicted": {
+        "category_id": 297,
+        "code": "09.3.2.2",
+        "title": "Products for pets and other household animals (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0873763500130735,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Clumping cat litter 10 L",
+      "expected": {
+        "category_id": 297,
+        "code": "09.3.2.2",
+        "title": "Products for pets and other household animals (ND)"
+      },
+      "predicted": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.1758122370229103,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Clumping cat litter 10 L",
+      "expected": {
+        "category_id": 297,
+        "code": "09.3.2.2",
+        "title": "Products for pets and other household animals (ND)"
+      },
+      "predicted": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.5354536550003104,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Annual vaccination for a pet cat",
+      "expected": {
+        "category_id": 307,
+        "code": "09.4.5.0",
+        "title": "Veterinary and other services for pets (S)"
+      },
+      "predicted": {
+        "category_id": 307,
+        "code": "09.4.5.0",
+        "title": "Veterinary and other services for pets (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.500563615001738,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Annual vaccination for a pet cat",
+      "expected": {
+        "category_id": 307,
+        "code": "09.4.5.0",
+        "title": "Veterinary and other services for pets (S)"
+      },
+      "predicted": {
+        "category_id": 369,
+        "code": "13",
+        "title": "Personal care, social protection and miscellaneous goods and services"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.2117964460048825,
+      "api_requests": 2,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Annual vaccination for a pet cat",
+      "expected": {
+        "category_id": 307,
+        "code": "09.4.5.0",
+        "title": "Veterinary and other services for pets (S)"
+      },
+      "predicted": {
+        "category_id": 307,
+        "code": "09.4.5.0",
+        "title": "Veterinary and other services for pets (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.333813570003258,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Annual vaccination for a pet cat",
+      "expected": {
+        "category_id": 307,
+        "code": "09.4.5.0",
+        "title": "Veterinary and other services for pets (S)"
+      },
+      "predicted": {
+        "category_id": 295,
+        "code": "09.3.2",
+        "title": "Pets and pet products (D)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.809643733984558,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Annual vaccination for a pet cat",
+      "expected": {
+        "category_id": 307,
+        "code": "09.4.5.0",
+        "title": "Veterinary and other services for pets (S)"
+      },
+      "predicted": {
+        "category_id": 307,
+        "code": "09.4.5.0",
+        "title": "Veterinary and other services for pets (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2926880640152376,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Annual vaccination for a pet cat",
+      "expected": {
+        "category_id": 307,
+        "code": "09.4.5.0",
+        "title": "Veterinary and other services for pets (S)"
+      },
+      "predicted": {
+        "category_id": 199,
+        "code": "06.4",
+        "title": "Other health services"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.9026144040108193,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Annual vaccination for a pet cat",
+      "expected": {
+        "category_id": 307,
+        "code": "09.4.5.0",
+        "title": "Veterinary and other services for pets (S)"
+      },
+      "predicted": {
+        "category_id": 199,
+        "code": "06.4",
+        "title": "Other health services"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.0421399579790886,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Two cinema tickets for an evening screening",
+      "expected": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "predicted": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.544871369987959,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Two cinema tickets for an evening screening",
+      "expected": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "predicted": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.0163837840082124,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Two cinema tickets for an evening screening",
+      "expected": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "predicted": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3826410960173234,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Two cinema tickets for an evening screening",
+      "expected": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "predicted": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.082067932002246,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Two cinema tickets for an evening screening",
+      "expected": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "predicted": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.24181595799746,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Two cinema tickets for an evening screening",
+      "expected": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "predicted": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.4436817560053896,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Two cinema tickets for an evening screening",
+      "expected": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "predicted": {
+        "category_id": 317,
+        "code": "09.6.1.0",
+        "title": "Services provided by cinemas, theatres and concert venues (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.1405364480160642,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Full-service restaurant brunch",
+      "expected": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "predicted": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.640205702977255,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Full-service restaurant brunch",
+      "expected": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "predicted": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.016491225018399,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Full-service restaurant brunch",
+      "expected": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "predicted": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3350229249917902,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Full-service restaurant brunch",
+      "expected": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "predicted": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.144203728996217,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Full-service restaurant brunch",
+      "expected": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "predicted": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.1210114970162977,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Full-service restaurant brunch",
+      "expected": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "predicted": {
+        "category_id": 342,
+        "code": "11.1",
+        "title": "Food and beverage serving services"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.8846106810087804,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Full-service restaurant brunch",
+      "expected": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "predicted": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2311619280080777,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Takeaway salad from a counter-service cafe",
+      "expected": {
+        "category_id": 345,
+        "code": "11.1.1.2",
+        "title": "Restaurants, cafés and the like – with limited service (S)"
+      },
+      "predicted": {
+        "category_id": 345,
+        "code": "11.1.1.2",
+        "title": "Restaurants, cafés and the like – with limited service (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.41772661198047,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Takeaway salad from a counter-service cafe",
+      "expected": {
+        "category_id": 345,
+        "code": "11.1.1.2",
+        "title": "Restaurants, cafés and the like – with limited service (S)"
+      },
+      "predicted": {
+        "category_id": 345,
+        "code": "11.1.1.2",
+        "title": "Restaurants, cafés and the like – with limited service (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.699318861006759,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Takeaway salad from a counter-service cafe",
+      "expected": {
+        "category_id": 345,
+        "code": "11.1.1.2",
+        "title": "Restaurants, cafés and the like – with limited service (S)"
+      },
+      "predicted": {
+        "category_id": 345,
+        "code": "11.1.1.2",
+        "title": "Restaurants, cafés and the like – with limited service (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3166069269936997,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Takeaway salad from a counter-service cafe",
+      "expected": {
+        "category_id": 345,
+        "code": "11.1.1.2",
+        "title": "Restaurants, cafés and the like – with limited service (S)"
+      },
+      "predicted": {
+        "category_id": 345,
+        "code": "11.1.1.2",
+        "title": "Restaurants, cafés and the like – with limited service (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.915110170986736,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Takeaway salad from a counter-service cafe",
+      "expected": {
+        "category_id": 345,
+        "code": "11.1.1.2",
+        "title": "Restaurants, cafés and the like – with limited service (S)"
+      },
+      "predicted": {
+        "category_id": 344,
+        "code": "11.1.1.1",
+        "title": "Restaurants, cafés and the like – with full service (S)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.330284448020393,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Takeaway salad from a counter-service cafe",
+      "expected": {
+        "category_id": 345,
+        "code": "11.1.1.2",
+        "title": "Restaurants, cafés and the like – with limited service (S)"
+      },
+      "predicted": {
+        "category_id": 348,
+        "code": "11.1.2.9",
+        "title": "Other canteens, cafeterias and refectories (S)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.8902711150003597,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Takeaway salad from a counter-service cafe",
+      "expected": {
+        "category_id": 345,
+        "code": "11.1.1.2",
+        "title": "Restaurants, cafés and the like – with limited service (S)"
+      },
+      "predicted": {
+        "category_id": 345,
+        "code": "11.1.1.2",
+        "title": "Restaurants, cafés and the like – with limited service (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5350728569901548,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Chilled ready-to-bake margherita pizza",
+      "expected": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "predicted": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6820538470055908,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Chilled ready-to-bake margherita pizza",
+      "expected": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "predicted": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.102944017999107,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Chilled ready-to-bake margherita pizza",
+      "expected": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "predicted": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5555856369901448,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Chilled ready-to-bake margherita pizza",
+      "expected": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "predicted": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.023030520998873,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Chilled ready-to-bake margherita pizza",
+      "expected": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "predicted": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.02134411901352,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Chilled ready-to-bake margherita pizza",
+      "expected": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "predicted": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.299593699019169,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Chilled ready-to-bake margherita pizza",
+      "expected": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "predicted": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.8447903069900349,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Frozen soy-based burger patties",
+      "expected": {
+        "category_id": 619,
+        "code": "01.1.7.9.6",
+        "title": "Tempeh, soy meat and burgers"
+      },
+      "predicted": {
+        "category_id": 619,
+        "code": "01.1.7.9.6",
+        "title": "Tempeh, soy meat and burgers"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3650914690224454,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Frozen soy-based burger patties",
+      "expected": {
+        "category_id": 619,
+        "code": "01.1.7.9.6",
+        "title": "Tempeh, soy meat and burgers"
+      },
+      "predicted": {
+        "category_id": 640,
+        "code": "01.1.9.1.9",
+        "title": "Other prepared ready-made dishes and meals n.e.c."
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 5.598941951000597,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Frozen soy-based burger patties",
+      "expected": {
+        "category_id": 619,
+        "code": "01.1.7.9.6",
+        "title": "Tempeh, soy meat and burgers"
+      },
+      "predicted": {
+        "category_id": 619,
+        "code": "01.1.7.9.6",
+        "title": "Tempeh, soy meat and burgers"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4659697450115345,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Frozen soy-based burger patties",
+      "expected": {
+        "category_id": 619,
+        "code": "01.1.7.9.6",
+        "title": "Tempeh, soy meat and burgers"
+      },
+      "predicted": {
+        "category_id": 640,
+        "code": "01.1.9.1.9",
+        "title": "Other prepared ready-made dishes and meals n.e.c."
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 7.135260315000778,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Frozen soy-based burger patties",
+      "expected": {
+        "category_id": 619,
+        "code": "01.1.7.9.6",
+        "title": "Tempeh, soy meat and burgers"
+      },
+      "predicted": {
+        "category_id": 619,
+        "code": "01.1.7.9.6",
+        "title": "Tempeh, soy meat and burgers"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0246835129801184,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Frozen soy-based burger patties",
+      "expected": {
+        "category_id": 619,
+        "code": "01.1.7.9.6",
+        "title": "Tempeh, soy meat and burgers"
+      },
+      "predicted": {
+        "category_id": 635,
+        "code": "01.1.9.1.2",
+        "title": "Precooked dishes based on meat and/or fish"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.299980281997705,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Frozen soy-based burger patties",
+      "expected": {
+        "category_id": 619,
+        "code": "01.1.7.9.6",
+        "title": "Tempeh, soy meat and burgers"
+      },
+      "predicted": {
+        "category_id": 640,
+        "code": "01.1.9.1.9",
+        "title": "Other prepared ready-made dishes and meals n.e.c."
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.8405272729869466,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Barista-style oat milk for coffee",
+      "expected": {
+        "category_id": 487,
+        "code": "01.1.4.4.5",
+        "title": "Oat milk"
+      },
+      "predicted": {
+        "category_id": 487,
+        "code": "01.1.4.4.5",
+        "title": "Oat milk"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3677055609878153,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Barista-style oat milk for coffee",
+      "expected": {
+        "category_id": 487,
+        "code": "01.1.4.4.5",
+        "title": "Oat milk"
+      },
+      "predicted": {
+        "category_id": 53,
+        "code": "01.2",
+        "title": "Non-alcoholic beverages"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.1432063799875323,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Barista-style oat milk for coffee",
+      "expected": {
+        "category_id": 487,
+        "code": "01.1.4.4.5",
+        "title": "Oat milk"
+      },
+      "predicted": {
+        "category_id": 487,
+        "code": "01.1.4.4.5",
+        "title": "Oat milk"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6480538799951319,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Barista-style oat milk for coffee",
+      "expected": {
+        "category_id": 487,
+        "code": "01.1.4.4.5",
+        "title": "Oat milk"
+      },
+      "predicted": {
+        "category_id": 662,
+        "code": "01.2.9.0.0",
+        "title": "Other non-alcoholic beverages"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.5235201249888632,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Barista-style oat milk for coffee",
+      "expected": {
+        "category_id": 487,
+        "code": "01.1.4.4.5",
+        "title": "Oat milk"
+      },
+      "predicted": {
+        "category_id": 487,
+        "code": "01.1.4.4.5",
+        "title": "Oat milk"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0693460369948298,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Barista-style oat milk for coffee",
+      "expected": {
+        "category_id": 487,
+        "code": "01.1.4.4.5",
+        "title": "Oat milk"
+      },
+      "predicted": {
+        "category_id": 662,
+        "code": "01.2.9.0.0",
+        "title": "Other non-alcoholic beverages"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.764628453005571,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Barista-style oat milk for coffee",
+      "expected": {
+        "category_id": 487,
+        "code": "01.1.4.4.5",
+        "title": "Oat milk"
+      },
+      "predicted": {
+        "category_id": 662,
+        "code": "01.2.9.0.0",
+        "title": "Other non-alcoholic beverages"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.2461795560084283,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Bottled peach iced tea",
+      "expected": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "predicted": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6788252640108112,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Bottled peach iced tea",
+      "expected": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "predicted": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.552654443017673,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Bottled peach iced tea",
+      "expected": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "predicted": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4289517260040157,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Bottled peach iced tea",
+      "expected": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "predicted": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.664059674018063,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Bottled peach iced tea",
+      "expected": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "predicted": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.1211895729938988,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Bottled peach iced tea",
+      "expected": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "predicted": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.8343829330115113,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Bottled peach iced tea",
+      "expected": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "predicted": {
+        "category_id": 655,
+        "code": "01.2.3.0.3",
+        "title": "Iced tea"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3880500679952092,
+      "api_requests": 4,
+      "error": null
+    }
+  ]
+}

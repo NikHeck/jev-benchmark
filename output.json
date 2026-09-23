@@ -1,34 +1,34 @@
 {
-  "generated_at_utc": "2026-09-21T14:37:14.678331+00:00",
+  "generated_at_utc": "2026-09-23T05:03:33.647269+00:00",
   "configuration": {
     "number_samples": 1,
     "full_dataset_iterations": 1,
-    "classifications_per_strategy": 29,
+    "classifications_per_strategy": 30,
     "input_file": "input.csv",
     "category_file": "category_input.json",
-    "tests_in_input_file": 29,
+    "tests_in_input_file": 30,
     "multilingual_prompt_note": "The item title may be in any language and is not necessarily English. Interpret the title in its original language before choosing the COICOP category.",
     "sampling": "number_samples is the number of complete dataset iterations. In every iteration, each strategy classifies every row in input_file exactly once."
   },
   "models": {
     "openai_luna": {
       "direct": {
-        "samples": 29,
-        "successes": 16,
-        "wrong_predictions": 13,
+        "samples": 30,
+        "successes": 18,
+        "wrong_predictions": 12,
         "api_errors": 0,
-        "failures": 13,
-        "success_rate": 0.5517241379310345,
+        "failures": 12,
+        "success_rate": 0.6,
         "hierarchy_accuracy": {
           "level_1": {
-            "eligible_samples": 29,
-            "correct": 25,
-            "accuracy": 0.8620689655172413
+            "eligible_samples": 30,
+            "correct": 28,
+            "accuracy": 0.9333333333333333
           },
           "level_2": {
-            "eligible_samples": 27,
-            "correct": 22,
-            "accuracy": 0.8148148148148148
+            "eligible_samples": 28,
+            "correct": 26,
+            "accuracy": 0.9285714285714286
           },
           "level_3": {
             "eligible_samples": 24,
@@ -36,80 +36,9 @@
             "accuracy": 0.75
           },
           "level_4": {
-            "eligible_samples": 22,
-            "correct": 14,
-            "accuracy": 0.6363636363636364
-          },
-          "level_5": {
-            "eligible_samples": 20,
-            "correct": 8,
-            "accuracy": 0.4
-          }
-        },
-        "timing": {
-          "total_seconds": 52.819166196995866,
-          "seconds_per_item": 1.8213505585170988
-        },
-        "usage": {
-          "input_tokens": 413590,
-          "cached_input_tokens": 53848,
-          "cache_write_tokens": 359655,
-          "cache_hit_tokens": 0,
-          "cache_miss_tokens": 0,
-          "output_tokens": 493,
-          "api_requests_with_usage": 29,
-          "api_requests_per_item": 1.0
-        },
-        "cost_accounting": {
-          "known_cost_attempts": 29,
-          "unknown_cost_attempts": 0,
-          "known_cost_coverage": 1.0,
-          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
-        },
-        "error_examples": [],
-        "strategy": "direct",
-        "model": "gpt-5.6-luna",
-        "cost": {
-          "known_total_usd": 0.09159971,
-          "complete_cost_attempts_total_usd": 0.09159971,
-          "known_cost_per_known_attempt_usd": 0.0031586106896551724,
-          "known_cost_lower_bound_per_attempt_usd": 0.0031586106896551724,
-          "unknown_cost_attempts": 0,
-          "prices_usd_per_1m_tokens": {
-            "input": 0.2,
-            "cached_input": 0.02,
-            "cache_write": 0.25,
-            "output": 1.2
-          }
-        }
-      },
-      "recursive": {
-        "samples": 29,
-        "successes": 15,
-        "wrong_predictions": 14,
-        "api_errors": 0,
-        "failures": 14,
-        "success_rate": 0.5172413793103449,
-        "hierarchy_accuracy": {
-          "level_1": {
-            "eligible_samples": 29,
-            "correct": 23,
-            "accuracy": 0.7931034482758621
-          },
-          "level_2": {
-            "eligible_samples": 27,
-            "correct": 19,
-            "accuracy": 0.7037037037037037
-          },
-          "level_3": {
-            "eligible_samples": 24,
-            "correct": 15,
-            "accuracy": 0.625
-          },
-          "level_4": {
-            "eligible_samples": 22,
-            "correct": 12,
-            "accuracy": 0.5454545454545454
+            "eligible_samples": 23,
+            "correct": 16,
+            "accuracy": 0.6956521739130435
           },
           "level_5": {
             "eligible_samples": 20,
@@ -118,61 +47,280 @@
           }
         },
         "timing": {
-          "total_seconds": 170.30272224399414,
-          "seconds_per_item": 5.8725076635860045
+          "total_seconds": 52.586207360058324,
+          "seconds_per_item": 1.7528735786686107
         },
         "usage": {
-          "input_tokens": 32519,
+          "input_tokens": 427858,
+          "cached_input_tokens": 41006,
+          "cache_write_tokens": 386762,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 0,
+          "output_tokens": 510,
+          "api_requests_with_usage": 30,
+          "api_requests_per_item": 1.0
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 30,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "direct",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "cost": {
+          "known_total_usd": 0.049019309999999996,
+          "complete_cost_attempts_total_usd": 0.049019309999999996,
+          "known_cost_per_known_attempt_usd": 0.0016339769999999998,
+          "known_cost_lower_bound_per_attempt_usd": 0.0016339769999999998,
+          "unknown_cost_attempts": 0,
+          "prices_usd_per_1m_tokens": {
+            "input": 0.1,
+            "cached_input": 0.01,
+            "cache_write": 0.125,
+            "output": 0.5
+          }
+        }
+      },
+      "recursive": {
+        "samples": 30,
+        "successes": 15,
+        "wrong_predictions": 15,
+        "api_errors": 0,
+        "failures": 15,
+        "success_rate": 0.5,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 30,
+            "correct": 26,
+            "accuracy": 0.8666666666666667
+          },
+          "level_2": {
+            "eligible_samples": 28,
+            "correct": 22,
+            "accuracy": 0.7857142857142857
+          },
+          "level_3": {
+            "eligible_samples": 24,
+            "correct": 17,
+            "accuracy": 0.7083333333333334
+          },
+          "level_4": {
+            "eligible_samples": 23,
+            "correct": 13,
+            "accuracy": 0.5652173913043478
+          },
+          "level_5": {
+            "eligible_samples": 20,
+            "correct": 8,
+            "accuracy": 0.4
+          }
+        },
+        "timing": {
+          "total_seconds": 131.5502007070172,
+          "seconds_per_item": 4.385006690233907
+        },
+        "usage": {
+          "input_tokens": 33828,
           "cached_input_tokens": 0,
           "cache_write_tokens": 0,
           "cache_hit_tokens": 0,
           "cache_miss_tokens": 0,
-          "output_tokens": 1938,
-          "api_requests_with_usage": 114,
-          "api_requests_per_item": 3.9310344827586206
+          "output_tokens": 2006,
+          "api_requests_with_usage": 118,
+          "api_requests_per_item": 3.933333333333333
         },
         "cost_accounting": {
-          "known_cost_attempts": 29,
+          "known_cost_attempts": 30,
           "unknown_cost_attempts": 0,
           "known_cost_coverage": 1.0,
           "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
         },
         "error_examples": [],
         "strategy": "recursive",
-        "model": "gpt-5.6-luna",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
         "cost": {
-          "known_total_usd": 0.008829400000000001,
-          "complete_cost_attempts_total_usd": 0.008829400000000001,
-          "known_cost_per_known_attempt_usd": 0.0003044620689655173,
-          "known_cost_lower_bound_per_attempt_usd": 0.0003044620689655173,
+          "known_total_usd": 0.0043858000000000005,
+          "complete_cost_attempts_total_usd": 0.0043858000000000005,
+          "known_cost_per_known_attempt_usd": 0.00014619333333333335,
+          "known_cost_lower_bound_per_attempt_usd": 0.00014619333333333335,
           "unknown_cost_attempts": 0,
           "prices_usd_per_1m_tokens": {
-            "input": 0.2,
-            "cached_input": 0.02,
-            "cache_write": 0.25,
-            "output": 1.2
+            "input": 0.1,
+            "cached_input": 0.01,
+            "cache_write": 0.125,
+            "output": 0.5
+          }
+        }
+      }
+    },
+    "openai_sol": {
+      "direct": {
+        "samples": 30,
+        "successes": 19,
+        "wrong_predictions": 11,
+        "api_errors": 0,
+        "failures": 11,
+        "success_rate": 0.6333333333333333,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 30,
+            "correct": 27,
+            "accuracy": 0.9
+          },
+          "level_2": {
+            "eligible_samples": 28,
+            "correct": 24,
+            "accuracy": 0.8571428571428571
+          },
+          "level_3": {
+            "eligible_samples": 24,
+            "correct": 18,
+            "accuracy": 0.75
+          },
+          "level_4": {
+            "eligible_samples": 23,
+            "correct": 14,
+            "accuracy": 0.6086956521739131
+          },
+          "level_5": {
+            "eligible_samples": 20,
+            "correct": 11,
+            "accuracy": 0.55
+          }
+        },
+        "timing": {
+          "total_seconds": 59.09292106615612,
+          "seconds_per_item": 1.9697640355385375
+        },
+        "usage": {
+          "input_tokens": 427858,
+          "cached_input_tokens": 41006,
+          "cache_write_tokens": 386762,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 0,
+          "output_tokens": 510,
+          "api_requests_with_usage": 30,
+          "api_requests_per_item": 1.0
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 30,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "direct",
+        "model": "gpt-6-sol",
+        "reasoning_effort": "none",
+        "cost": {
+          "known_total_usd": 0.9803862,
+          "complete_cost_attempts_total_usd": 0.9803862,
+          "known_cost_per_known_attempt_usd": 0.03267954,
+          "known_cost_lower_bound_per_attempt_usd": 0.03267954,
+          "unknown_cost_attempts": 0,
+          "prices_usd_per_1m_tokens": {
+            "input": 2.0,
+            "cached_input": 0.2,
+            "cache_write": 2.5,
+            "output": 10.0
+          }
+        }
+      },
+      "recursive": {
+        "samples": 30,
+        "successes": 21,
+        "wrong_predictions": 9,
+        "api_errors": 0,
+        "failures": 9,
+        "success_rate": 0.7,
+        "hierarchy_accuracy": {
+          "level_1": {
+            "eligible_samples": 30,
+            "correct": 29,
+            "accuracy": 0.9666666666666667
+          },
+          "level_2": {
+            "eligible_samples": 28,
+            "correct": 23,
+            "accuracy": 0.8214285714285714
+          },
+          "level_3": {
+            "eligible_samples": 24,
+            "correct": 19,
+            "accuracy": 0.7916666666666666
+          },
+          "level_4": {
+            "eligible_samples": 23,
+            "correct": 15,
+            "accuracy": 0.6521739130434783
+          },
+          "level_5": {
+            "eligible_samples": 20,
+            "correct": 13,
+            "accuracy": 0.65
+          }
+        },
+        "timing": {
+          "total_seconds": 152.8432902499626,
+          "seconds_per_item": 5.09477634166542
+        },
+        "usage": {
+          "input_tokens": 34479,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 0,
+          "output_tokens": 2040,
+          "api_requests_with_usage": 120,
+          "api_requests_per_item": 4.0
+        },
+        "cost_accounting": {
+          "known_cost_attempts": 30,
+          "unknown_cost_attempts": 0,
+          "known_cost_coverage": 1.0,
+          "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
+        },
+        "error_examples": [],
+        "strategy": "recursive",
+        "model": "gpt-6-sol",
+        "reasoning_effort": "none",
+        "cost": {
+          "known_total_usd": 0.089358,
+          "complete_cost_attempts_total_usd": 0.089358,
+          "known_cost_per_known_attempt_usd": 0.0029786,
+          "known_cost_lower_bound_per_attempt_usd": 0.0029786,
+          "unknown_cost_attempts": 0,
+          "prices_usd_per_1m_tokens": {
+            "input": 2.0,
+            "cached_input": 0.2,
+            "cache_write": 2.5,
+            "output": 10.0
           }
         }
       }
     },
     "deepseek_flash": {
       "direct": {
-        "samples": 29,
-        "successes": 19,
-        "wrong_predictions": 10,
+        "samples": 30,
+        "successes": 18,
+        "wrong_predictions": 12,
         "api_errors": 0,
-        "failures": 10,
-        "success_rate": 0.6551724137931034,
+        "failures": 12,
+        "success_rate": 0.6,
         "hierarchy_accuracy": {
           "level_1": {
-            "eligible_samples": 29,
-            "correct": 28,
-            "accuracy": 0.9655172413793104
+            "eligible_samples": 30,
+            "correct": 27,
+            "accuracy": 0.9
           },
           "level_2": {
-            "eligible_samples": 27,
-            "correct": 26,
-            "accuracy": 0.9629629629629629
+            "eligible_samples": 28,
+            "correct": 25,
+            "accuracy": 0.8928571428571429
           },
           "level_3": {
             "eligible_samples": 24,
@@ -180,32 +328,32 @@
             "accuracy": 0.9166666666666666
           },
           "level_4": {
-            "eligible_samples": 22,
-            "correct": 17,
-            "accuracy": 0.7727272727272727
+            "eligible_samples": 23,
+            "correct": 16,
+            "accuracy": 0.6956521739130435
           },
           "level_5": {
             "eligible_samples": 20,
-            "correct": 12,
-            "accuracy": 0.6
+            "correct": 11,
+            "accuracy": 0.55
           }
         },
         "timing": {
-          "total_seconds": 32.07248973099922,
-          "seconds_per_item": 1.105947921758594
+          "total_seconds": 32.335001583065605,
+          "seconds_per_item": 1.077833386102187
         },
         "usage": {
-          "input_tokens": 375821,
+          "input_tokens": 388788,
           "cached_input_tokens": 0,
           "cache_write_tokens": 0,
-          "cache_hit_tokens": 371200,
-          "cache_miss_tokens": 4621,
-          "output_tokens": 203,
-          "api_requests_with_usage": 29,
+          "cache_hit_tokens": 384000,
+          "cache_miss_tokens": 4788,
+          "output_tokens": 210,
+          "api_requests_with_usage": 30,
           "api_requests_per_item": 1.0
         },
         "cost_accounting": {
-          "known_cost_attempts": 29,
+          "known_cost_attempts": 30,
           "unknown_cost_attempts": 0,
           "known_cost_coverage": 1.0,
           "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
@@ -215,10 +363,10 @@
         "model": "deepseek-flash",
         "cost": {
           "peak": {
-            "known_total_usd": 0.0038571,
-            "complete_cost_attempts_total_usd": 0.0038571,
-            "known_cost_per_known_attempt_usd": 0.00013300344827586207,
-            "known_cost_lower_bound_per_attempt_usd": 0.00013300344827586207,
+            "known_total_usd": 0.003992399999999999,
+            "complete_cost_attempts_total_usd": 0.003992399999999999,
+            "known_cost_per_known_attempt_usd": 0.00013307999999999997,
+            "known_cost_lower_bound_per_attempt_usd": 0.00013307999999999997,
             "unknown_cost_attempts": 0,
             "prices_usd_per_1m_tokens": {
               "cache_hit_input": 0.006,
@@ -227,10 +375,10 @@
             }
           },
           "off_peak": {
-            "known_total_usd": 0.00192855,
-            "complete_cost_attempts_total_usd": 0.00192855,
-            "known_cost_per_known_attempt_usd": 6.650172413793103e-05,
-            "known_cost_lower_bound_per_attempt_usd": 6.650172413793103e-05,
+            "known_total_usd": 0.0019961999999999996,
+            "complete_cost_attempts_total_usd": 0.0019961999999999996,
+            "known_cost_per_known_attempt_usd": 6.653999999999998e-05,
+            "known_cost_lower_bound_per_attempt_usd": 6.653999999999998e-05,
             "unknown_cost_attempts": 0,
             "prices_usd_per_1m_tokens": {
               "cache_hit_input": 0.003,
@@ -241,22 +389,22 @@
         }
       },
       "recursive": {
-        "samples": 29,
-        "successes": 16,
+        "samples": 30,
+        "successes": 17,
         "wrong_predictions": 13,
         "api_errors": 0,
         "failures": 13,
-        "success_rate": 0.5517241379310345,
+        "success_rate": 0.5666666666666667,
         "hierarchy_accuracy": {
           "level_1": {
-            "eligible_samples": 29,
+            "eligible_samples": 30,
             "correct": 23,
-            "accuracy": 0.7931034482758621
+            "accuracy": 0.7666666666666667
           },
           "level_2": {
-            "eligible_samples": 27,
+            "eligible_samples": 28,
             "correct": 20,
-            "accuracy": 0.7407407407407407
+            "accuracy": 0.7142857142857143
           },
           "level_3": {
             "eligible_samples": 24,
@@ -264,32 +412,32 @@
             "accuracy": 0.7083333333333334
           },
           "level_4": {
-            "eligible_samples": 22,
-            "correct": 13,
-            "accuracy": 0.5909090909090909
+            "eligible_samples": 23,
+            "correct": 15,
+            "accuracy": 0.6521739130434783
           },
           "level_5": {
             "eligible_samples": 20,
-            "correct": 10,
-            "accuracy": 0.5
+            "correct": 11,
+            "accuracy": 0.55
           }
         },
         "timing": {
-          "total_seconds": 106.42652257000191,
-          "seconds_per_item": 3.669880088620755
+          "total_seconds": 108.3111287689826,
+          "seconds_per_item": 3.6103709589660866
         },
         "usage": {
-          "input_tokens": 33501,
+          "input_tokens": 34382,
           "cached_input_tokens": 0,
           "cache_write_tokens": 0,
-          "cache_hit_tokens": 7936,
-          "cache_miss_tokens": 25565,
-          "output_tokens": 854,
-          "api_requests_with_usage": 122,
-          "api_requests_per_item": 4.206896551724138
+          "cache_hit_tokens": 10870,
+          "cache_miss_tokens": 23512,
+          "output_tokens": 878,
+          "api_requests_with_usage": 125,
+          "api_requests_per_item": 4.166666666666667
         },
         "cost_accounting": {
-          "known_cost_attempts": 29,
+          "known_cost_attempts": 30,
           "unknown_cost_attempts": 0,
           "known_cost_coverage": 1.0,
           "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
@@ -299,10 +447,10 @@
         "model": "deepseek-flash",
         "cost": {
           "peak": {
-            "known_total_usd": 0.008741916,
-            "complete_cost_attempts_total_usd": 0.008741916,
-            "known_cost_per_known_attempt_usd": 0.00030144537931034486,
-            "known_cost_lower_bound_per_attempt_usd": 0.00030144537931034486,
+            "known_total_usd": 0.00817242,
+            "complete_cost_attempts_total_usd": 0.00817242,
+            "known_cost_per_known_attempt_usd": 0.000272414,
+            "known_cost_lower_bound_per_attempt_usd": 0.000272414,
             "unknown_cost_attempts": 0,
             "prices_usd_per_1m_tokens": {
               "cache_hit_input": 0.006,
@@ -311,10 +459,10 @@
             }
           },
           "off_peak": {
-            "known_total_usd": 0.004370958,
-            "complete_cost_attempts_total_usd": 0.004370958,
-            "known_cost_per_known_attempt_usd": 0.00015072268965517243,
-            "known_cost_lower_bound_per_attempt_usd": 0.00015072268965517243,
+            "known_total_usd": 0.00408621,
+            "complete_cost_attempts_total_usd": 0.00408621,
+            "known_cost_per_known_attempt_usd": 0.000136207,
+            "known_cost_lower_bound_per_attempt_usd": 0.000136207,
             "unknown_cost_attempts": 0,
             "prices_usd_per_1m_tokens": {
               "cache_hit_input": 0.003,
@@ -327,55 +475,55 @@
     },
     "typesafe_jev": {
       "recursive": {
-        "samples": 29,
-        "successes": 15,
-        "wrong_predictions": 14,
+        "samples": 30,
+        "successes": 14,
+        "wrong_predictions": 16,
         "api_errors": 0,
-        "failures": 14,
-        "success_rate": 0.5172413793103449,
+        "failures": 16,
+        "success_rate": 0.4666666666666667,
         "hierarchy_accuracy": {
           "level_1": {
-            "eligible_samples": 29,
+            "eligible_samples": 30,
             "correct": 25,
-            "accuracy": 0.8620689655172413
+            "accuracy": 0.8333333333333334
           },
           "level_2": {
-            "eligible_samples": 27,
+            "eligible_samples": 28,
             "correct": 20,
-            "accuracy": 0.7407407407407407
+            "accuracy": 0.7142857142857143
           },
           "level_3": {
             "eligible_samples": 24,
-            "correct": 17,
-            "accuracy": 0.7083333333333334
+            "correct": 16,
+            "accuracy": 0.6666666666666666
           },
           "level_4": {
-            "eligible_samples": 22,
-            "correct": 13,
-            "accuracy": 0.5909090909090909
+            "eligible_samples": 23,
+            "correct": 12,
+            "accuracy": 0.5217391304347826
           },
           "level_5": {
             "eligible_samples": 20,
-            "correct": 10,
-            "accuracy": 0.5
+            "correct": 9,
+            "accuracy": 0.45
           }
         },
         "timing": {
-          "total_seconds": 52.23274546099492,
-          "seconds_per_item": 1.801129153827411
+          "total_seconds": 46.19818954510265,
+          "seconds_per_item": 1.5399396515034216
         },
         "usage": {
-          "input_tokens": 74499,
+          "input_tokens": 76675,
           "cached_input_tokens": 0,
           "cache_write_tokens": 0,
           "cache_hit_tokens": 0,
           "cache_miss_tokens": 0,
-          "output_tokens": 12875,
-          "api_requests_with_usage": 123,
-          "api_requests_per_item": 4.241379310344827
+          "output_tokens": 13214,
+          "api_requests_with_usage": 127,
+          "api_requests_per_item": 4.233333333333333
         },
         "cost_accounting": {
-          "known_cost_attempts": 29,
+          "known_cost_attempts": 30,
           "unknown_cost_attempts": 0,
           "known_cost_coverage": 1.0,
           "note": "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, known_total_usd is a lower bound on true cost."
@@ -384,15 +532,5057 @@
         "strategy": "recursive",
         "model": "jev-latest",
         "cost": {
-          "known_total_usd": 0.003128958,
-          "complete_cost_attempts_total_usd": 0.003128958,
-          "known_cost_per_known_attempt_usd": 0.00010789510344827586,
-          "known_cost_lower_bound_per_attempt_usd": 0.00010789510344827586,
+          "known_total_usd": 0.00322035,
+          "complete_cost_attempts_total_usd": 0.00322035,
+          "known_cost_per_known_attempt_usd": 0.000107345,
+          "known_cost_lower_bound_per_attempt_usd": 0.000107345,
           "unknown_cost_attempts": 0,
           "input_price_usd_per_1m_tokens": 0.042,
           "output_price_usd_per_1m_tokens": 0.0
         }
       }
     }
-  }
+  },
+  "prediction_log": [
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Espresso Pulver",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.211108674004208,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Espresso Pulver",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.538722216006136,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Espresso Pulver",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3761005980195478,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Espresso Pulver",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.317003381001996,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Espresso Pulver",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.1319176070101094,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Espresso Pulver",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.672071346984012,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 1,
+      "overall_sample_index": 1,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Espresso Pulver",
+      "expected": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "predicted": {
+        "category_id": 648,
+        "code": "01.1.9.9.0",
+        "title": "Other food products n.e.c."
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.7469007319887169,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Schwarzer Tee",
+      "expected": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "predicted": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6253241660015192,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Schwarzer Tee",
+      "expected": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "predicted": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.939223746012431,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Schwarzer Tee",
+      "expected": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "predicted": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5803997819893993,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Schwarzer Tee",
+      "expected": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "predicted": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.419167027983349,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Schwarzer Tee",
+      "expected": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "predicted": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 0.8978262459859252,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Schwarzer Tee",
+      "expected": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "predicted": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.3787472569965757,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 2,
+      "overall_sample_index": 2,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Schwarzer Tee",
+      "expected": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "predicted": {
+        "category_id": 654,
+        "code": "01.2.3.0.2",
+        "title": "Black tea, leaves"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4332694949989673,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Kaba",
+      "expected": {
+        "category_id": 659,
+        "code": "01.2.4.0.0",
+        "title": "Cocoa drinks"
+      },
+      "predicted": {
+        "category_id": 650,
+        "code": "01.2.2.0.1",
+        "title": "Coffee"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.6185804679989815,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Kaba",
+      "expected": {
+        "category_id": 659,
+        "code": "01.2.4.0.0",
+        "title": "Cocoa drinks"
+      },
+      "predicted": {
+        "category_id": 651,
+        "code": "01.2.2.0.2",
+        "title": "Coffee substitutes"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.730857856018702,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Kaba",
+      "expected": {
+        "category_id": 659,
+        "code": "01.2.4.0.0",
+        "title": "Cocoa drinks"
+      },
+      "predicted": {
+        "category_id": 659,
+        "code": "01.2.4.0.0",
+        "title": "Cocoa drinks"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6099221069889609,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Kaba",
+      "expected": {
+        "category_id": 659,
+        "code": "01.2.4.0.0",
+        "title": "Cocoa drinks"
+      },
+      "predicted": {
+        "category_id": 659,
+        "code": "01.2.4.0.0",
+        "title": "Cocoa drinks"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.938649154995801,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Kaba",
+      "expected": {
+        "category_id": 659,
+        "code": "01.2.4.0.0",
+        "title": "Cocoa drinks"
+      },
+      "predicted": {
+        "category_id": 57,
+        "code": "02.1",
+        "title": "Alcoholic beverages"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 0.9013658170006238,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Kaba",
+      "expected": {
+        "category_id": 659,
+        "code": "01.2.4.0.0",
+        "title": "Cocoa drinks"
+      },
+      "predicted": {
+        "category_id": 75,
+        "code": "03.1.2.2",
+        "title": "Garments for women or girls (SD)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.2771150909829885,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 3,
+      "overall_sample_index": 3,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Kaba",
+      "expected": {
+        "category_id": 659,
+        "code": "01.2.4.0.0",
+        "title": "Cocoa drinks"
+      },
+      "predicted": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.7410793650196865,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Bioland Möhren",
+      "expected": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4323063920019194,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Bioland Möhren",
+      "expected": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.523246828990523,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Bioland Möhren",
+      "expected": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.7617585310072172,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Bioland Möhren",
+      "expected": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 7.438950632000342,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Bioland Möhren",
+      "expected": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0208562460029498,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Bioland Möhren",
+      "expected": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.609076456981711,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 4,
+      "overall_sample_index": 4,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Bioland Möhren",
+      "expected": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 586,
+        "code": "01.1.7.4.1",
+        "title": "Carrots and turnips, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.8390570940100588,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Fol Epi Sch.Carac.",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 52,
+        "code": "01.1.9.3",
+        "title": "Salt, condiments and sauces (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.4691841290041339,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Fol Epi Sch.Carac.",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 172,
+        "code": "06",
+        "title": "Health"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.322085744992364,
+      "api_requests": 2,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Fol Epi Sch.Carac.",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.337898062018212,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Fol Epi Sch.Carac.",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.7334794649796095,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Fol Epi Sch.Carac.",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.2688917769992258,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Fol Epi Sch.Carac.",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.864534571999684,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 5,
+      "overall_sample_index": 5,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Fol Epi Sch.Carac.",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 413,
+        "code": "01.1.1.3.1",
+        "title": "Bread"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.5417311979981605,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "ebelin Haarschmuck 18St",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 80,
+        "code": "03.1.3.2",
+        "title": "Clothing accessories (SD)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.7186405829852447,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "ebelin Haarschmuck 18St",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.809244867996313,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "ebelin Haarschmuck 18St",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 80,
+        "code": "03.1.3.2",
+        "title": "Clothing accessories (SD)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.526866843021708,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "ebelin Haarschmuck 18St",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.899859597993782,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "ebelin Haarschmuck 18St",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 80,
+        "code": "03.1.3.2",
+        "title": "Clothing accessories (SD)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 0.9940800140029751,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "ebelin Haarschmuck 18St",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 70,
+        "code": "03",
+        "title": "Clothing and footwear"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.7616323920083232,
+      "api_requests": 2,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 6,
+      "overall_sample_index": 6,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "ebelin Haarschmuck 18St",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 70,
+        "code": "03",
+        "title": "Clothing and footwear"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 0.6043327980150934,
+      "api_requests": 2,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "KATJES EASYLIFE",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 48,
+        "code": "01.1.8.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.453019010979915,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "KATJES EASYLIFE",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 48,
+        "code": "01.1.8.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 6.341016870021122,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "KATJES EASYLIFE",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4281950750155374,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "KATJES EASYLIFE",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.63906715597841,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "KATJES EASYLIFE",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 0.9182770250190515,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "KATJES EASYLIFE",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.300219316006405,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 7,
+      "overall_sample_index": 7,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "KATJES EASYLIFE",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6396555730025284,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "WUNDERLAND SAUER",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 63,
+        "code": "02.1.9.0",
+        "title": "Other alcoholic beverages (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.357643770024879,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "WUNDERLAND SAUER",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 57,
+        "code": "02.1",
+        "title": "Alcoholic beverages"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.0469347510079388,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "WUNDERLAND SAUER",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 631,
+        "code": "01.1.8.6.0",
+        "title": "Ice, ice cream and sorbets"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.626667278003879,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "WUNDERLAND SAUER",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 661,
+        "code": "01.2.6.0.0",
+        "title": "Soft drinks"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.7220100830018055,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "WUNDERLAND SAUER",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 44,
+        "code": "01.1.8",
+        "title": "Sugar, confectionery and desserts (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.1774307799933013,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "WUNDERLAND SAUER",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.453105713997502,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 8,
+      "overall_sample_index": 8,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "WUNDERLAND SAUER",
+      "expected": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "predicted": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.7117250250012148,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "SALTED CARAMEL",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 48,
+        "code": "01.1.8.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.4725060829950962,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "SALTED CARAMEL",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 5.019638792990008,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "SALTED CARAMEL",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.323484680004185,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "SALTED CARAMEL",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 6.038013918005163,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "SALTED CARAMEL",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 0.689357047987869,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "SALTED CARAMEL",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.530604325002059,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 9,
+      "overall_sample_index": 9,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "SALTED CARAMEL",
+      "expected": {
+        "category_id": 627,
+        "code": "01.1.8.5.1",
+        "title": "Chocolate"
+      },
+      "predicted": {
+        "category_id": 633,
+        "code": "01.1.8.9.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (not containing cocoa)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.8452398920198902,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "GEMUESESTAEBCHEN",
+      "expected": {
+        "category_id": 636,
+        "code": "01.1.9.1.3",
+        "title": "Mixed salads and prepared dishes based on vegetables"
+      },
+      "predicted": {
+        "category_id": 615,
+        "code": "01.1.7.9.2",
+        "title": "Canned vegetables"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.4468803490162827,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "GEMUESESTAEBCHEN",
+      "expected": {
+        "category_id": 636,
+        "code": "01.1.9.1.3",
+        "title": "Mixed salads and prepared dishes based on vegetables"
+      },
+      "predicted": {
+        "category_id": 620,
+        "code": "01.1.7.9.9",
+        "title": "Other vegetables, pulses and tubers preserved or processed"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 5.952313832996879,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "GEMUESESTAEBCHEN",
+      "expected": {
+        "category_id": 636,
+        "code": "01.1.9.1.3",
+        "title": "Mixed salads and prepared dishes based on vegetables"
+      },
+      "predicted": {
+        "category_id": 620,
+        "code": "01.1.7.9.9",
+        "title": "Other vegetables, pulses and tubers preserved or processed"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.469859347998863,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "GEMUESESTAEBCHEN",
+      "expected": {
+        "category_id": 636,
+        "code": "01.1.9.1.3",
+        "title": "Mixed salads and prepared dishes based on vegetables"
+      },
+      "predicted": {
+        "category_id": 636,
+        "code": "01.1.9.1.3",
+        "title": "Mixed salads and prepared dishes based on vegetables"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 6.086761899990961,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "GEMUESESTAEBCHEN",
+      "expected": {
+        "category_id": 636,
+        "code": "01.1.9.1.3",
+        "title": "Mixed salads and prepared dishes based on vegetables"
+      },
+      "predicted": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.0155438059882727,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "GEMUESESTAEBCHEN",
+      "expected": {
+        "category_id": 636,
+        "code": "01.1.9.1.3",
+        "title": "Mixed salads and prepared dishes based on vegetables"
+      },
+      "predicted": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.1923437519872095,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 10,
+      "overall_sample_index": 10,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "GEMUESESTAEBCHEN",
+      "expected": {
+        "category_id": 636,
+        "code": "01.1.9.1.3",
+        "title": "Mixed salads and prepared dishes based on vegetables"
+      },
+      "predicted": {
+        "category_id": 615,
+        "code": "01.1.7.9.2",
+        "title": "Canned vegetables"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.5912889250030275,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Sprachkurs Spanisch",
+      "expected": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "predicted": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5175633119943086,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Sprachkurs Spanisch",
+      "expected": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "predicted": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.360849335003877,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Sprachkurs Spanisch",
+      "expected": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "predicted": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4937820219784044,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Sprachkurs Spanisch",
+      "expected": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "predicted": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.2288407669984736,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Sprachkurs Spanisch",
+      "expected": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "predicted": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 0.7947221120120957,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Sprachkurs Spanisch",
+      "expected": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "predicted": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.4572786189964972,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 11,
+      "overall_sample_index": 11,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Sprachkurs Spanisch",
+      "expected": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "predicted": {
+        "category_id": 340,
+        "code": "10.5.0.9",
+        "title": "Other education not defined by level (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0694131449854467,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "dmBio 4-Korn Flocken 500g",
+      "expected": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "predicted": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.260348851006711,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "dmBio 4-Korn Flocken 500g",
+      "expected": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "predicted": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.668805768014863,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "dmBio 4-Korn Flocken 500g",
+      "expected": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "predicted": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5219333580171224,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "dmBio 4-Korn Flocken 500g",
+      "expected": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "predicted": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.506039606989361,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "dmBio 4-Korn Flocken 500g",
+      "expected": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "predicted": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0310252310009673,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "dmBio 4-Korn Flocken 500g",
+      "expected": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "predicted": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.3215168740134686,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 12,
+      "overall_sample_index": 12,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "dmBio 4-Korn Flocken 500g",
+      "expected": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "predicted": {
+        "category_id": 415,
+        "code": "01.1.1.4.0",
+        "title": "Breakfast cereals"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4549756190099288,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "VEGANE MAULT.",
+      "expected": {
+        "category_id": 634,
+        "code": "01.1.9.1.1",
+        "title": "Precooked dishes based on pasta and cereals"
+      },
+      "predicted": {
+        "category_id": 48,
+        "code": "01.1.8.9",
+        "title": "Other sugar confectionery and desserts n.e.c. (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.7313890279910993,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "VEGANE MAULT.",
+      "expected": {
+        "category_id": 634,
+        "code": "01.1.9.1.1",
+        "title": "Precooked dishes based on pasta and cereals"
+      },
+      "predicted": {
+        "category_id": 1,
+        "code": "01.1",
+        "title": "Food"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.8064471689867787,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "VEGANE MAULT.",
+      "expected": {
+        "category_id": 634,
+        "code": "01.1.9.1.1",
+        "title": "Precooked dishes based on pasta and cereals"
+      },
+      "predicted": {
+        "category_id": 623,
+        "code": "01.1.8.2.0",
+        "title": "Other sugars and sugar substitutes"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.451165876002051,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "VEGANE MAULT.",
+      "expected": {
+        "category_id": 634,
+        "code": "01.1.9.1.1",
+        "title": "Precooked dishes based on pasta and cereals"
+      },
+      "predicted": {
+        "category_id": 6,
+        "code": "01.1.2",
+        "title": "Live animals, and meat and other parts of slaughtered land animals (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.894422935001785,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "VEGANE MAULT.",
+      "expected": {
+        "category_id": 634,
+        "code": "01.1.9.1.1",
+        "title": "Precooked dishes based on pasta and cereals"
+      },
+      "predicted": {
+        "category_id": 637,
+        "code": "01.1.9.1.4",
+        "title": "Sandwiches, pizzas, quiches, meat or fish pies, frozen or not"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 0.8835766739794053,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "VEGANE MAULT.",
+      "expected": {
+        "category_id": 634,
+        "code": "01.1.9.1.1",
+        "title": "Precooked dishes based on pasta and cereals"
+      },
+      "predicted": {
+        "category_id": 348,
+        "code": "11.1.2.9",
+        "title": "Other canteens, cafeterias and refectories (S)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.3202195659978315,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 13,
+      "overall_sample_index": 13,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "VEGANE MAULT.",
+      "expected": {
+        "category_id": 634,
+        "code": "01.1.9.1.1",
+        "title": "Precooked dishes based on pasta and cereals"
+      },
+      "predicted": {
+        "category_id": 634,
+        "code": "01.1.9.1.1",
+        "title": "Precooked dishes based on pasta and cereals"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.8365961160161532,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "KOER FRISCHK",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 8,
+        "code": "01.1.2.2",
+        "title": "Meat, fresh, chilled or frozen (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.3357992020028178,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "KOER FRISCHK",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 1,
+        "code": "01.1",
+        "title": "Food"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.6586297820031177,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "KOER FRISCHK",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 297,
+        "code": "09.3.2.2",
+        "title": "Products for pets and other household animals (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.2018605539924465,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "KOER FRISCHK",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.5819224570004735,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "KOER FRISCHK",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.1238424990151543,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "KOER FRISCHK",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 0,
+        "code": "01",
+        "title": "Food and non-alcoholic beverages"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.0471232739801053,
+      "api_requests": 2,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 14,
+      "overall_sample_index": 14,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "KOER FRISCHK",
+      "expected": {
+        "category_id": 489,
+        "code": "01.1.4.5.0",
+        "title": "Cheese"
+      },
+      "predicted": {
+        "category_id": 1,
+        "code": "01.1",
+        "title": "Food"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.0242000380239915,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "CHAMPIGNONS",
+      "expected": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3558179230021778,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "CHAMPIGNONS",
+      "expected": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.190465686988318,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "CHAMPIGNONS",
+      "expected": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.6859623409982305,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "CHAMPIGNONS",
+      "expected": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 7.3884128110075835,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "CHAMPIGNONS",
+      "expected": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 0.9916258750017732,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "CHAMPIGNONS",
+      "expected": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.9148233460146002,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 15,
+      "overall_sample_index": 15,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "CHAMPIGNONS",
+      "expected": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.7181676840118598,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "FENCHEL",
+      "expected": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.7484665640222374,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "FENCHEL",
+      "expected": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 572,
+        "code": "01.1.7.1.9",
+        "title": "Other leafy or stem vegetables, fresh or chilled"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 5.008535965986084,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "FENCHEL",
+      "expected": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 647,
+        "code": "01.1.9.4.0",
+        "title": "Spices, culinary herbs and seeds"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.0164985779847484,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "FENCHEL",
+      "expected": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 572,
+        "code": "01.1.7.1.9",
+        "title": "Other leafy or stem vegetables, fresh or chilled"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 6.279933757992694,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "FENCHEL",
+      "expected": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 590,
+        "code": "01.1.7.4.5",
+        "title": "Mushrooms and truffles, fresh or chilled"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.328579618013464,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "FENCHEL",
+      "expected": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.403347074025078,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 16,
+      "overall_sample_index": 16,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "FENCHEL",
+      "expected": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 40,
+        "code": "01.1.7.4",
+        "title": "Other vegetables, fresh or chilled (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.6383628119947389,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "KOHLRABI",
+      "expected": {
+        "category_id": 566,
+        "code": "01.1.7.1.2",
+        "title": "Cabbages, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.2070290610135999,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "KOHLRABI",
+      "expected": {
+        "category_id": 566,
+        "code": "01.1.7.1.2",
+        "title": "Cabbages, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 5.757190439995611,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "KOHLRABI",
+      "expected": {
+        "category_id": 566,
+        "code": "01.1.7.1.2",
+        "title": "Cabbages, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.9472346170223318,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "KOHLRABI",
+      "expected": {
+        "category_id": 566,
+        "code": "01.1.7.1.2",
+        "title": "Cabbages, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 594,
+        "code": "01.1.7.4.9",
+        "title": "Other vegetable n.e.c., mixtures of vegetables, fresh or chilled"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 7.493153029005043,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "KOHLRABI",
+      "expected": {
+        "category_id": 566,
+        "code": "01.1.7.1.2",
+        "title": "Cabbages, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 40,
+        "code": "01.1.7.4",
+        "title": "Other vegetables, fresh or chilled (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.3112820610112976,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "KOHLRABI",
+      "expected": {
+        "category_id": 566,
+        "code": "01.1.7.1.2",
+        "title": "Cabbages, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 572,
+        "code": "01.1.7.1.9",
+        "title": "Other leafy or stem vegetables, fresh or chilled"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.274442091002129,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 17,
+      "overall_sample_index": 17,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "KOHLRABI",
+      "expected": {
+        "category_id": 566,
+        "code": "01.1.7.1.2",
+        "title": "Cabbages, fresh or chilled"
+      },
+      "predicted": {
+        "category_id": 40,
+        "code": "01.1.7.4",
+        "title": "Other vegetables, fresh or chilled (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.0492449550074525,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "DELIKATESS SENF",
+      "expected": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "predicted": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5902896430052351,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "DELIKATESS SENF",
+      "expected": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "predicted": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.491106897010468,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "DELIKATESS SENF",
+      "expected": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "predicted": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.1991328170115594,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "DELIKATESS SENF",
+      "expected": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "predicted": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.6106437150156125,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "DELIKATESS SENF",
+      "expected": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "predicted": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 0.7832772909896448,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "DELIKATESS SENF",
+      "expected": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "predicted": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.4349669690127485,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 18,
+      "overall_sample_index": 18,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "DELIKATESS SENF",
+      "expected": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "predicted": {
+        "category_id": 646,
+        "code": "01.1.9.3.9",
+        "title": "Other condiments and sauces"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.7535962609981652,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "ROTWEINGLAS X2",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.474839738017181,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "ROTWEINGLAS X2",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.033320828981232,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "ROTWEINGLAS X2",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.2754404800070915,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "ROTWEINGLAS X2",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.669530669983942,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "ROTWEINGLAS X2",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0159054740215652,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "ROTWEINGLAS X2",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.4583766649884637,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 19,
+      "overall_sample_index": 19,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "ROTWEINGLAS X2",
+      "expected": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "predicted": {
+        "category_id": 155,
+        "code": "05.4.0.1",
+        "title": "Glassware, crystal ware, ceramic ware and china ware (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0223787919967435,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "KART.FESTK.",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 4,
+        "code": "01.1.1.2",
+        "title": "Flour of cereals (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.5937411519989837,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "KART.FESTK.",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 271,
+        "code": "09",
+        "title": "Recreation, sport and culture"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 2.9919385660032276,
+      "api_requests": 2,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "KART.FESTK.",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 287,
+        "code": "09.2.1.3",
+        "title": "Celebration articles (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.457990717026405,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "KART.FESTK.",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 231,
+        "code": "07.3.2.1",
+        "title": "Passenger transport by bus and coach (S)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 5.6834320679772645,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "KART.FESTK.",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2227252019802108,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "KART.FESTK.",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 74,
+        "code": "03.1.2.1",
+        "title": "Garments for men or boys (SD)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.995206272986252,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 20,
+      "overall_sample_index": 20,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "KART.FESTK.",
+      "expected": {
+        "category_id": 595,
+        "code": "01.1.7.5.1",
+        "title": "Potatoes"
+      },
+      "predicted": {
+        "category_id": 311,
+        "code": "09.4.6.3",
+        "title": "Services associated with attendance at sporting events (S)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.6356308070244268,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "ALPRO ROTE FRUE.",
+      "expected": {
+        "category_id": 490,
+        "code": "01.1.4.6.0",
+        "title": "Yoghurt and similar products"
+      },
+      "predicted": {
+        "category_id": 488,
+        "code": "01.1.4.4.9",
+        "title": "Other non-animal milk"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.3324608319962863,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "ALPRO ROTE FRUE.",
+      "expected": {
+        "category_id": 490,
+        "code": "01.1.4.6.0",
+        "title": "Yoghurt and similar products"
+      },
+      "predicted": {
+        "category_id": 21,
+        "code": "01.1.4.4",
+        "title": "Non-animal milk (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 5.734962030022871,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "ALPRO ROTE FRUE.",
+      "expected": {
+        "category_id": 490,
+        "code": "01.1.4.6.0",
+        "title": "Yoghurt and similar products"
+      },
+      "predicted": {
+        "category_id": 485,
+        "code": "01.1.4.4.3",
+        "title": "Soy milk"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.773033272009343,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "ALPRO ROTE FRUE.",
+      "expected": {
+        "category_id": 490,
+        "code": "01.1.4.6.0",
+        "title": "Yoghurt and similar products"
+      },
+      "predicted": {
+        "category_id": 649,
+        "code": "01.2.1.0.0",
+        "title": "Fruit and vegetable juices"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.5700501860119402,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "ALPRO ROTE FRUE.",
+      "expected": {
+        "category_id": 490,
+        "code": "01.1.4.6.0",
+        "title": "Yoghurt and similar products"
+      },
+      "predicted": {
+        "category_id": 488,
+        "code": "01.1.4.4.9",
+        "title": "Other non-animal milk"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.414330125990091,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "ALPRO ROTE FRUE.",
+      "expected": {
+        "category_id": 490,
+        "code": "01.1.4.6.0",
+        "title": "Yoghurt and similar products"
+      },
+      "predicted": {
+        "category_id": 546,
+        "code": "01.1.6.5.9",
+        "title": "Other fruits or mixtures of fruit, fresh, n.e.c."
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.361673470993992,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 21,
+      "overall_sample_index": 21,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "ALPRO ROTE FRUE.",
+      "expected": {
+        "category_id": 490,
+        "code": "01.1.4.6.0",
+        "title": "Yoghurt and similar products"
+      },
+      "predicted": {
+        "category_id": 528,
+        "code": "01.1.6.3.4",
+        "title": "Cherries, fresh"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.985007395996945,
+      "api_requests": 5,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Windeln",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2509284449915867,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Windeln",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.4597991750051733,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Windeln",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.700882923003519,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Windeln",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.829898610012606,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Windeln",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0240930830186699,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Windeln",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.6855524540005717,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 22,
+      "overall_sample_index": 22,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Windeln",
+      "expected": {
+        "category_id": 384,
+        "code": "13.2.9.1",
+        "title": "Travel goods, baby articles and other personal effects n.e.c. (SD)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.1736236800206825,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Profissimo Einmalhandschuhe latexfrei",
+      "expected": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "predicted": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3484289880143479,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Profissimo Einmalhandschuhe latexfrei",
+      "expected": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "predicted": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.34066196999629,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Profissimo Einmalhandschuhe latexfrei",
+      "expected": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "predicted": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.8457367040100507,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Profissimo Einmalhandschuhe latexfrei",
+      "expected": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "predicted": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.54967809500522,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Profissimo Einmalhandschuhe latexfrei",
+      "expected": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 0.9999444370041601,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Profissimo Einmalhandschuhe latexfrei",
+      "expected": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "predicted": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.1721012050111312,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 23,
+      "overall_sample_index": 23,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Profissimo Einmalhandschuhe latexfrei",
+      "expected": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "predicted": {
+        "category_id": 179,
+        "code": "06.1.2.2",
+        "title": "Preventive and protective devices (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.5340799260011408,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Penne",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4017917339806445,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Penne",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.666151409008307,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Penne",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.8491777820163406,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Penne",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.808880208001938,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Penne",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.0214247340045404,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Penne",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.00014521801495,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 24,
+      "overall_sample_index": 24,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Penne",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5053379430028144,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "ebelin Bunte Wattestäbchen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3551245350099634,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "ebelin Bunte Wattestäbchen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.7398578010033816,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "ebelin Bunte Wattestäbchen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.731202155002393,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "ebelin Bunte Wattestäbchen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.565043845999753,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "ebelin Bunte Wattestäbchen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.226771996007301,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "ebelin Bunte Wattestäbchen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 168,
+        "code": "05.6.1.9",
+        "title": "Other non-durable household goods (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.300980292988243,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 25,
+      "overall_sample_index": 25,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "ebelin Bunte Wattestäbchen",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 180,
+        "code": "06.1.2.3",
+        "title": "Treatment devices for personal use (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.5356049649999477,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Denkmit Waschmasch.rein.250ml",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5410541070159525,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Denkmit Waschmasch.rein.250ml",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.6054204649990425,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Denkmit Waschmasch.rein.250ml",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4618759540026076,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Denkmit Waschmasch.rein.250ml",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.680033985991031,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Denkmit Waschmasch.rein.250ml",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3318853590171784,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Denkmit Waschmasch.rein.250ml",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.4794314239989035,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 26,
+      "overall_sample_index": 26,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Denkmit Waschmasch.rein.250ml",
+      "expected": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "predicted": {
+        "category_id": 167,
+        "code": "05.6.1.1",
+        "title": "Household cleaning and maintenance products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.637785314989742,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Altapharma Japanisches Heilpflanzenöl",
+      "expected": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "predicted": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.6453868999960832,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Altapharma Japanisches Heilpflanzenöl",
+      "expected": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "predicted": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.333567659981782,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Altapharma Japanisches Heilpflanzenöl",
+      "expected": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "predicted": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 2.120122162014013,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Altapharma Japanisches Heilpflanzenöl",
+      "expected": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "predicted": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.751659079018282,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Altapharma Japanisches Heilpflanzenöl",
+      "expected": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "predicted": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.3829200160107575,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Altapharma Japanisches Heilpflanzenöl",
+      "expected": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "predicted": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.58538050900097,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 27,
+      "overall_sample_index": 27,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Altapharma Japanisches Heilpflanzenöl",
+      "expected": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "predicted": {
+        "category_id": 176,
+        "code": "06.1.1.2",
+        "title": "Herbal medicines and homeopathic products (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.427916443994036,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Eintritt Aquarena",
+      "expected": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "predicted": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.568454797990853,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Eintritt Aquarena",
+      "expected": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "predicted": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.839537655992899,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Eintritt Aquarena",
+      "expected": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "predicted": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4045514969911892,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Eintritt Aquarena",
+      "expected": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "predicted": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 4.81019938501413,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Eintritt Aquarena",
+      "expected": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "predicted": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.124912386003416,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Eintritt Aquarena",
+      "expected": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "predicted": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.6879644120053854,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 28,
+      "overall_sample_index": 28,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Eintritt Aquarena",
+      "expected": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "predicted": {
+        "category_id": 309,
+        "code": "09.4.6.1",
+        "title": "Recreational and leisure services (S)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.5350261369894724,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Spätzle",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.237779955001315,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Spätzle",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.7783151809999254,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Spätzle",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4184041039843578,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Spätzle",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 5.285648135992233,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Spätzle",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2851416639750823,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Spätzle",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.89110269601224,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 29,
+      "overall_sample_index": 29,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Spätzle",
+      "expected": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "predicted": {
+        "category_id": 416,
+        "code": "01.1.1.5.0",
+        "title": "Macaroni, noodles, couscous and similar pasta products"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4304126990027726,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "openai_luna",
+      "strategy": "direct",
+      "classifier": "openai_luna.direct",
+      "title": "Medizinische Sonnencreme LSF 50+ sensitiv",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.2843189669947606,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "openai_luna",
+      "strategy": "recursive",
+      "classifier": "openai_luna.recursive",
+      "title": "Medizinische Sonnencreme LSF 50+ sensitiv",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 179,
+        "code": "06.1.2.2",
+        "title": "Preventive and protective devices (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 4.861351414001547,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "openai_sol",
+      "strategy": "direct",
+      "classifier": "openai_sol.direct",
+      "title": "Medizinische Sonnencreme LSF 50+ sensitiv",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 1.4957808490144089,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "openai_sol",
+      "strategy": "recursive",
+      "classifier": "openai_sol.recursive",
+      "title": "Medizinische Sonnencreme LSF 50+ sensitiv",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "correct": true,
+      "status": "correct",
+      "elapsed_seconds": 3.4229045860120095,
+      "api_requests": 3,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "deepseek_flash",
+      "strategy": "direct",
+      "classifier": "deepseek_flash.direct",
+      "title": "Medizinische Sonnencreme LSF 50+ sensitiv",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 179,
+        "code": "06.1.2.2",
+        "title": "Preventive and protective devices (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.0214693790185265,
+      "api_requests": 1,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "deepseek_flash",
+      "strategy": "recursive",
+      "classifier": "deepseek_flash.recursive",
+      "title": "Medizinische Sonnencreme LSF 50+ sensitiv",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 179,
+        "code": "06.1.2.2",
+        "title": "Preventive and protective devices (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 3.480046112992568,
+      "api_requests": 4,
+      "error": null
+    },
+    {
+      "iteration": 1,
+      "sample_index": 30,
+      "overall_sample_index": 30,
+      "model": "typesafe_jev",
+      "strategy": "recursive",
+      "classifier": "typesafe_jev.recursive",
+      "title": "Medizinische Sonnencreme LSF 50+ sensitiv",
+      "expected": {
+        "category_id": 374,
+        "code": "13.1.2.0",
+        "title": "Other appliances, articles and products for personal care (ND)"
+      },
+      "predicted": {
+        "category_id": 179,
+        "code": "06.1.2.2",
+        "title": "Preventive and protective devices (ND)"
+      },
+      "correct": false,
+      "status": "wrong_prediction",
+      "elapsed_seconds": 1.5365487139788456,
+      "api_requests": 4,
+      "error": null
+    }
+  ]
 }
