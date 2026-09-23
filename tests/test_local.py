@@ -19,6 +19,10 @@ from benchmark import (
     known_cost_summary,
     load_categories,
     load_tests,
+    OPENAI_MODELS,
+    OPENAI_PRICES,
+    OPENAI_REASONING_EFFORT,
+    openai_cost,
 )
 
 
@@ -393,3 +397,18 @@ def test_build_output_defaults_prediction_log_to_empty_list(tmp_path: Path) -> N
     }
     output = build_output(stats, args, test_count=1)
     assert output["prediction_log"] == []
+
+
+def test_selected_sol_strategy_has_own_model_effort_and_price(tmp_path: Path) -> None:
+    args = argparse.Namespace(
+        number_samples=1,
+        input_file=tmp_path / "input.csv",
+        category_file=tmp_path / "category_input.json",
+    )
+    output = build_output({"openai_sol.recursive": Stats()}, args, test_count=1)
+    assert list(output["models"]) == ["openai_sol"]
+    sol = output["models"]["openai_sol"]["recursive"]
+    assert sol["model"] == OPENAI_MODELS["openai_sol"] == "gpt-6-sol"
+    assert sol["reasoning_effort"] == OPENAI_REASONING_EFFORT == "none"
+    assert sol["cost"]["prices_usd_per_1m_tokens"] == OPENAI_PRICES["openai_sol"]
+    assert openai_cost(Usage(input_tokens=1_000_000), OPENAI_PRICES["openai_sol"]) == 2.0

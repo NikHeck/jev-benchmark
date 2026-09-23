@@ -14,12 +14,26 @@ from pathlib import Path
 from typing import Any, Protocol
 
 
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5.6-luna")
+OPENAI_MODELS = {
+    "openai_luna": os.getenv("OPENAI_LUNA_MODEL", "gpt-6-luna"),
+    "openai_sol": os.getenv("OPENAI_SOL_MODEL", "gpt-6-sol"),
+}
+OPENAI_REASONING_EFFORT = "none"
 DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL", "deepseek-flash")
 TYPESAFE_MODEL = os.getenv("TYPESAFE_MODEL", "jev-latest")
 
 # USD per 1M tokens. Verify before long benchmark runs; provider prices can change.
-OPENAI_PRICES = {"input": 0.20, "cached_input": 0.02, "cache_write": 0.25, "output": 1.20}
+OPENAI_PRICES = {
+    "openai_luna": {"input": 0.10, "cached_input": 0.01, "cache_write": 0.125, "output": 0.50},
+    "openai_sol": {"input": 2.00, "cached_input": 0.20, "cache_write": 2.50, "output": 10.00},
+}
+STRATEGIES = {
+    "openai_luna": ("direct", "recursive"),
+    "openai_sol": ("direct", "recursive"),
+    "deepseek_flash": ("direct", "recursive"),
+    "typesafe_jev": ("recursive",),
+}
+CLASSIFIER_CHOICES = tuple(f"{provider}.{strategy}" for provider, strategies in STRATEGIES.items() for strategy in strategies)
 DEEPSEEK_PEAK_PRICES = {"cache_hit_input": 0.006, "cache_miss_input": 0.30, "output": 1.20}
 DEEPSEEK_OFFPEAK_PRICES = {"cache_hit_input": 0.003, "cache_miss_input": 0.15, "output": 0.60}
 TYPESAFE_INPUT_PRICE = 0.042
@@ -306,9 +320,8 @@ class TreeMixin:
 
 
 class OpenAIClassifier(TreeMixin):
-    provider = "openai_luna"
-
-    def __init__(self, categories: list[Category], strategy: str) -> None:
+    def __init__(self, categories: list[Category], strategy: str, provider: str = "openai_luna") -> None:
+        self.provider = provider
         self.strategy = strategy
         self.key = f"{self.provider}.{strategy}"
         self._init_tree(categories)
@@ -327,8 +340,8 @@ class OpenAIClassifier(TreeMixin):
         if recursive:
             instructions += " In this hierarchical step, selecting the current category means stop; otherwise choose its best child."
         response = self.client.responses.create(
-            model=OPENAI_MODEL,
-            reasoning={"effort": "none"},
+            model=OPENAI_MODELS[self.provider],
+            reasoning={"effort": OPENAI_REASONING_EFFORT},
             instructions=instructions,
             input=f"{prompt}\n\nTITLE TO CLASSIFY:\n{title}",
             text={
@@ -578,15 +591,16 @@ def usd(tokens: int, price_per_million: float) -> float:
     return tokens / 1_000_000 * price_per_million
 
 
-def openai_cost(usage: Usage) -> float:
+def openai_cost(usage: Usage, prices: dict[str, float] | None = None) -> float:
+    prices = prices or OPENAI_PRICES["openai_luna"]
     cached = usage.cached_input_tokens
     writes = usage.cache_write_tokens
     regular = max(usage.input_tokens - cached - writes, 0)
     return (
-        usd(regular, OPENAI_PRICES["input"])
-        + usd(cached, OPENAI_PRICES["cached_input"])
-        + usd(writes, OPENAI_PRICES["cache_write"])
-        + usd(usage.output_tokens, OPENAI_PRICES["output"])
+        usd(regular, prices["input"])
+        + usd(cached, prices["cached_input"])
+        + usd(writes, prices["cache_write"])
+        + usd(usage.output_tokens, prices["output"])
     )
 
 
@@ -659,11 +673,13 @@ def stats_common(stats: Stats) -> dict[str, Any]:
 def strategy_output(provider: str, strategy: str, stats: Stats) -> dict[str, Any]:
     result = stats_common(stats)
     result["strategy"] = strategy
-    if provider == "openai_luna":
-        result["model"] = OPENAI_MODEL
+    if provider in OPENAI_MODELS:
+        prices = OPENAI_PRICES[provider]
+        result["model"] = OPENAI_MODELS[provider]
+        result["reasoning_effort"] = OPENAI_REASONING_EFFORT
         result["cost"] = {
-            **known_cost_summary(openai_cost(stats.usage), openai_cost(stats.complete_cost_usage), stats),
-            "prices_usd_per_1m_tokens": OPENAI_PRICES,
+            **known_cost_summary(openai_cost(stats.usage, prices), openai_cost(stats.complete_cost_usage, prices), stats),
+            "prices_usd_per_1m_tokens": prices,
         }
     elif provider == "deepseek_flash":
         result["model"] = DEEPSEEK_MODEL
@@ -721,17 +737,12 @@ def build_output(
             ),
         },
         "models": {
-            "openai_luna": {
-                "direct": strategy_output("openai_luna", "direct", stats["openai_luna.direct"]),
-                "recursive": strategy_output("openai_luna", "recursive", stats["openai_luna.recursive"]),
-            },
-            "deepseek_flash": {
-                "direct": strategy_output("deepseek_flash", "direct", stats["deepseek_flash.direct"]),
-                "recursive": strategy_output("deepseek_flash", "recursive", stats["deepseek_flash.recursive"]),
-            },
-            "typesafe_jev": {
-                "recursive": strategy_output("typesafe_jev", "recursive", stats["typesafe_jev.recursive"]),
-            },
+            provider: {
+                strategy: strategy_output(provider, strategy, stats[f"{provider}.{strategy}"])
+                for strategy in strategies if f"{provider}.{strategy}" in stats
+            }
+            for provider, strategies in STRATEGIES.items()
+            if any(f"{provider}.{strategy}" in stats for strategy in strategies)
         },
         # Intentionally separate from aggregate statistics so consumers can drop this
         # key entirely when they only need summary metrics.
@@ -752,6 +763,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--category-file", type=Path, default=Path("category_input.json"), help="Generated COICOP category tree"
     )
+    parser.add_argument(
+        "--classifiers", nargs="+", choices=CLASSIFIER_CHOICES, default=CLASSIFIER_CHOICES,
+        metavar="MODEL.STRATEGY",
+        help="Run selected pairs (default: all). Choices: " + ", ".join(CLASSIFIER_CHOICES),
+    )
     return parser.parse_args()
 
 
@@ -763,13 +779,15 @@ def main() -> None:
     categories = load_categories(args.category_file)
     by_id = {c.id: c for c in categories}
     tests = load_tests(args.input_file, set(by_id))
-    classifiers: list[Classifier] = [
-        OpenAIClassifier(categories, "direct"),
-        OpenAIClassifier(categories, "recursive"),
-        DeepSeekClassifier(categories, "direct"),
-        DeepSeekClassifier(categories, "recursive"),
-        JevClassifier(categories),
-    ]
+    classifiers: list[Classifier] = []
+    for key in dict.fromkeys(args.classifiers):
+        provider, strategy = key.split(".")
+        if provider in OPENAI_MODELS:
+            classifiers.append(OpenAIClassifier(categories, strategy, provider))
+        elif provider == "deepseek_flash":
+            classifiers.append(DeepSeekClassifier(categories, strategy))
+        else:
+            classifiers.append(JevClassifier(categories))
     stats = {classifier.key: Stats() for classifier in classifiers}
     prediction_log: list[dict[str, Any]] = []
 

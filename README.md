@@ -2,7 +2,8 @@
 
 Benchmark category classification against the official **COICOP 2018** taxonomy using:
 
-- OpenAI **GPT-5.6 Luna** (`gpt-5.6-luna`) — direct + recursive
+- OpenAI **GPT-6 Luna** (`gpt-6-luna`) — direct + recursive
+- OpenAI **GPT-6 Sol** (`gpt-6-sol`) — direct + recursive
 - DeepSeek **V4.1 Flash** (`deepseek-flash`) — direct + recursive
 - TypeSafe AI **Jev** (`jev-latest`) — recursive
 
@@ -13,6 +14,7 @@ The project uses [`uv`](https://docs.astral.sh/uv/) for Python/dependency manage
 | Backend | Direct, all categories | Recursive tree walk |
 |---|---:|---:|
 | OpenAI Luna | yes | yes |
+| OpenAI Sol | yes | yes |
 | DeepSeek Flash | yes | yes |
 | TypeSafe Jev | no | yes |
 
@@ -27,7 +29,7 @@ export DEEPSEEK_API_KEY="..."
 export TYPESAFE_API_KEY="..."
 ```
 
-Model IDs can be overridden with `OPENAI_MODEL`, `DEEPSEEK_MODEL`, and `TYPESAFE_MODEL`.
+Model IDs can be overridden with `OPENAI_LUNA_MODEL`, `OPENAI_SOL_MODEL`, `DEEPSEEK_MODEL`, and `TYPESAFE_MODEL`. OpenAI Luna, OpenAI Sol, and DeepSeek Flash all use `none` reasoning effort for each strategy.
 
 ## 1. Build the COICOP category tree
 
@@ -114,6 +116,7 @@ Titles may be German, English, or any other language. Rows with a missing/invali
 
 ```bash
 uv run python benchmark.py --number-samples 5
+uv run python benchmark.py --number-samples 5 --classifiers openai_luna.direct openai_sol.recursive
 ```
 
 Defaults:
@@ -121,17 +124,20 @@ Defaults:
 - `--input-file input.csv`
 - `--output-file output.json`
 - `--category-file category_input.json`
+- `--classifiers MODEL.STRATEGY ...` selects model/strategy pairs; all seven run by default. Use `--help` to see valid pairs.
 
 `--number-samples N` means **N complete passes over the entire input CSV**. Every strategy classifies every row once per pass. For example, with 30 input rows and `--number-samples 5`, each strategy performs 150 classifications.
 
-With `R` rows in `input.csv`, every strategy performs `N × R` classification attempts. Across the five configured strategies, the run performs `5 × N × R` classification attempts in total. For example, with 30 rows and `N=5`:
+With `R` rows in `input.csv`, every selected strategy performs `N × R` classification attempts. Across the seven default strategies, the run performs `7 × N × R` classification attempts in total. For example, with 30 rows and `N=5`:
 
 - OpenAI direct: 150
 - OpenAI recursive: 150
+- OpenAI Sol direct: 150
+- OpenAI Sol recursive: 150
 - DeepSeek direct: 150
 - DeepSeek recursive: 150
 - Jev recursive: 150
-- Total across strategies: 750
+- Total across strategies: 1050
 
 A recursive classification attempt can contain several API requests; request counts and per-item request averages are reported separately.
 
@@ -159,6 +165,10 @@ Each strategy gets its own independent statistics object:
 {
   "models": {
     "openai_luna": {
+      "direct": { "...": "..." },
+      "recursive": { "...": "..." }
+    },
+    "openai_sol": {
       "direct": { "...": "..." },
       "recursive": { "...": "..." }
     },
