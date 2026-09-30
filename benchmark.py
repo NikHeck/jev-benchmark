@@ -100,8 +100,6 @@ class Stats:
     usage: Usage = field(default_factory=lambda: Usage(requests=0))
     complete_cost_usage: Usage = field(default_factory=lambda: Usage(requests=0))
     error_examples: list[str] = field(default_factory=list)
-    hierarchy_eligible: dict[int, int] = field(default_factory=dict)
-    hierarchy_correct: dict[int, int] = field(default_factory=dict)
 
     @property
     def failures(self) -> int:
@@ -123,7 +121,6 @@ class Stats:
         usage: Usage,
         expected: Category,
         predicted: Category,
-        by_id: dict[int, Category],
     ) -> None:
         if expected.id == predicted.id:
             self.successes += 1
@@ -131,19 +128,9 @@ class Stats:
             self.wrong_predictions += 1
         self._record_usage(elapsed, usage)
 
-        expected_path = ancestor_ids_by_level(expected, by_id)
-        predicted_path = ancestor_ids_by_level(predicted, by_id)
-        for level, expected_id in expected_path.items():
-            self.hierarchy_eligible[level] = self.hierarchy_eligible.get(level, 0) + 1
-            if predicted_path.get(level) == expected_id:
-                self.hierarchy_correct[level] = self.hierarchy_correct.get(level, 0) + 1
-
-    def record_error(self, elapsed: float, exc: Exception, expected: Category | None = None) -> None:
+    def record_error(self, elapsed: float, exc: Exception) -> None:
         self.api_errors += 1
         self.total_seconds += elapsed
-        if expected is not None:
-            for level in range(1, expected.level + 1):
-                self.hierarchy_eligible[level] = self.hierarchy_eligible.get(level, 0) + 1
 
         if isinstance(exc, ClassificationError):
             if exc.usage is not None:
@@ -174,15 +161,6 @@ def require_env(name: str) -> str:
     if not value:
         raise RuntimeError(f"Required environment variable {name} is not set.")
     return value
-
-
-def ancestor_ids_by_level(category: Category, by_id: dict[int, Category]) -> dict[int, int]:
-    result: dict[int, int] = {}
-    current: Category | None = category
-    while current is not None:
-        result[current.level] = current.id
-        current = by_id.get(current.parent_id) if current.parent_id is not None else None
-    return result
 
 
 def build_flat_prompt(categories: list[Category]) -> str:
@@ -626,15 +604,6 @@ def known_cost_summary(measured_total: float, complete_attempts_total: float, st
 
 def stats_common(stats: Stats) -> dict[str, Any]:
     samples = stats.samples
-    hierarchy: dict[str, Any] = {}
-    for level in sorted(stats.hierarchy_eligible):
-        eligible = stats.hierarchy_eligible[level]
-        correct = stats.hierarchy_correct.get(level, 0)
-        hierarchy[f"level_{level}"] = {
-            "eligible_samples": eligible,
-            "correct": correct,
-            "accuracy": correct / eligible if eligible else 0.0,
-        }
     return {
         "samples": samples,
         "successes": stats.successes,
@@ -642,7 +611,6 @@ def stats_common(stats: Stats) -> dict[str, Any]:
         "api_errors": stats.api_errors,
         "failures": stats.failures,
         "success_rate": stats.successes / samples if samples else 0.0,
-        "hierarchy_accuracy": hierarchy,
         "timing": {
             "total_seconds": stats.total_seconds,
             "seconds_per_item": stats.total_seconds / samples if samples else 0.0,
@@ -811,7 +779,7 @@ def main() -> None:
                     result = classifier.classify(test.title)
                     elapsed = time.perf_counter() - started
                     predicted = by_id[result.category_id]
-                    stats[classifier.key].record_prediction(elapsed, result.usage, expected, predicted, by_id)
+                    stats[classifier.key].record_prediction(elapsed, result.usage, expected, predicted)
                     prediction_log.append(
                         {
                             "iteration": iteration,
@@ -842,7 +810,7 @@ def main() -> None:
                     print(f"  {classifier.key}: {status} ({elapsed:.3f}s, requests={result.usage.requests})")
                 except Exception as exc:
                     elapsed = time.perf_counter() - started
-                    stats[classifier.key].record_error(elapsed, exc, expected)
+                    stats[classifier.key].record_error(elapsed, exc)
                     error_usage = exc.usage if isinstance(exc, ClassificationError) else None
                     prediction_log.append(
                         {

@@ -186,18 +186,15 @@ Each strategy gets its own independent statistics object:
 Each strategy reports:
 
 - exact successes, wrong predictions, API errors and success rate;
-- accuracy at each COICOP hierarchy level;
 - total and per-item latency;
 - token usage;
 - API requests and API requests per item;
 - measured cost and cost coverage;
 - up to five API/error examples.
 
-### Hierarchy accuracy
+### Exact category accuracy
 
-Exact category accuracy treats every wrong final category equally. The hierarchy metrics also show whether the prediction remained on the correct branch. For example, predicting `Food -> Meat -> Pork` when the answer is `Food -> Meat -> Beef` can still be correct at levels 1 and 2.
-
-For each level, `eligible_samples` includes only tests whose expected category reaches that level. API errors count as incorrect for every eligible level.
+`success_rate` is the number of exact category ID matches divided by all classification attempts. A different category, including a parent or child of the expected category, counts as a wrong prediction. API errors count as unsuccessful attempts. No partial credit is awarded for matching an ancestor or branch.
 
 ### Prediction log
 

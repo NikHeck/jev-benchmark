@@ -13,7 +13,6 @@ from benchmark import (
     MULTILINGUAL_NOTE,
     Stats,
     Usage,
-    ancestor_ids_by_level,
     build_output,
     deepseek_cost,
     known_cost_summary,
@@ -23,6 +22,7 @@ from benchmark import (
     OPENAI_PRICES,
     OPENAI_REASONING_EFFORT,
     openai_cost,
+    stats_common,
 )
 
 
@@ -199,23 +199,20 @@ def test_load_categories_derives_tree_for_old_flat_json(tmp_path: Path) -> None:
     assert categories[1].is_leaf is True
 
 
-def test_ancestor_ids_by_level() -> None:
-    categories = sample_categories()
-    by_id = {c.id: c for c in categories}
-    assert ancestor_ids_by_level(categories[2], by_id) == {3: 2, 2: 1, 1: 0}
-
-
-def test_hierarchy_accuracy_counts_close_prediction() -> None:
+def test_exact_accuracy_gives_no_credit_for_parent_prediction() -> None:
     categories = sample_categories()
     by_id = {c.id: c for c in categories}
     stats = Stats()
     expected = by_id[2]  # Food -> Food products -> Bread
     predicted = by_id[1]  # Food -> Food products
-    stats.record_prediction(0.1, Usage(input_tokens=10), expected, predicted, by_id)
+    stats.record_prediction(0.1, Usage(input_tokens=10), expected, predicted)
+    stats.record_prediction(0.1, Usage(input_tokens=10), expected, expected)
+    stats.record_error(0.1, RuntimeError("timeout"))
 
     assert stats.wrong_predictions == 1
-    assert stats.hierarchy_eligible == {1: 1, 2: 1, 3: 1}
-    assert stats.hierarchy_correct == {1: 1, 2: 1}
+    output = stats_common(stats)
+    assert output["success_rate"] == 1 / 3
+    assert "hierarchy_accuracy" not in output
 
 
 def test_deepseek_offpeak_is_half_peak() -> None:
@@ -230,16 +227,15 @@ def test_failure_cost_accounting_distinguishes_known_and_unknown() -> None:
     by_id = {c.id: c for c in categories}
     stats = Stats()
 
-    stats.record_prediction(0.1, Usage(input_tokens=100, output_tokens=10), by_id[2], by_id[2], by_id)
-    stats.record_prediction(0.2, Usage(input_tokens=110, output_tokens=11), by_id[2], by_id[3], by_id)
+    stats.record_prediction(0.1, Usage(input_tokens=100, output_tokens=10), by_id[2], by_id[2])
+    stats.record_prediction(0.2, Usage(input_tokens=110, output_tokens=11), by_id[2], by_id[3])
     stats.record_error(
         0.3,
         ClassificationError(
             "bad JSON", usage=Usage(input_tokens=120, output_tokens=12), cost_complete=True
         ),
-        by_id[2],
     )
-    stats.record_error(0.4, RuntimeError("timeout"), by_id[2])
+    stats.record_error(0.4, RuntimeError("timeout"))
 
     assert stats.samples == 4
     assert stats.successes == 1
@@ -270,7 +266,7 @@ def test_partial_usage_from_unknown_cost_error_not_in_complete_average() -> None
     categories = sample_categories()
     stats = Stats()
     stats.record_prediction(
-        0.1, Usage(input_tokens=100, output_tokens=10), categories[2], categories[2], {c.id: c for c in categories}
+        0.1, Usage(input_tokens=100, output_tokens=10), categories[2], categories[2]
     )
     stats.record_error(
         0.2,
@@ -279,7 +275,6 @@ def test_partial_usage_from_unknown_cost_error_not_in_complete_average() -> None
             usage=Usage(input_tokens=40, output_tokens=4),
             cost_complete=False,
         ),
-        categories[2],
     )
     assert stats.known_cost_attempts == 1
     assert stats.unknown_cost_attempts == 1
