@@ -209,25 +209,15 @@ def add_tree_metadata(categories: list[dict[str, object]]) -> list[dict[str, obj
 
 def extract_categories(excel_path: Path, *, household_only: bool = True) -> list[dict[str, object]]:
     workbook = load_workbook(excel_path, read_only=True, data_only=True)
-    best: list[tuple[object, ...]] | None = None
+    sheet = workbook.worksheets[0]
+    rows = [tuple(row) for row in sheet.iter_rows(values_only=True)]
 
-    best_score = -1
-    for sheet in workbook.worksheets:
-        rows = [tuple(row) for row in sheet.iter_rows(values_only=True)]
-        score = sum(1 for row in rows for cell in row if looks_like_code(cell))
-        if score > best_score:
-            best_score = score
-            best = rows
-
-    if not best:
-        raise ValueError("No usable worksheet found in the COICOP workbook.")
-
-    detected = find_header_and_columns(best)
-    header_row, code_col, title_col = detected or infer_columns(best)
+    detected = find_header_and_columns(rows)
+    header_row, code_col, title_col = detected or infer_columns(rows)
 
     categories: list[dict[str, object]] = []
     seen_codes: set[str] = set()
-    for row in best[header_row + 1 :]:
+    for row in rows[header_row + 1 :]:
         if code_col >= len(row) or title_col >= len(row):
             continue
         code = clean_text(row[code_col])
