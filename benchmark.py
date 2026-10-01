@@ -184,38 +184,22 @@ def load_categories(path: Path) -> list[Category]:
     if not isinstance(raw, list) or not raw:
         raise ValueError("category_input.json must be a non-empty JSON list.")
 
-    # Tree metadata is preferred, but derive it for compatibility with older generated files.
-    basic = [
-        {"id": int(item["id"]), "code": str(item["code"]), "title": str(item["title"]), **item}
+    categories = [
+        Category(
+            id=item["id"],
+            code=item["code"],
+            title=item["title"],
+            parent_id=item["parent_id"],
+            level=item["level"],
+            children_ids=tuple(item["children_ids"]),
+            is_leaf=item["is_leaf"],
+        )
         for item in raw
     ]
-    ids = [int(item["id"]) for item in basic]
-    if ids != list(range(len(basic))):
+    if [c.id for c in categories] != list(range(len(categories))):
         raise ValueError("Category ids must start at 0 and increase by 1 without gaps.")
-    if len({str(item["code"]) for item in basic}) != len(basic):
+    if len({c.code for c in categories}) != len(categories):
         raise ValueError("COICOP codes must be unique.")
-
-    code_to_id = {str(item["code"]): int(item["id"]) for item in basic}
-    derived_children: dict[int, list[int]] = {int(item["id"]): [] for item in basic}
-    derived_parent: dict[int, int | None] = {}
-    for item in basic:
-        cid, code = int(item["id"]), str(item["code"])
-        pcode = code.rsplit(".", 1)[0] if "." in code else None
-        pid = code_to_id.get(pcode) if pcode is not None else None
-        derived_parent[cid] = pid
-        if pid is not None:
-            derived_children[pid].append(cid)
-
-    categories: list[Category] = []
-    for item in basic:
-        cid, code = int(item["id"]), str(item["code"])
-        parent_id = item.get("parent_id", derived_parent[cid])
-        parent_id = int(parent_id) if parent_id is not None else None
-        children_raw = item.get("children_ids", derived_children[cid])
-        children_ids = tuple(int(v) for v in children_raw)
-        level = int(item.get("level", code.count(".") + 1))
-        is_leaf = bool(item.get("is_leaf", not children_ids))
-        categories.append(Category(cid, code, str(item["title"]), parent_id, level, children_ids, is_leaf))
 
     by_id = {c.id: c for c in categories}
     for c in categories:

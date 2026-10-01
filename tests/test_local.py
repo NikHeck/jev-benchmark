@@ -197,13 +197,19 @@ def test_extract_categories_defaults_to_household_divisions_01_to_13(tmp_path: P
     assert [item["code"] for item in all_divisions] == ["01", "13", "14", "15"]
 
 
-def test_load_categories_derives_tree_for_old_flat_json(tmp_path: Path) -> None:
+def test_load_categories_reads_explicit_tree_metadata(tmp_path: Path) -> None:
     path = tmp_path / "categories.json"
     path.write_text(
         json.dumps(
             [
-                {"id": 0, "code": "01", "title": "Food"},
-                {"id": 1, "code": "01.1", "title": "Food products"},
+                {
+                    "id": 0, "code": "01", "title": "Food",
+                    "parent_id": None, "level": 1, "children_ids": [1], "is_leaf": False,
+                },
+                {
+                    "id": 1, "code": "01.1.0", "title": "Food products",
+                    "parent_id": 0, "level": 3, "children_ids": [], "is_leaf": True,
+                },
             ]
         ),
         encoding="utf-8",
@@ -211,7 +217,7 @@ def test_load_categories_derives_tree_for_old_flat_json(tmp_path: Path) -> None:
     categories = load_categories(path)
     assert categories[0].children_ids == (1,)
     assert categories[1].parent_id == 0
-    assert categories[1].level == 2
+    assert categories[1].level == 3
     assert categories[1].is_leaf is True
 
 

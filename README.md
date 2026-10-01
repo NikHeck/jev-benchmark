@@ -81,7 +81,7 @@ Collapse is transitive. In an equivalent chain `A -> B -> C`, only the deepest c
 
 The retained `level` is the original code depth, so the collapsed tree can intentionally skip redundant levels. The UN workbook also contains optional high-detail categories below the standard four COICOP levels; these are retained for receipt-line classification and marked with `is_optional_detail: true`. Because collapsing/filtering reassigns dense numeric IDs, regenerate or update `input.csv` after rebuilding `category_input.json`.
 
-The canonical tree is therefore produced once by the preparation script instead of reconstructed differently by each classifier. `benchmark.py` can still read an older flat category JSON and derive the tree for compatibility.
+The canonical tree is produced once by the preparation script. `benchmark.py` requires the generated tree metadata and reads it directly.
 
 Useful options:
 
