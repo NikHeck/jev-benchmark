@@ -27,14 +27,6 @@ def clean_text(value: object) -> str:
     return " ".join(str(value).replace("\n", " ").split()).strip()
 
 
-def normalize_header(value: object) -> str:
-    return re.sub(r"[^a-z0-9]+", " ", clean_text(value).lower()).strip()
-
-
-def looks_like_code(value: object) -> bool:
-    return bool(CODE_RE.fullmatch(clean_text(value)))
-
-
 def parent_code(code: str) -> str | None:
     if "." not in code:
         return None
@@ -50,7 +42,7 @@ def title_key(title: str) -> str:
     category meaning, so ignore a trailing marker when comparing titles.
     """
     without_marker = DURABILITY_SUFFIX_RE.sub("", clean_text(title))
-    return normalize_header(without_marker)
+    return re.sub(r"[^a-z0-9]+", " ", without_marker.lower()).strip()
 
 
 def is_household_category(code: str) -> bool:
@@ -123,62 +115,6 @@ def collapse_semantic_passthroughs(
     return collapsed
 
 
-def find_header_and_columns(rows: list[tuple[object, ...]]) -> tuple[int, int, int] | None:
-    """Return (header_row_index, code_col_index, title_col_index), zero-based."""
-    for row_idx, row in enumerate(rows[:40]):
-        headers = [normalize_header(cell) for cell in row]
-        code_candidates = [i for i, h in enumerate(headers) if h == "code" or "code" in h]
-        title_candidates = [
-            i
-            for i, h in enumerate(headers)
-            if h == "title"
-            or "title" in h
-            or h == "description"
-            or "description" in h
-            or h == "name"
-        ]
-        if code_candidates and title_candidates:
-            return row_idx, code_candidates[0], title_candidates[0]
-    return None
-
-
-def infer_columns(rows: list[tuple[object, ...]]) -> tuple[int, int, int]:
-    """Fallback for workbook revisions whose header names change."""
-    max_cols = max((len(row) for row in rows), default=0)
-    if max_cols == 0:
-        raise ValueError("The workbook contains no cells.")
-
-    code_scores: list[int] = []
-    for col in range(max_cols):
-        score = sum(1 for row in rows[:1000] if col < len(row) and looks_like_code(row[col]))
-        code_scores.append(score)
-
-    code_col = max(range(max_cols), key=code_scores.__getitem__)
-    if code_scores[code_col] < 3:
-        raise ValueError("Could not identify the COICOP code column in the workbook.")
-
-    candidate_cols = [c for c in range(max_cols) if c != code_col]
-    title_scores: dict[int, float] = {}
-    for col in candidate_cols:
-        text_count = 0
-        total_chars = 0
-        for row in rows[:1000]:
-            if col >= len(row):
-                continue
-            text = clean_text(row[col])
-            if text and not looks_like_code(text):
-                text_count += 1
-                total_chars += min(len(text), 120)
-        distance_penalty = abs(col - code_col) * 0.5
-        title_scores[col] = text_count * 10 + total_chars / 100 - distance_penalty
-
-    if not title_scores:
-        raise ValueError("Could not identify the COICOP title column in the workbook.")
-
-    title_col = max(title_scores, key=title_scores.__getitem__)
-    return -1, code_col, title_col
-
-
 def add_tree_metadata(categories: list[dict[str, object]]) -> list[dict[str, object]]:
     """Add explicit tree fields while preserving sequential numeric category ids."""
     code_to_id = {str(item["code"]): int(item["id"]) for item in categories}
@@ -207,27 +143,38 @@ def add_tree_metadata(categories: list[dict[str, object]]) -> list[dict[str, obj
     return categories
 
 
-def extract_categories(excel_path: Path, *, household_only: bool = True) -> list[dict[str, object]]:
+def extract_categories(
+    excel_path: Path,
+    *,
+    household_only: bool = True,
+    sheet_number: int = 1,
+    code_column: int = 1,
+    title_column: int = 2,
+) -> list[dict[str, object]]:
+    """Read a header in row 1 and category rows from row 2; all indexes are 1-based.
+
+    Defaults match the local XLSX: first worksheet, codes in A, titles in B.
+    Other columns are ignored. Worksheet and column positions are not inferred.
+    """
+    if min(sheet_number, code_column, title_column) < 1:
+        raise ValueError("Sheet number and column indexes must be at least 1.")
     workbook = load_workbook(excel_path, read_only=True, data_only=True)
-    sheet = workbook.worksheets[0]
-    rows = [tuple(row) for row in sheet.iter_rows(values_only=True)]
-
-    detected = find_header_and_columns(rows)
-    header_row, code_col, title_col = detected or infer_columns(rows)
-
+    if sheet_number > len(workbook.worksheets):
+        workbook.close()
+        raise ValueError(f"Worksheet {sheet_number} does not exist in {excel_path}.")
+    sheet = workbook.worksheets[sheet_number - 1]
     categories: list[dict[str, object]] = []
     seen_codes: set[str] = set()
-    for row in rows[header_row + 1 :]:
-        if code_col >= len(row) or title_col >= len(row):
-            continue
-        code = clean_text(row[code_col])
-        title = clean_text(row[title_col])
+    for row in sheet.iter_rows(min_row=2, max_col=max(code_column, title_column), values_only=True):
+        code = clean_text(row[code_column - 1])
+        title = clean_text(row[title_column - 1])
         if not CODE_RE.fullmatch(code) or not title or code in seen_codes:
             continue
         seen_codes.add(code)
         if household_only and not is_household_category(code):
             continue
         categories.append({"id": len(categories), "code": code, "title": title})
+    workbook.close()
 
     if not categories:
         raise ValueError("No COICOP categories were extracted from the workbook.")
@@ -253,9 +200,17 @@ def write_json(categories: Iterable[dict[str, object]], destination: Path) -> No
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Download COICOP 2018 and create tree-aware category_input.json."
+        description="Download COICOP 2018 and create tree-aware category_input.json.",
+        epilog=(
+            "Expected XLSX layout: row 1 is a header, category rows start at row 2. "
+            "By default, read the first worksheet with codes in column A and titles in column B. "
+            "All sheet and column indexes are 1-based. Other columns are ignored."
+        ),
     )
     parser.add_argument("--url", default=COICOP_XLSX_URL, help="COICOP Excel URL")
+    parser.add_argument("--sheet-number", type=int, default=1, help="Worksheet number, 1-based (default: 1)")
+    parser.add_argument("--code-column", type=int, default=1, help="Code column index, 1-based (default: 1 = A)")
+    parser.add_argument("--title-column", type=int, default=2, help="Title column index, 1-based (default: 2 = B)")
     parser.add_argument(
         "--excel-output",
         type=Path,
@@ -282,7 +237,10 @@ def parse_args() -> argparse.Namespace:
             "consumer expense classification."
         ),
     )
-    return parser.parse_args()
+    args = parser.parse_args()
+    if min(args.sheet_number, args.code_column, args.title_column) < 1:
+        parser.error("--sheet-number, --code-column and --title-column must be at least 1.")
+    return args
 
 
 def main() -> None:
@@ -291,7 +249,11 @@ def main() -> None:
         print(f"Downloading {args.url}")
         download_excel(args.url, args.excel_output)
     categories = extract_categories(
-        args.excel_output, household_only=not args.include_all_divisions
+        args.excel_output,
+        household_only=not args.include_all_divisions,
+        sheet_number=args.sheet_number,
+        code_column=args.code_column,
+        title_column=args.title_column,
     )
     write_json(categories, args.json_output)
     scope = "all COICOP divisions" if args.include_all_divisions else "household divisions 01-13"
