@@ -11,7 +11,7 @@ import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Protocol
+from typing import Any, Callable, Protocol
 
 
 OPENAI_MODELS = {
@@ -296,8 +296,73 @@ class TreeMixin:
         children.sort(key=lambda c: coicop_sort_key(c.code))
         return [current, *children]
 
+    def _classify_recursive(
+        self,
+        title: str,
+        choose: Callable[[str, list[Category], Category | None], tuple[int, Usage]],
+        failure_context: str,
+        *,
+        local_validation: bool = False,
+    ) -> ClassificationResult:
+        """Walk the tree and retain billed usage if a later decision fails."""
+        total = Usage(requests=0)
+        try:
+            selected_id, usage = choose(title, self.roots, None)
+            total.add(usage)
+            selected = self.by_id[selected_id]
+            while selected.children_ids:
+                next_id, usage = choose(title, self._next_options(selected), selected)
+                total.add(usage)
+                if next_id == selected.id:
+                    break
+                selected = self.by_id[next_id]
+            return ClassificationResult(selected.id, total)
+        except ClassificationError as exc:
+            if exc.usage is not None:
+                total.add(exc.usage)
+            raise ClassificationError(str(exc), usage=total, cost_complete=exc.cost_complete) from exc
+        except Exception as exc:
+            if local_validation and isinstance(exc, ValueError):
+                raise ClassificationError(
+                    f"{failure_context} failed local validation: {exc}", usage=total, cost_complete=True
+                ) from exc
+            if total.requests > 0:
+                raise ClassificationError(
+                    f"{failure_context} failed after partial billed usage: {exc}",
+                    usage=total,
+                    cost_complete=False,
+                ) from exc
+            raise
 
-class OpenAIClassifier(TreeMixin):
+
+class JsonClassifier(TreeMixin):
+    """Common direct and recursive strategies for the JSON-based providers."""
+
+    strategy: str
+    failure_context: str
+    flat_prompt: str
+
+    def _request(self, title: str, candidates: list[Category], prompt: str, recursive: bool) -> tuple[int, Usage]:
+        raise NotImplementedError
+
+    def _choose_recursive(
+        self, title: str, candidates: list[Category], current: Category | None
+    ) -> tuple[int, Usage]:
+        prompt = build_option_prompt(candidates)
+        if current is not None:
+            prompt = f"CURRENT COICOP CATEGORY: {current.id} | {current.code} | {current.title}\n" + prompt
+        return self._request(title, candidates, prompt, recursive=True)
+
+    def classify(self, title: str) -> ClassificationResult:
+        if self.strategy == "direct":
+            category_id, usage = self._request(title, self.categories, self.flat_prompt, recursive=False)
+            return ClassificationResult(category_id, usage)
+        return self._classify_recursive(title, self._choose_recursive, self.failure_context)
+
+
+class OpenAIClassifier(JsonClassifier):
+    failure_context = "OpenAI recursive classification"
+
     def __init__(self, categories: list[Category], strategy: str, provider: str = "openai_luna") -> None:
         self.provider = provider
         self.strategy = strategy
@@ -355,44 +420,10 @@ class OpenAIClassifier(TreeMixin):
             ) from exc
         return category_id, usage
 
-    def classify(self, title: str) -> ClassificationResult:
-        if self.strategy == "direct":
-            category_id, usage = self._request(title, self.categories, self.flat_prompt, recursive=False)
-            return ClassificationResult(category_id, usage)
 
-        total = Usage(requests=0)
-        try:
-            selected_id, usage = self._request(title, self.roots, build_option_prompt(self.roots), recursive=True)
-            total.add(usage)
-            selected = self.by_id[selected_id]
-            while selected.children_ids:
-                options = self._next_options(selected)
-                prompt = (
-                    f"CURRENT COICOP CATEGORY: {selected.id} | {selected.code} | {selected.title}\n"
-                    + build_option_prompt(options)
-                )
-                next_id, usage = self._request(title, options, prompt, recursive=True)
-                total.add(usage)
-                if next_id == selected.id:
-                    break
-                selected = self.by_id[next_id]
-            return ClassificationResult(selected.id, total)
-        except ClassificationError as exc:
-            if exc.usage is not None:
-                total.add(exc.usage)
-            raise ClassificationError(str(exc), usage=total, cost_complete=exc.cost_complete) from exc
-        except Exception as exc:
-            if total.requests > 0:
-                raise ClassificationError(
-                    f"OpenAI recursive classification failed after partial billed usage: {exc}",
-                    usage=total,
-                    cost_complete=False,
-                ) from exc
-            raise
-
-
-class DeepSeekClassifier(TreeMixin):
+class DeepSeekClassifier(JsonClassifier):
     provider = "deepseek_flash"
+    failure_context = "DeepSeek recursive classification"
 
     def __init__(self, categories: list[Category], strategy: str) -> None:
         self.strategy = strategy
@@ -449,41 +480,6 @@ class DeepSeekClassifier(TreeMixin):
             ) from exc
         return category_id, usage
 
-    def classify(self, title: str) -> ClassificationResult:
-        if self.strategy == "direct":
-            category_id, usage = self._request(title, self.categories, self.flat_prompt, recursive=False)
-            return ClassificationResult(category_id, usage)
-
-        total = Usage(requests=0)
-        try:
-            selected_id, usage = self._request(title, self.roots, build_option_prompt(self.roots), recursive=True)
-            total.add(usage)
-            selected = self.by_id[selected_id]
-            while selected.children_ids:
-                options = self._next_options(selected)
-                prompt = (
-                    f"CURRENT COICOP CATEGORY: {selected.id} | {selected.code} | {selected.title}\n"
-                    + build_option_prompt(options)
-                )
-                next_id, usage = self._request(title, options, prompt, recursive=True)
-                total.add(usage)
-                if next_id == selected.id:
-                    break
-                selected = self.by_id[next_id]
-            return ClassificationResult(selected.id, total)
-        except ClassificationError as exc:
-            if exc.usage is not None:
-                total.add(exc.usage)
-            raise ClassificationError(str(exc), usage=total, cost_complete=exc.cost_complete) from exc
-        except Exception as exc:
-            if total.requests > 0:
-                raise ClassificationError(
-                    f"DeepSeek recursive classification failed after partial billed usage: {exc}",
-                    usage=total,
-                    cost_complete=False,
-                ) from exc
-            raise
-
 
 class JevClassifier(TreeMixin):
     provider = "typesafe_jev"
@@ -534,35 +530,7 @@ class JevClassifier(TreeMixin):
         return category_id, usage
 
     def classify(self, title: str) -> ClassificationResult:
-        total = Usage(requests=0)
-        try:
-            selected_id, usage = self._choice(title, self.roots, None)
-            total.add(usage)
-            selected = self.by_id[selected_id]
-            while selected.children_ids:
-                options = self._next_options(selected)
-                next_id, usage = self._choice(title, options, selected)
-                total.add(usage)
-                if next_id == selected.id:
-                    break
-                selected = self.by_id[next_id]
-            return ClassificationResult(selected.id, total)
-        except ClassificationError as exc:
-            if exc.usage is not None:
-                total.add(exc.usage)
-            raise ClassificationError(str(exc), usage=total, cost_complete=exc.cost_complete) from exc
-        except ValueError as exc:
-            raise ClassificationError(
-                f"Jev classification failed local validation: {exc}", usage=total, cost_complete=True
-            ) from exc
-        except Exception as exc:
-            if total.requests > 0:
-                raise ClassificationError(
-                    f"Jev classification failed after partial billed usage: {exc}",
-                    usage=total,
-                    cost_complete=False,
-                ) from exc
-            raise
+        return self._classify_recursive(title, self._choice, "Jev classification", local_validation=True)
 
 
 def usd(tokens: int, price_per_million: float) -> float:
@@ -739,16 +707,10 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def main() -> None:
-    args = parse_args()
-    if args.number_samples <= 0:
-        raise ValueError("--number-samples must be greater than zero.")
-
-    categories = load_categories(args.category_file)
-    by_id = {c.id: c for c in categories}
-    tests = load_tests(args.input_file, set(by_id))
+def create_classifiers(categories: list[Category], keys: list[str] | tuple[str, ...]) -> list[Classifier]:
+    """Create selected classifiers once, preserving order and removing duplicates."""
     classifiers: list[Classifier] = []
-    for key in dict.fromkeys(args.classifiers):
+    for key in dict.fromkeys(keys):
         provider, strategy = key.split(".")
         if provider in OPENAI_MODELS:
             classifiers.append(OpenAIClassifier(categories, strategy, provider))
@@ -756,93 +718,107 @@ def main() -> None:
             classifiers.append(DeepSeekClassifier(categories, strategy))
         else:
             classifiers.append(JevClassifier(categories))
+    return classifiers
+
+
+def category_output(category: Category) -> dict[str, Any]:
+    return {"category_id": category.id, "code": category.code, "title": category.title}
+
+
+def classify_test(
+    classifier: Classifier, test: TestCase, by_id: dict[int, Category], stats: Stats
+) -> dict[str, Any]:
+    """Measure one attempt, update its statistics, and return its prediction log."""
+    expected = by_id[test.category_id]
+    predicted: Category | None
+    error: dict[str, str] | None = None
+    requests: int | None
+    started = time.perf_counter()
+    try:
+        result = classifier.classify(test.title)
+        elapsed = time.perf_counter() - started
+        predicted = by_id[result.category_id]
+        stats.record_prediction(elapsed, result.usage, expected, predicted)
+        correct = predicted.id == expected.id
+        requests = result.usage.requests
+        status = "correct" if correct else "wrong_prediction"
+        console_status = "OK" if correct else f"FAIL predicted={predicted.id}"
+        print(f"  {classifier.key}: {console_status} ({elapsed:.3f}s, requests={requests})")
+    except Exception as exc:
+        elapsed = time.perf_counter() - started
+        stats.record_error(elapsed, exc)
+        predicted = None
+        correct = False
+        status = "api_error"
+        error_usage = exc.usage if isinstance(exc, ClassificationError) else None
+        requests = error_usage.requests if error_usage is not None else None
+        error = {"type": type(exc).__name__, "message": str(exc)}
+        print(f"  {classifier.key}: ERROR {type(exc).__name__}: {exc}")
+
+    return {
+        "model": classifier.provider,
+        "strategy": classifier.strategy,
+        "classifier": classifier.key,
+        "title": test.title,
+        "expected": category_output(expected),
+        "predicted": category_output(predicted) if predicted is not None else None,
+        "correct": correct,
+        "status": status,
+        "elapsed_seconds": elapsed,
+        "api_requests": requests,
+        "error": error,
+    }
+
+
+def run_benchmark(
+    classifiers: list[Classifier], tests: list[TestCase], categories: list[Category], iterations: int
+) -> tuple[dict[str, Stats], list[dict[str, Any]]]:
+    """Run every classifier on every row for each full dataset iteration."""
+    by_id = {c.id: c for c in categories}
     stats = {classifier.key: Stats() for classifier in classifiers}
     prediction_log: list[dict[str, Any]] = []
-
-    attempts_per_strategy = args.number_samples * len(tests)
-    for iteration in range(1, args.number_samples + 1):
+    attempts_per_strategy = iterations * len(tests)
+    for iteration in range(1, iterations + 1):
         print(
-            f"Starting full dataset iteration {iteration}/{args.number_samples} "
+            f"Starting full dataset iteration {iteration}/{iterations} "
             f"({len(tests)} rows; {attempts_per_strategy} total classifications per strategy)."
         )
         for row_index, test in enumerate(tests, start=1):
-            expected = by_id[test.category_id]
             overall_sample = (iteration - 1) * len(tests) + row_index
             print(
-                f"iteration={iteration}/{args.number_samples} row={row_index}/{len(tests)} "
+                f"iteration={iteration}/{iterations} row={row_index}/{len(tests)} "
                 f"sample={overall_sample}/{attempts_per_strategy} "
                 f"expected_id={test.category_id} title={test.title!r}"
             )
             for classifier in classifiers:
-                started = time.perf_counter()
-                try:
-                    result = classifier.classify(test.title)
-                    elapsed = time.perf_counter() - started
-                    predicted = by_id[result.category_id]
-                    stats[classifier.key].record_prediction(elapsed, result.usage, expected, predicted)
-                    prediction_log.append(
-                        {
-                            "iteration": iteration,
-                            "sample_index": row_index,
-                            "overall_sample_index": overall_sample,
-                            "model": classifier.provider,
-                            "strategy": classifier.strategy,
-                            "classifier": classifier.key,
-                            "title": test.title,
-                            "expected": {
-                                "category_id": expected.id,
-                                "code": expected.code,
-                                "title": expected.title,
-                            },
-                            "predicted": {
-                                "category_id": predicted.id,
-                                "code": predicted.code,
-                                "title": predicted.title,
-                            },
-                            "correct": predicted.id == expected.id,
-                            "status": "correct" if predicted.id == expected.id else "wrong_prediction",
-                            "elapsed_seconds": elapsed,
-                            "api_requests": result.usage.requests,
-                            "error": None,
-                        }
-                    )
-                    status = "OK" if predicted.id == expected.id else f"FAIL predicted={predicted.id}"
-                    print(f"  {classifier.key}: {status} ({elapsed:.3f}s, requests={result.usage.requests})")
-                except Exception as exc:
-                    elapsed = time.perf_counter() - started
-                    stats[classifier.key].record_error(elapsed, exc)
-                    error_usage = exc.usage if isinstance(exc, ClassificationError) else None
-                    prediction_log.append(
-                        {
-                            "iteration": iteration,
-                            "sample_index": row_index,
-                            "overall_sample_index": overall_sample,
-                            "model": classifier.provider,
-                            "strategy": classifier.strategy,
-                            "classifier": classifier.key,
-                            "title": test.title,
-                            "expected": {
-                                "category_id": expected.id,
-                                "code": expected.code,
-                                "title": expected.title,
-                            },
-                            "predicted": None,
-                            "correct": False,
-                            "status": "api_error",
-                            "elapsed_seconds": elapsed,
-                            "api_requests": error_usage.requests if error_usage is not None else None,
-                            "error": {
-                                "type": type(exc).__name__,
-                                "message": str(exc),
-                            },
-                        }
-                    )
-                    print(f"  {classifier.key}: ERROR {type(exc).__name__}: {exc}")
+                prediction_log.append(
+                    {
+                        "iteration": iteration,
+                        "sample_index": row_index,
+                        "overall_sample_index": overall_sample,
+                        **classify_test(classifier, test, by_id, stats[classifier.key]),
+                    }
+                )
+    return stats, prediction_log
 
+
+def write_output(output: dict[str, Any], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"Wrote benchmark results to {path}")
+
+
+def main() -> None:
+    args = parse_args()
+    if args.number_samples <= 0:
+        raise ValueError("--number-samples must be greater than zero.")
+
+    categories = load_categories(args.category_file)
+    tests = load_tests(args.input_file, {c.id for c in categories})
+    classifiers = create_classifiers(categories, args.classifiers)
+    stats, prediction_log = run_benchmark(classifiers, tests, categories, args.number_samples)
     output = build_output(stats, args, len(tests), prediction_log)
-    args.output_file.parent.mkdir(parents=True, exist_ok=True)
-    args.output_file.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Wrote benchmark results to {args.output_file}")
+    write_output(output, args.output_file)
 
 
 if __name__ == "__main__":

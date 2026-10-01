@@ -91,6 +91,22 @@ def test_extract_categories_builds_tree(tmp_path: Path) -> None:
     ]
 
 
+def test_extract_categories_reads_selected_sheet_and_columns(tmp_path: Path) -> None:
+    path = tmp_path / "custom.xlsx"
+    workbook = Workbook()
+    workbook.active.append(["code", "title"])
+    workbook.active.append(["02", "Ignored category"])
+    sheet = workbook.create_sheet("Categories")
+    sheet.append(["title", "notes", "code"])
+    sheet.append(["Food", "ignored", "01"])
+    sheet.append(["Bread", "ignored", "01.1"])
+    workbook.save(path)
+
+    categories = extract_categories(path, sheet_number=2, code_column=3, title_column=1)
+    assert [(c["code"], c["title"]) for c in categories] == [("01", "Food"), ("01.1", "Bread")]
+    assert categories[1]["parent_id"] == 0
+
+
 def test_extract_categories_collapses_zero_only_duplicate_level(tmp_path: Path) -> None:
     path = tmp_path / "coicop_zero.xlsx"
     workbook = Workbook()

@@ -85,9 +85,12 @@ The canonical tree is therefore produced once by the preparation script instead 
 
 Useful options:
 
+The XLSX must have a header in row 1 and category rows starting at row 2. Sheet and column indexes are **1-based**. Defaults match the local workbook: sheet 1, codes in column 1 (A), titles in column 2 (B). Other columns are ignored.
+
 ```bash
 uv run python build_category_input.py --help
 uv run python build_category_input.py --reuse-excel
+uv run python build_category_input.py --reuse-excel --sheet-number 1 --code-column 1 --title-column 2
 # Include the complete institutional COICOP scope, including divisions 14-15:
 uv run python build_category_input.py --include-all-divisions
 ```
