@@ -146,6 +146,18 @@ A recursive classification attempt can contain several API requests; request cou
 
 ## Direct vs recursive classification
 
+OpenAI and DeepSeek use the Responses API with identical classification instructions,
+category/title input, JSON schema (including the allowed category IDs), `none`
+reasoning effort, and a 128-token output limit. Both responses are validated locally
+against the same rules. DeepSeek cache-hit and cache-miss costs are derived from
+`input_tokens_details.cached_tokens` and total input tokens.
+
+DeepSeek's Responses API and JSON-schema format support are documented in its
+[API reference](https://api-docs.deepseek.com/api/create-response/) and
+[compatibility guide](https://api-docs.deepseek.com/guides/responses_api/).
+Existing benchmark result files predate this alignment; rerun the benchmark for
+results using the shared prompt and output constraints.
+
 ### Direct
 
 OpenAI/DeepSeek receive the entire COICOP category list and choose one category in a single API request.

@@ -320,14 +320,72 @@ class TreeMixin:
 
 
 class JsonClassifier(TreeMixin):
-    """Common direct and recursive strategies for the JSON-based providers."""
+    """Identical prompts and structured-output requests for both JSON providers."""
 
     strategy: str
     failure_context: str
     flat_prompt: str
+    model: str
+    provider_name: str
 
     def _request(self, title: str, candidates: list[Category], prompt: str, recursive: bool) -> tuple[int, Usage]:
-        raise NotImplementedError
+        valid_ids = [c.id for c in candidates]
+        instructions = (
+            "Classify the expense or product title into exactly one COICOP category. "
+            "Use only a category id from the supplied list. "
+            'Return JSON only, with exactly one integer field: {"category_id": 123}. '
+            f"{MULTILINGUAL_NOTE}"
+        )
+        if recursive:
+            instructions += " In this hierarchical step, selecting the current category means stop; otherwise choose its best child."
+        response = self.client.responses.create(
+            model=self.model,
+            reasoning={"effort": OPENAI_REASONING_EFFORT},
+            instructions=instructions,
+            input=f"{prompt}\n\nTITLE TO CLASSIFY:\n{title}",
+            text={
+                "format": {
+                    "type": "json_schema",
+                    "name": "coicop_classification",
+                    "strict": True,
+                    "schema": {
+                        "type": "object",
+                        "properties": {"category_id": {"type": "integer", "enum": valid_ids}},
+                        "required": ["category_id"],
+                        "additionalProperties": False,
+                    },
+                }
+            },
+            max_output_tokens=128,
+            store=False,
+        )
+        usage = self._response_usage(response)
+        try:
+            if response.status != "completed":
+                raise ValueError(f"response status is {response.status!r}")
+            result = json.loads(response.output_text)
+            if not isinstance(result, dict) or set(result) != {"category_id"}:
+                raise ValueError("expected exactly one category_id field")
+            category_id = result["category_id"]
+            if type(category_id) is not int:
+                raise ValueError("category_id must be an integer")
+            if category_id not in valid_ids:
+                raise ValueError(f"category_id {category_id} is not one of {valid_ids}")
+        except (ValueError, TypeError) as exc:
+            raise ClassificationError(
+                f"{self.provider_name} returned an unusable classification: {exc}", usage=usage, cost_complete=True
+            ) from exc
+        return category_id, usage
+
+    def _response_usage(self, response: Any) -> Usage:
+        u = response.usage
+        details = getattr(u, "input_tokens_details", None)
+        return Usage(
+            input_tokens=int(getattr(u, "input_tokens", 0) or 0),
+            cached_input_tokens=int(getattr(details, "cached_tokens", 0) or 0),
+            cache_write_tokens=int(getattr(details, "cache_write_tokens", 0) or 0),
+            output_tokens=int(getattr(u, "output_tokens", 0) or 0),
+        )
 
     def _choose_recursive(
         self, title: str, candidates: list[Category], current: Category | None
@@ -346,9 +404,11 @@ class JsonClassifier(TreeMixin):
 
 class OpenAIClassifier(JsonClassifier):
     failure_context = "OpenAI recursive classification"
+    provider_name = "OpenAI"
 
     def __init__(self, categories: list[Category], strategy: str, provider: str = "openai_luna") -> None:
         self.provider = provider
+        self.model = OPENAI_MODELS[provider]
         self.strategy = strategy
         self.key = f"{self.provider}.{strategy}"
         self._init_tree(categories)
@@ -357,60 +417,15 @@ class OpenAIClassifier(JsonClassifier):
         self.client = OpenAI(api_key=require_env("OPENAI_API_KEY"), max_retries=0)
         self.flat_prompt = build_flat_prompt(categories)
 
-    def _request(self, title: str, candidates: list[Category], prompt: str, recursive: bool) -> tuple[int, Usage]:
-        valid_ids = [c.id for c in candidates]
-        instructions = (
-            "Classify the expense or product title into exactly one COICOP category. "
-            "Use only a category id from the supplied list. "
-            f"{MULTILINGUAL_NOTE}"
-        )
-        if recursive:
-            instructions += " In this hierarchical step, selecting the current category means stop; otherwise choose its best child."
-        response = self.client.responses.create(
-            model=OPENAI_MODELS[self.provider],
-            reasoning={"effort": OPENAI_REASONING_EFFORT},
-            instructions=instructions,
-            input=f"{prompt}\n\nTITLE TO CLASSIFY:\n{title}",
-            text={
-                "format": {
-                    "type": "json_schema",
-                    "name": "coicop_classification",
-                    "strict": True,
-                    "schema": {
-                        "type": "object",
-                        "properties": {"category_id": {"type": "integer", "enum": valid_ids}},
-                        "required": ["category_id"],
-                        "additionalProperties": False,
-                    },
-                }
-            },
-            store=False,
-        )
-        u = response.usage
-        details = getattr(u, "input_tokens_details", None)
-        usage = Usage(
-            input_tokens=int(getattr(u, "input_tokens", 0) or 0),
-            cached_input_tokens=int(getattr(details, "cached_tokens", 0) or 0),
-            cache_write_tokens=int(getattr(details, "cache_write_tokens", 0) or 0),
-            output_tokens=int(getattr(u, "output_tokens", 0) or 0),
-        )
-        try:
-            category_id = int(json.loads(response.output_text)["category_id"])
-            if category_id not in valid_ids:
-                raise ValueError(f"category_id {category_id} is not one of {valid_ids}")
-        except Exception as exc:
-            raise ClassificationError(
-                f"OpenAI returned an unusable classification: {exc}", usage=usage, cost_complete=True
-            ) from exc
-        return category_id, usage
-
 
 class DeepSeekClassifier(JsonClassifier):
     provider = "deepseek_flash"
     failure_context = "DeepSeek recursive classification"
+    provider_name = "DeepSeek"
 
     def __init__(self, categories: list[Category], strategy: str) -> None:
         self.strategy = strategy
+        self.model = DEEPSEEK_MODEL
         self.key = f"{self.provider}.{strategy}"
         self._init_tree(categories)
         from openai import OpenAI
@@ -420,49 +435,17 @@ class DeepSeekClassifier(JsonClassifier):
         )
         self.flat_prompt = build_flat_prompt(categories)
 
-    def _request(self, title: str, candidates: list[Category], prompt: str, recursive: bool) -> tuple[int, Usage]:
-        valid_ids = {c.id for c in candidates}
-        system = (
-            "Classify the expense or product title into exactly one COICOP category. "
-            "Return JSON only, exactly like {\"category_id\": 123}. "
-            "Use only an id from the supplied category list. "
-            f"{MULTILINGUAL_NOTE}"
-        )
-        if recursive:
-            system += " In this hierarchical step, selecting the current category means stop; otherwise choose its best child."
-        response = self.client.chat.completions.create(
-            model=DEEPSEEK_MODEL,
-            messages=[
-                {"role": "system", "content": system},
-                {"role": "user", "content": f"{prompt}\n\nTITLE TO CLASSIFY:\n{title}"},
-            ],
-            response_format={"type": "json_object"},
-            max_tokens=32,
-            reasoning_effort="none",
-            extra_body={"thinking": {"type": "disabled"}},
-        )
-        content = response.choices[0].message.content or ""
+    def _response_usage(self, response: Any) -> Usage:
         u = response.usage
-        prompt_tokens = int(getattr(u, "prompt_tokens", 0) or 0)
-        hit = int(getattr(u, "prompt_cache_hit_tokens", 0) or 0)
-        miss = int(getattr(u, "prompt_cache_miss_tokens", 0) or 0)
-        if hit == 0 and miss == 0:
-            miss = prompt_tokens
-        usage = Usage(
-            input_tokens=prompt_tokens,
+        input_tokens = int(getattr(u, "input_tokens", 0) or 0)
+        details = getattr(u, "input_tokens_details", None)
+        hit = int(getattr(details, "cached_tokens", 0) or 0)
+        return Usage(
+            input_tokens=input_tokens,
             cache_hit_tokens=hit,
-            cache_miss_tokens=miss,
-            output_tokens=int(getattr(u, "completion_tokens", 0) or 0),
+            cache_miss_tokens=input_tokens - hit,
+            output_tokens=int(getattr(u, "output_tokens", 0) or 0),
         )
-        try:
-            category_id = int(json.loads(content)["category_id"])
-            if category_id not in valid_ids:
-                raise ValueError(f"category_id {category_id} is not in the supplied options")
-        except Exception as exc:
-            raise ClassificationError(
-                f"DeepSeek returned an unusable classification: {exc}", usage=usage, cost_complete=True
-            ) from exc
-        return category_id, usage
 
 
 class JevClassifier(TreeMixin):
