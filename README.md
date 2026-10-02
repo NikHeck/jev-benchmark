@@ -164,6 +164,11 @@ OpenAI/DeepSeek receive the entire COICOP category list and choose one category 
 
 ### Recursive
 
+All recursive implementations share the classification wording, multilingual
+guidance, current-category context, and stopping instructions. Jev receives its
+answer options through native `Choice.criteria`; OpenAI and DeepSeek receive
+the category list and JSON output instructions.
+
 All recursive implementations use the same tree semantics:
 
 1. choose one root category;

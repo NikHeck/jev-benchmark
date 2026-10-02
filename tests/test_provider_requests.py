@@ -1,13 +1,14 @@
 """Exercise provider adapters through the real SDK without making API calls."""
 
 import json
+from types import SimpleNamespace
 
 import httpx
 import openai
 import pytest
 
 import benchmark
-from benchmark import Category, ClassificationError, DeepSeekClassifier, OpenAIClassifier
+from benchmark import Category, ClassificationError, DeepSeekClassifier, JevClassifier, OpenAIClassifier
 
 
 @pytest.fixture
@@ -102,6 +103,53 @@ def test_providers_send_identical_prompts_and_constraints(provider_http, strateg
         assert format_["schema"]["properties"]["category_id"] == {"type": "integer", "enum": ids}
         assert format_["schema"]["required"] == ["category_id"]
         assert format_["schema"]["additionalProperties"] is False
+
+
+@pytest.mark.parametrize("classifier_type", [OpenAIClassifier, DeepSeekClassifier])
+@pytest.mark.parametrize("decisions", [[0, 2, 3], [0, 2, 2]])
+def test_jev_shares_recursive_wording_with_native_choices(provider_http, monkeypatch, classifier_type, decisions):
+    import typesafe_sdk
+
+    calls, responses = provider_http
+    responses.extend(response(json.dumps({"category_id": id_})) for id_ in decisions)
+    json_result = classifier_type(categories(), "recursive").classify("Kaffee")
+    jev_calls = []
+    remaining = iter(decisions)
+
+    def system_one(**kwargs):
+        jev_calls.append(kwargs)
+        return SimpleNamespace(
+            answers={"category": SimpleNamespace(choice=f"id_{next(remaining)}")},
+            usage=SimpleNamespace(input_tokens=10, output_tokens=2),
+        )
+
+    monkeypatch.setenv("TYPESAFE_API_KEY", "test-typesafe-key")
+    monkeypatch.setattr(typesafe_sdk, "TypeSafeClient", lambda **kwargs: SimpleNamespace(system_one=system_one))
+    jev_result = JevClassifier(categories()).classify("Kaffee")
+    assert jev_result.category_id == json_result.category_id == decisions[-1]
+    assert jev_result.usage.requests == json_result.usage.requests == 3
+
+    by_id = {c.id: c for c in categories()}
+    for step, (json_call, jev_call) in enumerate(zip(calls, jev_calls)):
+        assert jev_call["state"] == "Kaffee"
+        assert jev_call["model"] == benchmark.TYPESAFE_MODEL
+        question = jev_call["questions"]["category"]
+        assert isinstance(question, typesafe_sdk.Choice)
+        classification_wording = json_call["instructions"].split(" Return JSON only,", 1)[0]
+        assert question.instructions.split("\n", 1)[0] == classification_wording
+        assert benchmark.MULTILINGUAL_NOTE in question.instructions
+        assert "selecting it means stop" in question.instructions
+        assert "JSON" not in question.instructions
+        ids = json_call["text"]["format"]["schema"]["properties"]["category_id"]["enum"]
+        assert question.criteria == {
+            f"id_{id_}": f"COICOP {by_id[id_].code}: {by_id[id_].title}" for id_ in ids
+        }
+        if step:
+            current_context = json_call["input"].split("\n", 1)[0]
+            assert current_context.startswith("CURRENT COICOP CATEGORY:")
+            assert question.instructions == classification_wording + "\n" + current_context
+        else:
+            assert question.instructions == classification_wording
 
 
 @pytest.mark.parametrize("classifier_type", [OpenAIClassifier, DeepSeekClassifier])

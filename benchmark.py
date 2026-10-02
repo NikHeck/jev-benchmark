@@ -163,6 +163,26 @@ def require_env(name: str) -> str:
     return value
 
 
+def build_classification_instructions(*, recursive: bool) -> str:
+    """Task wording shared by JSON generation and Jev's native Choice API."""
+    instructions = (
+        "Classify the expense or product title into exactly one COICOP category. "
+        "Choose only from the supplied category options. "
+        f"{MULTILINGUAL_NOTE}"
+    )
+    if recursive:
+        instructions += (
+            " In this hierarchical step, choose the best available option. "
+            "If a current category is supplied, selecting it means stop; "
+            "selecting one of its children means continue."
+        )
+    return instructions
+
+
+def build_current_category_context(current: Category) -> str:
+    return f"CURRENT COICOP CATEGORY: {current.id} | {current.code} | {current.title}"
+
+
 def build_flat_prompt(categories: list[Category]) -> str:
     rows = ["AVAILABLE COICOP CATEGORIES (id | code | title):"]
     rows.extend(f"{c.id} | {c.code} | {c.title}" for c in categories)
@@ -330,14 +350,9 @@ class JsonClassifier(TreeMixin):
 
     def _request(self, title: str, candidates: list[Category], prompt: str, recursive: bool) -> tuple[int, Usage]:
         valid_ids = [c.id for c in candidates]
-        instructions = (
-            "Classify the expense or product title into exactly one COICOP category. "
-            "Use only a category id from the supplied list. "
-            'Return JSON only, with exactly one integer field: {"category_id": 123}. '
-            f"{MULTILINGUAL_NOTE}"
+        instructions = build_classification_instructions(recursive=recursive) + (
+            ' Return JSON only, with exactly one integer field: {"category_id": 123}.'
         )
-        if recursive:
-            instructions += " In this hierarchical step, selecting the current category means stop; otherwise choose its best child."
         response = self.client.responses.create(
             model=self.model,
             reasoning={"effort": OPENAI_REASONING_EFFORT},
@@ -392,7 +407,7 @@ class JsonClassifier(TreeMixin):
     ) -> tuple[int, Usage]:
         prompt = build_option_prompt(candidates)
         if current is not None:
-            prompt = f"CURRENT COICOP CATEGORY: {current.id} | {current.code} | {current.title}\n" + prompt
+            prompt = build_current_category_context(current) + "\n" + prompt
         return self._request(title, candidates, prompt, recursive=True)
 
     def classify(self, title: str) -> ClassificationResult:
@@ -465,14 +480,9 @@ class JevClassifier(TreeMixin):
         if len(candidates) > 255:
             raise ValueError(f"Jev Choice supports at most 255 options; this node has {len(candidates)}.")
         criteria = {f"id_{c.id}": f"COICOP {c.code}: {c.title}" for c in candidates}
-        if current is None:
-            instructions = "Choose the top-level COICOP category that best matches this expense or product title. "
-        else:
-            instructions = (
-                f"The current category is COICOP {current.code}: {current.title}. "
-                "Choose the current category itself if it is the best final classification; otherwise choose the best child. "
-            )
-        instructions += MULTILINGUAL_NOTE
+        instructions = build_classification_instructions(recursive=True)
+        if current is not None:
+            instructions += "\n" + build_current_category_context(current)
         response = self.client.system_one(
             model=TYPESAFE_MODEL,
             state=title,
