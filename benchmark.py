@@ -21,6 +21,7 @@ OPENAI_MODELS = {
 OPENAI_REASONING_EFFORT = "none"
 DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL", "deepseek-flash")
 TYPESAFE_MODEL = os.getenv("TYPESAFE_MODEL", "jev-latest")
+REQUEST_TIMEOUT_SECONDS = 600.0
 
 # USD per 1M tokens. Verify before long benchmark runs; provider prices can change.
 OPENAI_PRICES = {
@@ -429,7 +430,9 @@ class OpenAIClassifier(JsonClassifier):
         self._init_tree(categories)
         from openai import OpenAI
 
-        self.client = OpenAI(api_key=require_env("OPENAI_API_KEY"), max_retries=0)
+        self.client = OpenAI(
+            api_key=require_env("OPENAI_API_KEY"), max_retries=0, timeout=REQUEST_TIMEOUT_SECONDS
+        )
         self.flat_prompt = build_flat_prompt(categories)
 
 
@@ -446,7 +449,8 @@ class DeepSeekClassifier(JsonClassifier):
         from openai import OpenAI
 
         self.client = OpenAI(
-            api_key=require_env("DEEPSEEK_API_KEY"), base_url="https://api.deepseek.com", max_retries=0
+            api_key=require_env("DEEPSEEK_API_KEY"), base_url="https://api.deepseek.com",
+            max_retries=0, timeout=REQUEST_TIMEOUT_SECONDS,
         )
         self.flat_prompt = build_flat_prompt(categories)
 
@@ -474,7 +478,7 @@ class JevClassifier(TreeMixin):
 
         self._init_tree(categories)
         self._choice_type = Choice
-        self.client = TypeSafeClient(retry=RetryPolicy(max_retries=0))
+        self.client = TypeSafeClient(retry=RetryPolicy(max_retries=0), timeout=REQUEST_TIMEOUT_SECONDS)
 
     def _choice(self, title: str, candidates: list[Category], current: Category | None) -> tuple[int, Usage]:
         if len(candidates) > 255:
@@ -644,6 +648,7 @@ def build_output(
             "category_file": str(args.category_file),
             "tests_in_input_file": test_count,
             "multilingual_prompt_note": MULTILINGUAL_NOTE,
+            "request_timeout_seconds": REQUEST_TIMEOUT_SECONDS,
             "sampling": (
                 "number_samples is the number of complete dataset iterations. In every iteration, "
                 "each strategy classifies every row in input_file exactly once."

@@ -21,6 +21,9 @@ def provider_http(monkeypatch):
     def handle(request):
         expected_path = "/responses" if request.url.host == "api.deepseek.com" else "/v1/responses"
         assert request.url.path == expected_path
+        assert request.extensions["timeout"] == {
+            phase: 600.0 for phase in ("connect", "read", "write", "pool")
+        }
         calls.append(json.loads(request.content))
         return httpx.Response(200, json=responses.pop(0))
 
@@ -124,7 +127,13 @@ def test_jev_shares_recursive_wording_with_native_choices(provider_http, monkeyp
         )
 
     monkeypatch.setenv("TYPESAFE_API_KEY", "test-typesafe-key")
-    monkeypatch.setattr(typesafe_sdk, "TypeSafeClient", lambda **kwargs: SimpleNamespace(system_one=system_one))
+
+    def make_jev_client(**kwargs):
+        assert kwargs["timeout"] == 600.0
+        assert kwargs["retry"].max_retries == 0
+        return SimpleNamespace(system_one=system_one)
+
+    monkeypatch.setattr(typesafe_sdk, "TypeSafeClient", make_jev_client)
     jev_result = JevClassifier(categories()).classify("Kaffee")
     assert jev_result.category_id == json_result.category_id == decisions[-1]
     assert jev_result.usage.requests == json_result.usage.requests == 3

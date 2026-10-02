@@ -31,6 +31,10 @@ export TYPESAFE_API_KEY="..."
 
 Model IDs can be overridden with `OPENAI_LUNA_MODEL`, `OPENAI_SOL_MODEL`, `DEEPSEEK_MODEL`, and `TYPESAFE_MODEL`. OpenAI Luna, OpenAI Sol, and DeepSeek Flash all use `none` reasoning effort for each strategy.
 
+All provider clients use an explicit **600-second HTTP timeout**. For recursive
+classification, this applies to each API request. The timeout is recorded as
+`configuration.request_timeout_seconds` in the results.
+
 ## 1. Build the COICOP category tree
 
 ```bash

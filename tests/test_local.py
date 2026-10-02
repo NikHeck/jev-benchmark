@@ -362,6 +362,7 @@ def test_number_samples_means_full_dataset_iterations(tmp_path: Path) -> None:
     assert config["full_dataset_iterations"] == 5
     assert config["tests_in_input_file"] == 30
     assert config["classifications_per_strategy"] == 150
+    assert config["request_timeout_seconds"] == 600.0
     assert "complete dataset iterations" in config["sampling"]
 
 
