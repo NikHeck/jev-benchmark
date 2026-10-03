@@ -8,11 +8,11 @@ import csv
 import json
 import os
 import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Callable, Protocol
-
+from typing import Any, Protocol
 
 OPENAI_MODELS = {
     "openai_luna": os.getenv("OPENAI_LUNA_MODEL", "gpt-6-luna"),
@@ -72,7 +72,7 @@ class Usage:
     output_tokens: int = 0
     requests: int = 1
 
-    def add(self, other: "Usage") -> None:
+    def add(self, other: Usage) -> None:
         for name in self.__dataclass_fields__:
             setattr(self, name, getattr(self, name) + getattr(other, name))
 
@@ -639,7 +639,7 @@ def build_output(
     prediction_log: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     return {
-        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "generated_at_utc": datetime.now(UTC).isoformat(),
         "configuration": {
             "number_samples": args.number_samples,
             "full_dataset_iterations": args.number_samples,
@@ -726,7 +726,7 @@ def classify_test(
         status = "correct" if correct else "wrong_prediction"
         console_status = "OK" if correct else f"FAIL predicted={predicted.id}"
         print(f"  {classifier.key}: {console_status} ({elapsed:.3f}s, requests={requests})")
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001 - Record provider failures and continue the benchmark.
         elapsed = time.perf_counter() - started
         stats.record_error(elapsed, exc)
         predicted = None

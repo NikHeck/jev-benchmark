@@ -6,8 +6,8 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 import httpx
 from openpyxl import load_workbook
