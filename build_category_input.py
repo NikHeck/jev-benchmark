@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download the official COICOP 2018 Excel structure and create category_input.json."""
+"""Download the COICOP 2018 workbook and create category_input.json."""
 
 from __future__ import annotations
 
@@ -90,24 +90,33 @@ def collapse_semantic_passthroughs(
         seen: set[str] = set()
         while code in redirect:
             if code in seen:
-                raise ValueError(f"Cycle while collapsing COICOP category {code}.")
+                raise ValueError(
+                    f"Cycle while collapsing COICOP category {code}."
+                )
             seen.add(code)
             code = redirect[code]
         return code
 
     aliases_by_target: dict[str, list[str]] = {}
     for removed_code in redirect:
-        aliases_by_target.setdefault(final_target(removed_code), []).append(removed_code)
+        aliases_by_target.setdefault(final_target(removed_code), []).append(
+            removed_code
+        )
 
     collapsed: list[dict[str, object]] = []
     for item in categories:
-        code = str(item["code"] )
+        code = str(item["code"])
         if code in redirect:
             continue
-        new_item: dict[str, object] = {"code": code, "title": str(item["title"])}
+        new_item: dict[str, object] = {
+            "code": code,
+            "title": str(item["title"]),
+        }
         aliases = aliases_by_target.get(code)
         if aliases:
-            new_item["collapsed_codes"] = sorted(aliases, key=lambda value: (value.count("."), value))
+            new_item["collapsed_codes"] = sorted(
+                aliases, key=lambda value: (value.count("."), value)
+            )
         collapsed.append(new_item)
 
     for idx, item in enumerate(collapsed):
@@ -115,16 +124,20 @@ def collapse_semantic_passthroughs(
     return collapsed
 
 
-def add_tree_metadata(categories: list[dict[str, object]]) -> list[dict[str, object]]:
-    """Add explicit tree fields while preserving sequential numeric category ids."""
+def add_tree_metadata(
+    categories: list[dict[str, object]],
+) -> list[dict[str, object]]:
+    """Add tree fields while preserving sequential numeric category ids."""
     code_to_id = {str(item["code"]): int(item["id"]) for item in categories}
-    children_by_id: dict[int, list[int]] = {int(item["id"]): [] for item in categories}
+    children_by_id: dict[int, list[int]] = {
+        int(item["id"]): [] for item in categories
+    }
 
     for item in categories:
         code = str(item["code"])
         pcode = parent_code(code)
-        # A collapsed `.0` node can skip its original direct parent. Walk upward
-        # until the nearest surviving ancestor is found.
+        # A collapsed `.0` node can skip its original direct parent.
+        # Walk upward until the nearest surviving ancestor is found.
         while pcode is not None and pcode not in code_to_id:
             pcode = parent_code(pcode)
         pid = code_to_id.get(pcode) if pcode is not None else None
@@ -151,7 +164,9 @@ def extract_categories(
     code_column: int = 1,
     title_column: int = 2,
 ) -> list[dict[str, object]]:
-    """Read a header in row 1 and category rows from row 2; all indexes are 1-based.
+    """Read a header in row 1 and category rows from row 2.
+
+    All indexes are 1-based.
 
     Defaults match the local XLSX: first worksheet, codes in A, titles in B.
     Other columns are ignored. Worksheet and column positions are not inferred.
@@ -161,11 +176,15 @@ def extract_categories(
     workbook = load_workbook(excel_path, read_only=True, data_only=True)
     if sheet_number > len(workbook.worksheets):
         workbook.close()
-        raise ValueError(f"Worksheet {sheet_number} does not exist in {excel_path}.")
+        raise ValueError(
+            f"Worksheet {sheet_number} does not exist in {excel_path}."
+        )
     sheet = workbook.worksheets[sheet_number - 1]
     categories: list[dict[str, object]] = []
     seen_codes: set[str] = set()
-    for row in sheet.iter_rows(min_row=2, max_col=max(code_column, title_column), values_only=True):
+    for row in sheet.iter_rows(
+        min_row=2, max_col=max(code_column, title_column), values_only=True
+    ):
         code = clean_text(row[code_column - 1])
         title = clean_text(row[title_column - 1])
         if not CODE_RE.fullmatch(code) or not title or code in seen_codes:
@@ -173,11 +192,15 @@ def extract_categories(
         seen_codes.add(code)
         if household_only and not is_household_category(code):
             continue
-        categories.append({"id": len(categories), "code": code, "title": title})
+        categories.append(
+            {"id": len(categories), "code": code, "title": title}
+        )
     workbook.close()
 
     if not categories:
-        raise ValueError("No COICOP categories were extracted from the workbook.")
+        raise ValueError(
+            "No COICOP categories were extracted from the workbook."
+        )
     categories = collapse_semantic_passthroughs(categories)
     return add_tree_metadata(categories)
 
@@ -190,7 +213,9 @@ def download_excel(url: str, destination: Path) -> None:
         destination.write_bytes(response.content)
 
 
-def write_json(categories: Iterable[dict[str, object]], destination: Path) -> None:
+def write_json(
+    categories: Iterable[dict[str, object]], destination: Path
+) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(
         json.dumps(list(categories), indent=2, ensure_ascii=False) + "\n",
@@ -200,17 +225,38 @@ def write_json(categories: Iterable[dict[str, object]], destination: Path) -> No
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Download COICOP 2018 and create tree-aware category_input.json.",
+        description=(
+            "Download COICOP 2018 and create tree-aware category_input.json."
+        ),
         epilog=(
-            "Expected XLSX layout: row 1 is a header, category rows start at row 2. "
-            "By default, read the first worksheet with codes in column A and titles in column B. "
-            "All sheet and column indexes are 1-based. Other columns are ignored."
+            "Expected XLSX layout: row 1 is a header, "
+            "category rows start at row 2. By default, read the first "
+            "worksheet with codes in column A and titles in column B. "
+            "All sheet and column indexes are 1-based. "
+            "Other columns are ignored."
         ),
     )
-    parser.add_argument("--url", default=COICOP_XLSX_URL, help="COICOP Excel URL")
-    parser.add_argument("--sheet-number", type=int, default=1, help="Worksheet number, 1-based (default: 1)")
-    parser.add_argument("--code-column", type=int, default=1, help="Code column index, 1-based (default: 1 = A)")
-    parser.add_argument("--title-column", type=int, default=2, help="Title column index, 1-based (default: 2 = B)")
+    parser.add_argument(
+        "--url", default=COICOP_XLSX_URL, help="COICOP Excel URL"
+    )
+    parser.add_argument(
+        "--sheet-number",
+        type=int,
+        default=1,
+        help="Worksheet number, 1-based (default: 1)",
+    )
+    parser.add_argument(
+        "--code-column",
+        type=int,
+        default=1,
+        help="Code column index, 1-based (default: 1 = A)",
+    )
+    parser.add_argument(
+        "--title-column",
+        type=int,
+        default=2,
+        help="Title column index, 1-based (default: 2 = B)",
+    )
     parser.add_argument(
         "--excel-output",
         type=Path,
@@ -232,14 +278,18 @@ def parse_args() -> argparse.Namespace:
         "--include-all-divisions",
         action="store_true",
         help=(
-            "Include COICOP divisions 14-15 as well. By default only household "
-            "expenditure divisions 01-13 are emitted, which is appropriate for "
-            "consumer expense classification."
+            "Include COICOP divisions 14-15 as well. "
+            "By default only household expenditure divisions 01-13 are "
+            "emitted, which is appropriate for consumer expense "
+            "classification."
         ),
     )
     args = parser.parse_args()
     if min(args.sheet_number, args.code_column, args.title_column) < 1:
-        parser.error("--sheet-number, --code-column and --title-column must be at least 1.")
+        parser.error(
+            "--sheet-number, --code-column and --title-column "
+            "must be at least 1."
+        )
     return args
 
 
@@ -256,7 +306,11 @@ def main() -> None:
         title_column=args.title_column,
     )
     write_json(categories, args.json_output)
-    scope = "all COICOP divisions" if args.include_all_divisions else "household divisions 01-13"
+    scope = (
+        "all COICOP divisions"
+        if args.include_all_divisions
+        else "household divisions 01-13"
+    )
     print(
         f"Wrote {len(categories)} collapsed, tree-aware categories ({scope}) "
         f"to {args.json_output}"

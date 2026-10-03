@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Benchmark direct and recursive COICOP classification across OpenAI, DeepSeek and Jev."""
+"""Benchmark direct and recursive COICOP classification.
+
+Compare OpenAI, DeepSeek and Jev.
+"""
 
 from __future__ import annotations
 
@@ -23,10 +26,21 @@ DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL", "deepseek-flash")
 TYPESAFE_MODEL = os.getenv("TYPESAFE_MODEL", "jev-latest")
 REQUEST_TIMEOUT_SECONDS = 600.0
 
-# USD per 1M tokens. Verify before long benchmark runs; provider prices can change.
+# USD per 1M tokens. Verify before long benchmark runs;
+# provider prices can change.
 OPENAI_PRICES = {
-    "openai_luna": {"input": 0.10, "cached_input": 0.01, "cache_write": 0.125, "output": 0.50},
-    "openai_sol": {"input": 2.00, "cached_input": 0.20, "cache_write": 2.50, "output": 10.00},
+    "openai_luna": {
+        "input": 0.10,
+        "cached_input": 0.01,
+        "cache_write": 0.125,
+        "output": 0.50,
+    },
+    "openai_sol": {
+        "input": 2.00,
+        "cached_input": 0.20,
+        "cache_write": 2.50,
+        "output": 10.00,
+    },
 }
 STRATEGIES = {
     "openai_luna": ("direct", "recursive"),
@@ -34,14 +48,27 @@ STRATEGIES = {
     "deepseek_flash": ("direct", "recursive"),
     "typesafe_jev": ("recursive",),
 }
-CLASSIFIER_CHOICES = tuple(f"{provider}.{strategy}" for provider, strategies in STRATEGIES.items() for strategy in strategies)
-DEEPSEEK_PEAK_PRICES = {"cache_hit_input": 0.006, "cache_miss_input": 0.30, "output": 1.20}
-DEEPSEEK_OFFPEAK_PRICES = {"cache_hit_input": 0.003, "cache_miss_input": 0.15, "output": 0.60}
+CLASSIFIER_CHOICES = tuple(
+    f"{provider}.{strategy}"
+    for provider, strategies in STRATEGIES.items()
+    for strategy in strategies
+)
+DEEPSEEK_PEAK_PRICES = {
+    "cache_hit_input": 0.006,
+    "cache_miss_input": 0.30,
+    "output": 1.20,
+}
+DEEPSEEK_OFFPEAK_PRICES = {
+    "cache_hit_input": 0.003,
+    "cache_miss_input": 0.15,
+    "output": 0.60,
+}
 TYPESAFE_INPUT_PRICE = 0.042
 
 MULTILINGUAL_NOTE = (
     "The item title may be in any language and is not necessarily English. "
-    "Interpret the title in its original language before choosing the COICOP category."
+    "Interpret the title in its original language before choosing "
+    "the COICOP category."
 )
 
 
@@ -84,7 +111,13 @@ class ClassificationResult:
 
 
 class ClassificationError(RuntimeError):
-    def __init__(self, message: str, *, usage: Usage | None = None, cost_complete: bool = False) -> None:
+    def __init__(
+        self,
+        message: str,
+        *,
+        usage: Usage | None = None,
+        cost_complete: bool = False,
+    ) -> None:
         super().__init__(message)
         self.usage = usage
         self.cost_complete = cost_complete
@@ -99,7 +132,9 @@ class Stats:
     unknown_cost_attempts: int = 0
     total_seconds: float = 0.0
     usage: Usage = field(default_factory=lambda: Usage(requests=0))
-    complete_cost_usage: Usage = field(default_factory=lambda: Usage(requests=0))
+    complete_cost_usage: Usage = field(
+        default_factory=lambda: Usage(requests=0)
+    )
     error_examples: list[str] = field(default_factory=list)
 
     @property
@@ -167,7 +202,8 @@ def require_env(name: str) -> str:
 def build_classification_instructions(*, recursive: bool) -> str:
     """Task wording shared by JSON generation and Jev's native Choice API."""
     instructions = (
-        "Classify the expense or product title into exactly one COICOP category. "
+        "Classify the expense or product title into exactly one "
+        "COICOP category. "
         "Choose only from the supplied category options. "
         f"{MULTILINGUAL_NOTE}"
     )
@@ -181,7 +217,10 @@ def build_classification_instructions(*, recursive: bool) -> str:
 
 
 def build_current_category_context(current: Category) -> str:
-    return f"CURRENT COICOP CATEGORY: {current.id} | {current.code} | {current.title}"
+    return (
+        f"CURRENT COICOP CATEGORY: {current.id} | "
+        f"{current.code} | {current.title}"
+    )
 
 
 def build_flat_prompt(categories: list[Category]) -> str:
@@ -218,17 +257,23 @@ def load_categories(path: Path) -> list[Category]:
         for item in raw
     ]
     if [c.id for c in categories] != list(range(len(categories))):
-        raise ValueError("Category ids must start at 0 and increase by 1 without gaps.")
+        raise ValueError(
+            "Category ids must start at 0 and increase by 1 without gaps."
+        )
     if len({c.code for c in categories}) != len(categories):
         raise ValueError("COICOP codes must be unique.")
 
     by_id = {c.id: c for c in categories}
     for c in categories:
         if c.parent_id is not None and c.parent_id not in by_id:
-            raise ValueError(f"Category {c.id} has unknown parent_id {c.parent_id}.")
+            raise ValueError(
+                f"Category {c.id} has unknown parent_id {c.parent_id}."
+            )
         for child_id in c.children_ids:
             if child_id not in by_id:
-                raise ValueError(f"Category {c.id} has unknown child id {child_id}.")
+                raise ValueError(
+                    f"Category {c.id} has unknown child id {child_id}."
+                )
     return categories
 
 
@@ -244,7 +289,8 @@ def load_tests(path: Path, valid_ids: set[int]) -> list[TestCase]:
         reader = csv.DictReader(handle)
         if reader.fieldnames is None:
             raise ValueError(
-                "input CSV must contain a header row with columns: category_id,title."
+                "input CSV must contain a header row with columns: "
+                "category_id,title."
             )
 
         # Be forgiving about whitespace/case in the header while requiring the
@@ -257,7 +303,8 @@ def load_tests(path: Path, valid_ids: set[int]) -> list[TestCase]:
         missing = {"category_id", "title"} - set(normalized)
         if missing:
             raise ValueError(
-                "input CSV is missing required column(s): " + ", ".join(sorted(missing))
+                "input CSV is missing required column(s): "
+                + ", ".join(sorted(missing))
             )
 
         category_id_column = normalized["category_id"]
@@ -268,20 +315,26 @@ def load_tests(path: Path, valid_ids: set[int]) -> list[TestCase]:
             if not raw_category_id and not title:
                 continue
             if not raw_category_id:
-                raise ValueError(f"input CSV row {row_number} has an empty category_id.")
+                raise ValueError(
+                    f"input CSV row {row_number} has an empty category_id."
+                )
             try:
                 category_id = int(raw_category_id)
             except ValueError as exc:
                 raise ValueError(
-                    f"input CSV row {row_number} has a non-integer category_id: "
+                    f"input CSV row {row_number} has a non-integer "
+                    "category_id: "
                     f"{raw_category_id!r}."
                 ) from exc
             if category_id not in valid_ids:
                 raise ValueError(
-                    f"input CSV row {row_number} references unknown category_id {category_id}."
+                    f"input CSV row {row_number} references unknown "
+                    f"category_id {category_id}."
                 )
             if not title:
-                raise ValueError(f"input CSV row {row_number} has an empty title.")
+                raise ValueError(
+                    f"input CSV row {row_number} has an empty title."
+                )
             tests.append(TestCase(category_id=category_id, title=title))
 
     if not tests:
@@ -293,10 +346,14 @@ class TreeMixin:
     def _init_tree(self, categories: list[Category]) -> None:
         self.categories = categories
         self.by_id = {c.id: c for c in categories}
-        self.roots = sorted((c for c in categories if c.parent_id is None), key=lambda c: coicop_sort_key(c.code))
+        self.roots = sorted(
+            (c for c in categories if c.parent_id is None),
+            key=lambda c: coicop_sort_key(c.code),
+        )
 
     def _next_options(self, current: Category) -> list[Category]:
-        # Include the current category as a valid stopping choice, then its children.
+        # Include the current category as a valid stopping choice,
+        # then its children.
         children = [self.by_id[cid] for cid in current.children_ids]
         children.sort(key=lambda c: coicop_sort_key(c.code))
         return [current, *children]
@@ -304,7 +361,9 @@ class TreeMixin:
     def _classify_recursive(
         self,
         title: str,
-        choose: Callable[[str, list[Category], Category | None], tuple[int, Usage]],
+        choose: Callable[
+            [str, list[Category], Category | None], tuple[int, Usage]
+        ],
         failure_context: str,
         *,
         local_validation: bool = False,
@@ -316,7 +375,9 @@ class TreeMixin:
             total.add(usage)
             selected = self.by_id[selected_id]
             while selected.children_ids:
-                next_id, usage = choose(title, self._next_options(selected), selected)
+                next_id, usage = choose(
+                    title, self._next_options(selected), selected
+                )
                 total.add(usage)
                 if next_id == selected.id:
                     break
@@ -325,15 +386,20 @@ class TreeMixin:
         except ClassificationError as exc:
             if exc.usage is not None:
                 total.add(exc.usage)
-            raise ClassificationError(str(exc), usage=total, cost_complete=exc.cost_complete) from exc
+            raise ClassificationError(
+                str(exc), usage=total, cost_complete=exc.cost_complete
+            ) from exc
         except Exception as exc:
             if local_validation and isinstance(exc, ValueError):
                 raise ClassificationError(
-                    f"{failure_context} failed local validation: {exc}", usage=total, cost_complete=True
+                    f"{failure_context} failed local validation: {exc}",
+                    usage=total,
+                    cost_complete=True,
                 ) from exc
             if total.requests > 0:
                 raise ClassificationError(
-                    f"{failure_context} failed after partial billed usage: {exc}",
+                    f"{failure_context} failed after partial billed usage: "
+                    f"{exc}",
                     usage=total,
                     cost_complete=False,
                 ) from exc
@@ -341,7 +407,7 @@ class TreeMixin:
 
 
 class JsonClassifier(TreeMixin):
-    """Identical prompts and structured-output requests for both JSON providers."""
+    """Share prompts and structured-output requests between JSON providers."""
 
     strategy: str
     failure_context: str
@@ -349,10 +415,19 @@ class JsonClassifier(TreeMixin):
     model: str
     provider_name: str
 
-    def _request(self, title: str, candidates: list[Category], prompt: str, recursive: bool) -> tuple[int, Usage]:
+    def _request(
+        self,
+        title: str,
+        candidates: list[Category],
+        prompt: str,
+        recursive: bool,
+    ) -> tuple[int, Usage]:
         valid_ids = [c.id for c in candidates]
-        instructions = build_classification_instructions(recursive=recursive) + (
-            ' Return JSON only, with exactly one integer field: {"category_id": 123}.'
+        instructions = build_classification_instructions(
+            recursive=recursive
+        ) + (
+            " Return JSON only, with exactly one integer field: "
+            '{"category_id": 123}.'
         )
         response = self.client.responses.create(
             model=self.model,
@@ -366,7 +441,12 @@ class JsonClassifier(TreeMixin):
                     "strict": True,
                     "schema": {
                         "type": "object",
-                        "properties": {"category_id": {"type": "integer", "enum": valid_ids}},
+                        "properties": {
+                            "category_id": {
+                                "type": "integer",
+                                "enum": valid_ids,
+                            }
+                        },
                         "required": ["category_id"],
                         "additionalProperties": False,
                     },
@@ -386,10 +466,15 @@ class JsonClassifier(TreeMixin):
             if type(category_id) is not int:
                 raise ValueError("category_id must be an integer")
             if category_id not in valid_ids:
-                raise ValueError(f"category_id {category_id} is not one of {valid_ids}")
+                raise ValueError(
+                    f"category_id {category_id} is not one of {valid_ids}"
+                )
         except (ValueError, TypeError) as exc:
             raise ClassificationError(
-                f"{self.provider_name} returned an unusable classification: {exc}", usage=usage, cost_complete=True
+                f"{self.provider_name} returned an unusable classification: "
+                f"{exc}",
+                usage=usage,
+                cost_complete=True,
             ) from exc
         return category_id, usage
 
@@ -399,7 +484,9 @@ class JsonClassifier(TreeMixin):
         return Usage(
             input_tokens=int(getattr(u, "input_tokens", 0) or 0),
             cached_input_tokens=int(getattr(details, "cached_tokens", 0) or 0),
-            cache_write_tokens=int(getattr(details, "cache_write_tokens", 0) or 0),
+            cache_write_tokens=int(
+                getattr(details, "cache_write_tokens", 0) or 0
+            ),
             output_tokens=int(getattr(u, "output_tokens", 0) or 0),
         )
 
@@ -413,16 +500,25 @@ class JsonClassifier(TreeMixin):
 
     def classify(self, title: str) -> ClassificationResult:
         if self.strategy == "direct":
-            category_id, usage = self._request(title, self.categories, self.flat_prompt, recursive=False)
+            category_id, usage = self._request(
+                title, self.categories, self.flat_prompt, recursive=False
+            )
             return ClassificationResult(category_id, usage)
-        return self._classify_recursive(title, self._choose_recursive, self.failure_context)
+        return self._classify_recursive(
+            title, self._choose_recursive, self.failure_context
+        )
 
 
 class OpenAIClassifier(JsonClassifier):
     failure_context = "OpenAI recursive classification"
     provider_name = "OpenAI"
 
-    def __init__(self, categories: list[Category], strategy: str, provider: str = "openai_luna") -> None:
+    def __init__(
+        self,
+        categories: list[Category],
+        strategy: str,
+        provider: str = "openai_luna",
+    ) -> None:
         self.provider = provider
         self.model = OPENAI_MODELS[provider]
         self.strategy = strategy
@@ -431,7 +527,9 @@ class OpenAIClassifier(JsonClassifier):
         from openai import OpenAI
 
         self.client = OpenAI(
-            api_key=require_env("OPENAI_API_KEY"), max_retries=0, timeout=REQUEST_TIMEOUT_SECONDS
+            api_key=require_env("OPENAI_API_KEY"),
+            max_retries=0,
+            timeout=REQUEST_TIMEOUT_SECONDS,
         )
         self.flat_prompt = build_flat_prompt(categories)
 
@@ -449,8 +547,10 @@ class DeepSeekClassifier(JsonClassifier):
         from openai import OpenAI
 
         self.client = OpenAI(
-            api_key=require_env("DEEPSEEK_API_KEY"), base_url="https://api.deepseek.com",
-            max_retries=0, timeout=REQUEST_TIMEOUT_SECONDS,
+            api_key=require_env("DEEPSEEK_API_KEY"),
+            base_url="https://api.deepseek.com",
+            max_retries=0,
+            timeout=REQUEST_TIMEOUT_SECONDS,
         )
         self.flat_prompt = build_flat_prompt(categories)
 
@@ -478,19 +578,32 @@ class JevClassifier(TreeMixin):
 
         self._init_tree(categories)
         self._choice_type = Choice
-        self.client = TypeSafeClient(retry=RetryPolicy(max_retries=0), timeout=REQUEST_TIMEOUT_SECONDS)
+        self.client = TypeSafeClient(
+            retry=RetryPolicy(max_retries=0), timeout=REQUEST_TIMEOUT_SECONDS
+        )
 
-    def _choice(self, title: str, candidates: list[Category], current: Category | None) -> tuple[int, Usage]:
+    def _choice(
+        self, title: str, candidates: list[Category], current: Category | None
+    ) -> tuple[int, Usage]:
         if len(candidates) > 255:
-            raise ValueError(f"Jev Choice supports at most 255 options; this node has {len(candidates)}.")
-        criteria = {f"id_{c.id}": f"COICOP {c.code}: {c.title}" for c in candidates}
+            raise ValueError(
+                "Jev Choice supports at most 255 options; "
+                f"this node has {len(candidates)}."
+            )
+        criteria = {
+            f"id_{c.id}": f"COICOP {c.code}: {c.title}" for c in candidates
+        }
         instructions = build_classification_instructions(recursive=True)
         if current is not None:
             instructions += "\n" + build_current_category_context(current)
         response = self.client.system_one(
             model=TYPESAFE_MODEL,
             state=title,
-            questions={"category": self._choice_type(instructions=instructions, criteria=criteria)},
+            questions={
+                "category": self._choice_type(
+                    instructions=instructions, criteria=criteria
+                )
+            },
         )
         u = response.usage
         usage = Usage(
@@ -503,15 +616,21 @@ class JevClassifier(TreeMixin):
                 raise ValueError(f"unexpected choice {key!r}")
             category_id = int(key[3:])
             if category_id not in {c.id for c in candidates}:
-                raise ValueError(f"category_id {category_id} is not in the supplied options")
+                raise ValueError(
+                    f"category_id {category_id} is not in the supplied options"
+                )
         except Exception as exc:
             raise ClassificationError(
-                f"Jev returned an unusable classification: {exc}", usage=usage, cost_complete=True
+                f"Jev returned an unusable classification: {exc}",
+                usage=usage,
+                cost_complete=True,
             ) from exc
         return category_id, usage
 
     def classify(self, title: str) -> ClassificationResult:
-        return self._classify_recursive(title, self._choice, "Jev classification", local_validation=True)
+        return self._classify_recursive(
+            title, self._choice, "Jev classification", local_validation=True
+        )
 
 
 def usd(tokens: int, price_per_million: float) -> float:
@@ -539,14 +658,21 @@ def deepseek_cost(usage: Usage, prices: dict[str, float]) -> float:
     )
 
 
-def known_cost_summary(measured_total: float, complete_attempts_total: float, stats: Stats) -> dict[str, Any]:
+def known_cost_summary(
+    measured_total: float, complete_attempts_total: float, stats: Stats
+) -> dict[str, Any]:
     return {
         "known_total_usd": measured_total,
         "complete_cost_attempts_total_usd": complete_attempts_total,
         "known_cost_per_known_attempt_usd": (
-            complete_attempts_total / stats.known_cost_attempts if stats.known_cost_attempts else 0.0
+            complete_attempts_total / stats.known_cost_attempts
+            if stats.known_cost_attempts
+            else 0.0
         ),
-        "known_cost_lower_bound_per_attempt_usd": measured_total / stats.samples if stats.samples else 0.0,
+        "known_cost_lower_bound_per_attempt_usd": measured_total
+        / stats.samples
+        if stats.samples
+        else 0.0,
         "unknown_cost_attempts": stats.unknown_cost_attempts,
     }
 
@@ -562,7 +688,9 @@ def stats_common(stats: Stats) -> dict[str, Any]:
         "success_rate": stats.successes / samples if samples else 0.0,
         "timing": {
             "total_seconds": stats.total_seconds,
-            "seconds_per_item": stats.total_seconds / samples if samples else 0.0,
+            "seconds_per_item": stats.total_seconds / samples
+            if samples
+            else 0.0,
         },
         "usage": {
             "input_tokens": stats.usage.input_tokens,
@@ -572,14 +700,19 @@ def stats_common(stats: Stats) -> dict[str, Any]:
             "cache_miss_tokens": stats.usage.cache_miss_tokens,
             "output_tokens": stats.usage.output_tokens,
             "api_requests_with_usage": stats.usage.requests,
-            "api_requests_per_item": stats.usage.requests / samples if samples else 0.0,
+            "api_requests_per_item": stats.usage.requests / samples
+            if samples
+            else 0.0,
         },
         "cost_accounting": {
             "known_cost_attempts": stats.known_cost_attempts,
             "unknown_cost_attempts": stats.unknown_cost_attempts,
-            "known_cost_coverage": stats.known_cost_attempts / samples if samples else 0.0,
+            "known_cost_coverage": stats.known_cost_attempts / samples
+            if samples
+            else 0.0,
             "note": (
-                "Measured usage is retained whenever available. If unknown_cost_attempts is non-zero, "
+                "Measured usage is retained whenever available. "
+                "If unknown_cost_attempts is non-zero, "
                 "known_total_usd is a lower bound on true cost."
             ),
         },
@@ -587,7 +720,9 @@ def stats_common(stats: Stats) -> dict[str, Any]:
     }
 
 
-def strategy_output(provider: str, strategy: str, stats: Stats) -> dict[str, Any]:
+def strategy_output(
+    provider: str, strategy: str, stats: Stats
+) -> dict[str, Any]:
     result = stats_common(stats)
     result["strategy"] = strategy
     if provider in OPENAI_MODELS:
@@ -595,7 +730,11 @@ def strategy_output(provider: str, strategy: str, stats: Stats) -> dict[str, Any
         result["model"] = OPENAI_MODELS[provider]
         result["reasoning_effort"] = OPENAI_REASONING_EFFORT
         result["cost"] = {
-            **known_cost_summary(openai_cost(stats.usage, prices), openai_cost(stats.complete_cost_usage, prices), stats),
+            **known_cost_summary(
+                openai_cost(stats.usage, prices),
+                openai_cost(stats.complete_cost_usage, prices),
+                stats,
+            ),
             "prices_usd_per_1m_tokens": prices,
         }
     elif provider == "deepseek_flash":
@@ -604,7 +743,9 @@ def strategy_output(provider: str, strategy: str, stats: Stats) -> dict[str, Any
             "peak": {
                 **known_cost_summary(
                     deepseek_cost(stats.usage, DEEPSEEK_PEAK_PRICES),
-                    deepseek_cost(stats.complete_cost_usage, DEEPSEEK_PEAK_PRICES),
+                    deepseek_cost(
+                        stats.complete_cost_usage, DEEPSEEK_PEAK_PRICES
+                    ),
                     stats,
                 ),
                 "prices_usd_per_1m_tokens": DEEPSEEK_PEAK_PRICES,
@@ -612,7 +753,9 @@ def strategy_output(provider: str, strategy: str, stats: Stats) -> dict[str, Any
             "off_peak": {
                 **known_cost_summary(
                     deepseek_cost(stats.usage, DEEPSEEK_OFFPEAK_PRICES),
-                    deepseek_cost(stats.complete_cost_usage, DEEPSEEK_OFFPEAK_PRICES),
+                    deepseek_cost(
+                        stats.complete_cost_usage, DEEPSEEK_OFFPEAK_PRICES
+                    ),
                     stats,
                 ),
                 "prices_usd_per_1m_tokens": DEEPSEEK_OFFPEAK_PRICES,
@@ -623,7 +766,10 @@ def strategy_output(provider: str, strategy: str, stats: Stats) -> dict[str, Any
         result["cost"] = {
             **known_cost_summary(
                 usd(stats.usage.input_tokens, TYPESAFE_INPUT_PRICE),
-                usd(stats.complete_cost_usage.input_tokens, TYPESAFE_INPUT_PRICE),
+                usd(
+                    stats.complete_cost_usage.input_tokens,
+                    TYPESAFE_INPUT_PRICE,
+                ),
                 stats,
             ),
             "input_price_usd_per_1m_tokens": TYPESAFE_INPUT_PRICE,
@@ -650,19 +796,25 @@ def build_output(
             "multilingual_prompt_note": MULTILINGUAL_NOTE,
             "request_timeout_seconds": REQUEST_TIMEOUT_SECONDS,
             "sampling": (
-                "number_samples is the number of complete dataset iterations. In every iteration, "
-                "each strategy classifies every row in input_file exactly once."
+                "number_samples is the number of complete dataset "
+                "iterations. In every iteration, each strategy classifies "
+                "every row in input_file exactly once."
             ),
         },
         "models": {
             provider: {
-                strategy: strategy_output(provider, strategy, stats[f"{provider}.{strategy}"])
-                for strategy in strategies if f"{provider}.{strategy}" in stats
+                strategy: strategy_output(
+                    provider, strategy, stats[f"{provider}.{strategy}"]
+                )
+                for strategy in strategies
+                if f"{provider}.{strategy}" in stats
             }
             for provider, strategies in STRATEGIES.items()
-            if any(f"{provider}.{strategy}" in stats for strategy in strategies)
+            if any(
+                f"{provider}.{strategy}" in stats for strategy in strategies
+            )
         },
-        # Intentionally separate from aggregate statistics so consumers can drop this
+        # Separate from aggregate statistics so consumers can drop this
         # key entirely when they only need summary metrics.
         "prediction_log": prediction_log or [],
     }
@@ -674,28 +826,52 @@ def parse_args() -> argparse.Namespace:
         "--number-samples",
         type=int,
         required=True,
-        help="Number of complete passes over input.csv. Every strategy classifies every row once per pass.",
-    )
-    parser.add_argument("--input-file", type=Path, default=Path("input.csv"), help="Default: input.csv")
-    parser.add_argument("--output-file", type=Path, default=Path("output.json"), help="Default: output.json")
-    parser.add_argument(
-        "--category-file", type=Path, default=Path("category_input.json"), help="Generated COICOP category tree"
+        help=(
+            "Number of complete passes over input.csv. "
+            "Every strategy classifies every row once per pass."
+        ),
     )
     parser.add_argument(
-        "--classifiers", nargs="+", choices=CLASSIFIER_CHOICES, default=CLASSIFIER_CHOICES,
+        "--input-file",
+        type=Path,
+        default=Path("input.csv"),
+        help="Default: input.csv",
+    )
+    parser.add_argument(
+        "--output-file",
+        type=Path,
+        default=Path("output.json"),
+        help="Default: output.json",
+    )
+    parser.add_argument(
+        "--category-file",
+        type=Path,
+        default=Path("category_input.json"),
+        help="Generated COICOP category tree",
+    )
+    parser.add_argument(
+        "--classifiers",
+        nargs="+",
+        choices=CLASSIFIER_CHOICES,
+        default=CLASSIFIER_CHOICES,
         metavar="MODEL.STRATEGY",
-        help="Run selected pairs (default: all). Choices: " + ", ".join(CLASSIFIER_CHOICES),
+        help="Run selected pairs (default: all). Choices: "
+        + ", ".join(CLASSIFIER_CHOICES),
     )
     return parser.parse_args()
 
 
-def create_classifiers(categories: list[Category], keys: list[str] | tuple[str, ...]) -> list[Classifier]:
-    """Create selected classifiers once, preserving order and removing duplicates."""
+def create_classifiers(
+    categories: list[Category], keys: list[str] | tuple[str, ...]
+) -> list[Classifier]:
+    """Create classifiers once, preserving order and removing duplicates."""
     classifiers: list[Classifier] = []
     for key in dict.fromkeys(keys):
         provider, strategy = key.split(".")
         if provider in OPENAI_MODELS:
-            classifiers.append(OpenAIClassifier(categories, strategy, provider))
+            classifiers.append(
+                OpenAIClassifier(categories, strategy, provider)
+            )
         elif provider == "deepseek_flash":
             classifiers.append(DeepSeekClassifier(categories, strategy))
         else:
@@ -704,13 +880,20 @@ def create_classifiers(categories: list[Category], keys: list[str] | tuple[str, 
 
 
 def category_output(category: Category) -> dict[str, Any]:
-    return {"category_id": category.id, "code": category.code, "title": category.title}
+    return {
+        "category_id": category.id,
+        "code": category.code,
+        "title": category.title,
+    }
 
 
 def classify_test(
-    classifier: Classifier, test: TestCase, by_id: dict[int, Category], stats: Stats
+    classifier: Classifier,
+    test: TestCase,
+    by_id: dict[int, Category],
+    stats: Stats,
 ) -> dict[str, Any]:
-    """Measure one attempt, update its statistics, and return its prediction log."""
+    """Measure an attempt, update statistics, and return its prediction log."""
     expected = by_id[test.category_id]
     predicted: Category | None
     error: dict[str, str] | None = None
@@ -725,14 +908,20 @@ def classify_test(
         requests = result.usage.requests
         status = "correct" if correct else "wrong_prediction"
         console_status = "OK" if correct else f"FAIL predicted={predicted.id}"
-        print(f"  {classifier.key}: {console_status} ({elapsed:.3f}s, requests={requests})")
-    except Exception as exc:  # noqa: BLE001 - Record provider failures and continue the benchmark.
+        print(
+            f"  {classifier.key}: {console_status} "
+            f"({elapsed:.3f}s, requests={requests})"
+        )
+    except Exception as exc:  # noqa: BLE001
+        # Record provider failures so remaining benchmark attempts still run.
         elapsed = time.perf_counter() - started
         stats.record_error(elapsed, exc)
         predicted = None
         correct = False
         status = "api_error"
-        error_usage = exc.usage if isinstance(exc, ClassificationError) else None
+        error_usage = (
+            exc.usage if isinstance(exc, ClassificationError) else None
+        )
         requests = error_usage.requests if error_usage is not None else None
         error = {"type": type(exc).__name__, "message": str(exc)}
         print(f"  {classifier.key}: ERROR {type(exc).__name__}: {exc}")
@@ -743,7 +932,9 @@ def classify_test(
         "classifier": classifier.key,
         "title": test.title,
         "expected": category_output(expected),
-        "predicted": category_output(predicted) if predicted is not None else None,
+        "predicted": category_output(predicted)
+        if predicted is not None
+        else None,
         "correct": correct,
         "status": status,
         "elapsed_seconds": elapsed,
@@ -753,7 +944,10 @@ def classify_test(
 
 
 def run_benchmark(
-    classifiers: list[Classifier], tests: list[TestCase], categories: list[Category], iterations: int
+    classifiers: list[Classifier],
+    tests: list[TestCase],
+    categories: list[Category],
+    iterations: int,
 ) -> tuple[dict[str, Stats], list[dict[str, Any]]]:
     """Run every classifier on every row for each full dataset iteration."""
     by_id = {c.id: c for c in categories}
@@ -763,12 +957,14 @@ def run_benchmark(
     for iteration in range(1, iterations + 1):
         print(
             f"Starting full dataset iteration {iteration}/{iterations} "
-            f"({len(tests)} rows; {attempts_per_strategy} total classifications per strategy)."
+            f"({len(tests)} rows; {attempts_per_strategy} "
+            "total classifications per strategy)."
         )
         for row_index, test in enumerate(tests, start=1):
             overall_sample = (iteration - 1) * len(tests) + row_index
             print(
-                f"iteration={iteration}/{iterations} row={row_index}/{len(tests)} "
+                f"iteration={iteration}/{iterations} "
+                f"row={row_index}/{len(tests)} "
                 f"sample={overall_sample}/{attempts_per_strategy} "
                 f"expected_id={test.category_id} title={test.title!r}"
             )
@@ -778,7 +974,9 @@ def run_benchmark(
                         "iteration": iteration,
                         "sample_index": row_index,
                         "overall_sample_index": overall_sample,
-                        **classify_test(classifier, test, by_id, stats[classifier.key]),
+                        **classify_test(
+                            classifier, test, by_id, stats[classifier.key]
+                        ),
                     }
                 )
     return stats, prediction_log
@@ -786,7 +984,10 @@ def run_benchmark(
 
 def write_output(output: dict[str, Any], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(output, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
     print(f"Wrote benchmark results to {path}")
 
 
@@ -798,7 +999,9 @@ def main() -> None:
     categories = load_categories(args.category_file)
     tests = load_tests(args.input_file, {c.id for c in categories})
     classifiers = create_classifiers(categories, args.classifiers)
-    stats, prediction_log = run_benchmark(classifiers, tests, categories, args.number_samples)
+    stats, prediction_log = run_benchmark(
+        classifiers, tests, categories, args.number_samples
+    )
     output = build_output(stats, args, len(tests), prediction_log)
     write_output(output, args.output_file)
 
