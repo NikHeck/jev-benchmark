@@ -21,7 +21,8 @@ OPENAI_MODELS = {
     "openai_luna": os.getenv("OPENAI_LUNA_MODEL", "gpt-6-luna"),
     "openai_sol": os.getenv("OPENAI_SOL_MODEL", "gpt-6-sol"),
 }
-OPENAI_REASONING_EFFORT = "none"
+RESPONSES_REASONING_EFFORT = "none"
+OPENAI_DECISIONS_INPUT_PRICE = 0.10
 DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL", "deepseek-flash")
 TYPESAFE_MODEL = os.getenv("TYPESAFE_MODEL", "jev-latest")
 REQUEST_TIMEOUT_SECONDS = 600.0
@@ -44,9 +45,10 @@ OPENAI_PRICES = {
 }
 STRATEGIES = {
     "openai_luna": ("direct", "recursive"),
+    "openai_luna_decisions": ("direct", "recursive", "recursive_subtree"),
     "openai_sol": ("direct", "recursive"),
     "deepseek_flash": ("direct", "recursive"),
-    "typesafe_jev": ("recursive",),
+    "typesafe_jev": ("recursive", "recursive_subtree"),
 }
 CLASSIFIER_CHOICES = tuple(
     f"{provider}.{strategy}"
@@ -81,6 +83,13 @@ class Category:
     level: int
     children_ids: tuple[int, ...]
     is_leaf: bool
+
+    def to_output(self) -> dict[str, Any]:
+        return {
+            "category_id": self.id,
+            "code": self.code,
+            "title": self.title,
+        }
 
 
 @dataclass(frozen=True)
@@ -155,10 +164,10 @@ class Stats:
         self,
         elapsed: float,
         usage: Usage,
-        expected: Category,
-        predicted: Category,
+        *,
+        correct: bool,
     ) -> None:
-        if expected.id == predicted.id:
+        if correct:
             self.successes += 1
         else:
             self.wrong_predictions += 1
@@ -183,6 +192,67 @@ class Stats:
         if len(self.error_examples) < 5:
             self.error_examples.append(f"{type(exc).__name__}: {exc}")
 
+    def to_output(self) -> dict[str, Any]:
+        samples = self.samples
+        return {
+            "samples": samples,
+            "successes": self.successes,
+            "wrong_predictions": self.wrong_predictions,
+            "api_errors": self.api_errors,
+            "failures": self.failures,
+            "success_rate": self.successes / samples if samples else 0.0,
+            "timing": {
+                "total_seconds": self.total_seconds,
+                "seconds_per_item": self.total_seconds / samples
+                if samples
+                else 0.0,
+            },
+            "usage": {
+                "input_tokens": self.usage.input_tokens,
+                "cached_input_tokens": self.usage.cached_input_tokens,
+                "cache_write_tokens": self.usage.cache_write_tokens,
+                "cache_hit_tokens": self.usage.cache_hit_tokens,
+                "cache_miss_tokens": self.usage.cache_miss_tokens,
+                "output_tokens": self.usage.output_tokens,
+                "api_requests_with_usage": self.usage.requests,
+                "api_requests_per_item": self.usage.requests / samples
+                if samples
+                else 0.0,
+            },
+            "cost_accounting": {
+                "known_cost_attempts": self.known_cost_attempts,
+                "unknown_cost_attempts": self.unknown_cost_attempts,
+                "known_cost_coverage": self.known_cost_attempts / samples
+                if samples
+                else 0.0,
+                "descriptions": {
+                    "known_cost_attempts": (
+                        "Number of classification attempts whose full cost is "
+                        "known, regardless of prediction correctness or "
+                        "errors. One attempt classifies one item and may "
+                        "make multiple API requests."
+                    ),
+                    "unknown_cost_attempts": (
+                        "Number of classification attempts whose full cost "
+                        "could not be determined. Available partial usage is "
+                        "still retained."
+                    ),
+                    "known_cost_coverage": (
+                        "known_cost_attempts / samples. Fraction of all "
+                        "classification attempts with a fully known cost, "
+                        "from 0 to 1. Returns 0 when there are no attempts; "
+                        "coverage is unavailable in that case."
+                    ),
+                },
+                "note": (
+                    "Measured usage is retained whenever available. "
+                    "If unknown_cost_attempts is non-zero, "
+                    "known_total_usd is a lower bound on true cost."
+                ),
+            },
+            "error_examples": self.error_examples,
+        }
+
 
 class Classifier(Protocol):
     key: str
@@ -200,18 +270,19 @@ def require_env(name: str) -> str:
 
 
 def build_classification_instructions(*, recursive: bool) -> str:
-    """Task wording shared by JSON generation and Jev's native Choice API."""
+    """Task wording shared by JSON generation and native Choice APIs."""
     instructions = (
         "Classify the expense or product title into exactly one "
-        "COICOP category. "
+        "COICOP leaf category in the supplied taxonomy. "
         "Choose only from the supplied category options. "
         f"{MULTILINGUAL_NOTE}"
     )
     if recursive:
         instructions += (
-            " In this hierarchical step, choose the best available option. "
-            "If a current category is supplied, selecting it means stop; "
-            "selecting one of its children means continue."
+            " In this hierarchical step, choose the available branch "
+            "that best matches the item. Intermediate categories guide "
+            "the traversal; continue until a category with no children "
+            "is reached."
         )
     return instructions
 
@@ -227,6 +298,26 @@ def build_flat_prompt(categories: list[Category]) -> str:
     rows = ["AVAILABLE COICOP CATEGORIES (id | code | title):"]
     rows.extend(f"{c.id} | {c.code} | {c.title}" for c in categories)
     return "\n".join(rows)
+
+
+def build_choice_instructions(
+    current: Category | None,
+    *,
+    recursive: bool,
+    subtree_context: str | None = None,
+) -> str:
+    """Task and tree context shared by the native Choice APIs."""
+    instructions = build_classification_instructions(recursive=recursive)
+    if current is not None:
+        instructions += "\n" + build_current_category_context(current)
+    if subtree_context is not None:
+        instructions += (
+            "\nUse the tree below as context to compare the available "
+            "options. Choose only from the supplied choice options "
+            "for this step; deeper descendants are context only.\n"
+            + subtree_context
+        )
+    return instructions
 
 
 def build_option_prompt(categories: list[Category]) -> str:
@@ -345,6 +436,7 @@ def load_tests(path: Path, valid_ids: set[int]) -> list[TestCase]:
 class TreeMixin:
     def _init_tree(self, categories: list[Category]) -> None:
         self.categories = categories
+        self.leaves = [c for c in categories if not c.children_ids]
         self.by_id = {c.id: c for c in categories}
         self.roots = sorted(
             (c for c in categories if c.parent_id is None),
@@ -352,11 +444,27 @@ class TreeMixin:
         )
 
     def _next_options(self, current: Category) -> list[Category]:
-        # Include the current category as a valid stopping choice,
-        # then its children.
         children = [self.by_id[cid] for cid in current.children_ids]
         children.sort(key=lambda c: coicop_sort_key(c.code))
-        return [current, *children]
+        return children
+
+    def _build_subtree_context(self, current: Category | None) -> str:
+        rows = [
+            "COICOP SUBTREE CONTEXT (id | code | title; "
+            "indentation shows parent/child relationships):"
+        ]
+
+        def append_category(category: Category, depth: int) -> None:
+            rows.append(
+                f"{'  ' * depth}{category.id} | "
+                f"{category.code} | {category.title}"
+            )
+            for child in self._next_options(category):
+                append_category(child, depth + 1)
+
+        for root in self.roots if current is None else [current]:
+            append_category(root, 0)
+        return "\n".join(rows)
 
     def _classify_recursive(
         self,
@@ -379,8 +487,6 @@ class TreeMixin:
                     title, self._next_options(selected), selected
                 )
                 total.add(usage)
-                if next_id == selected.id:
-                    break
                 selected = self.by_id[next_id]
             return ClassificationResult(selected.id, total)
         except ClassificationError as exc:
@@ -431,7 +537,7 @@ class JsonClassifier(TreeMixin):
         )
         response = self.client.responses.create(
             model=self.model,
-            reasoning={"effort": OPENAI_REASONING_EFFORT},
+            reasoning={"effort": RESPONSES_REASONING_EFFORT},
             instructions=instructions,
             input=f"{prompt}\n\nTITLE TO CLASSIFY:\n{title}",
             text={
@@ -501,7 +607,7 @@ class JsonClassifier(TreeMixin):
     def classify(self, title: str) -> ClassificationResult:
         if self.strategy == "direct":
             category_id, usage = self._request(
-                title, self.categories, self.flat_prompt, recursive=False
+                title, self.leaves, self.flat_prompt, recursive=False
             )
             return ClassificationResult(category_id, usage)
         return self._classify_recursive(
@@ -531,7 +637,121 @@ class OpenAIClassifier(JsonClassifier):
             max_retries=0,
             timeout=REQUEST_TIMEOUT_SECONDS,
         )
-        self.flat_prompt = build_flat_prompt(categories)
+        self.flat_prompt = build_flat_prompt(self.leaves)
+
+
+class OpenAIDecisionsClassifier(TreeMixin):
+    """Evaluate native choice questions through the Decisions preview API."""
+
+    provider = "openai_luna_decisions"
+
+    def __init__(self, categories: list[Category], strategy: str) -> None:
+        if strategy not in STRATEGIES[self.provider]:
+            raise ValueError(f"Unsupported Decisions strategy: {strategy}")
+        self.strategy = strategy
+        self.model = OPENAI_MODELS["openai_luna"]
+        self.key = f"{self.provider}.{strategy}"
+        self._init_tree(categories)
+        from openai import OpenAI
+
+        self.client = OpenAI(
+            api_key=require_env("OPENAI_API_KEY"),
+            max_retries=0,
+            timeout=REQUEST_TIMEOUT_SECONDS,
+        )
+
+    def _choice(
+        self, title: str, candidates: list[Category], current: Category | None
+    ) -> tuple[int, Usage]:
+        instructions = build_choice_instructions(
+            current,
+            recursive=self.strategy != "direct",
+            subtree_context=self._build_subtree_context(current)
+            if self.strategy == "recursive_subtree"
+            else None,
+        )
+        # The installed SDK predates client.decisions. Its public HTTP
+        # interface keeps SDK authentication, timeouts and retry handling.
+        response = self.client.post(
+            "/decisions",
+            cast_to=dict,
+            body={
+                "model": self.model,
+                "input": title,
+                "questions": [
+                    {
+                        "type": "choice",
+                        "name": "category",
+                        "instructions": instructions,
+                        "choices": [
+                            {
+                                "value": f"id_{c.id}",
+                                "description": f"COICOP {c.code}: {c.title}",
+                            }
+                            for c in candidates
+                        ],
+                    }
+                ],
+            },
+        )
+        u = response.get("usage") if isinstance(response, dict) else None
+        if (
+            not isinstance(u, dict)
+            or type(u.get("input_tokens")) is not int
+            or u["input_tokens"] < 0
+        ):
+            raise ClassificationError(
+                "OpenAI Decisions returned missing or invalid input usage",
+                usage=Usage(requests=1),
+                cost_complete=False,
+            )
+        usage = Usage(input_tokens=u["input_tokens"])
+        try:
+            details = u.get("input_tokens_details") or {}
+            if not isinstance(details, dict):
+                raise ValueError("input_tokens_details must be an object")
+            usage.cached_input_tokens = int(
+                details.get("cached_tokens", 0) or 0
+            )
+            usage.cache_write_tokens = int(
+                details.get("cache_write_tokens", 0) or 0
+            )
+            usage.output_tokens = int(u.get("output_tokens", 0) or 0)
+            answers = response["answers"]
+            if not isinstance(answers, list) or len(answers) != 1:
+                raise ValueError("expected exactly one category answer")
+            answer = answers[0]
+            if not isinstance(answer, dict):
+                raise ValueError("expected a choice answer object")
+            if answer.get("type") != "choice":
+                raise ValueError(
+                    f"unexpected answer type {answer.get('type')!r}"
+                )
+            if answer.get("name") != "category":
+                raise ValueError("answer name must be 'category'")
+            choices = {f"id_{c.id}": c.id for c in candidates}
+            key = answer.get("choice")
+            if not isinstance(key, str) or key not in choices:
+                raise ValueError(
+                    f"choice {key!r} is not in the supplied options"
+                )
+            category_id = choices[key]
+        except (ValueError, TypeError, KeyError) as exc:
+            raise ClassificationError(
+                "OpenAI Decisions returned an unusable classification: "
+                f"{exc}",
+                usage=usage,
+                cost_complete=True,
+            ) from exc
+        return category_id, usage
+
+    def classify(self, title: str) -> ClassificationResult:
+        if self.strategy == "direct":
+            category_id, usage = self._choice(title, self.leaves, None)
+            return ClassificationResult(category_id, usage)
+        return self._classify_recursive(
+            title, self._choice, "OpenAI Decisions classification"
+        )
 
 
 class DeepSeekClassifier(JsonClassifier):
@@ -552,7 +772,7 @@ class DeepSeekClassifier(JsonClassifier):
             max_retries=0,
             timeout=REQUEST_TIMEOUT_SECONDS,
         )
-        self.flat_prompt = build_flat_prompt(categories)
+        self.flat_prompt = build_flat_prompt(self.leaves)
 
     def _response_usage(self, response: Any) -> Usage:
         u = response.usage
@@ -569,10 +789,14 @@ class DeepSeekClassifier(JsonClassifier):
 
 class JevClassifier(TreeMixin):
     provider = "typesafe_jev"
-    strategy = "recursive"
-    key = "typesafe_jev.recursive"
 
-    def __init__(self, categories: list[Category]) -> None:
+    def __init__(
+        self, categories: list[Category], strategy: str = "recursive"
+    ) -> None:
+        if strategy not in STRATEGIES[self.provider]:
+            raise ValueError(f"Unsupported Jev strategy: {strategy}")
+        self.strategy = strategy
+        self.key = f"{self.provider}.{strategy}"
         require_env("TYPESAFE_API_KEY")
         from typesafe_sdk import Choice, RetryPolicy, TypeSafeClient
 
@@ -593,9 +817,13 @@ class JevClassifier(TreeMixin):
         criteria = {
             f"id_{c.id}": f"COICOP {c.code}: {c.title}" for c in candidates
         }
-        instructions = build_classification_instructions(recursive=True)
-        if current is not None:
-            instructions += "\n" + build_current_category_context(current)
+        instructions = build_choice_instructions(
+            current,
+            recursive=True,
+            subtree_context=self._build_subtree_context(current)
+            if self.strategy == "recursive_subtree"
+            else None,
+        )
         response = self.client.system_one(
             model=TYPESAFE_MODEL,
             state=title,
@@ -637,8 +865,12 @@ def usd(tokens: int, price_per_million: float) -> float:
     return tokens / 1_000_000 * price_per_million
 
 
-def openai_cost(usage: Usage, prices: dict[str, float] | None = None) -> float:
-    prices = prices or OPENAI_PRICES["openai_luna"]
+def openai_decisions_cost(usage: Usage) -> float:
+    """Decisions charges only input tokens, without separate cache charges."""
+    return usd(usage.input_tokens, OPENAI_DECISIONS_INPUT_PRICE)
+
+
+def openai_cost(usage: Usage, prices: dict[str, float]) -> float:
     cached = usage.cached_input_tokens
     writes = usage.cache_write_tokens
     regular = max(usage.input_tokens - cached - writes, 0)
@@ -659,76 +891,67 @@ def deepseek_cost(usage: Usage, prices: dict[str, float]) -> float:
 
 
 def known_cost_summary(
-    measured_total: float, complete_attempts_total: float, stats: Stats
+    measured_total_usd: float, complete_cost_total_usd: float, stats: Stats
 ) -> dict[str, Any]:
     return {
-        "known_total_usd": measured_total,
-        "complete_cost_attempts_total_usd": complete_attempts_total,
+        "known_total_usd": measured_total_usd,
+        "complete_cost_attempts_total_usd": complete_cost_total_usd,
         "known_cost_per_known_attempt_usd": (
-            complete_attempts_total / stats.known_cost_attempts
+            complete_cost_total_usd / stats.known_cost_attempts
             if stats.known_cost_attempts
             else 0.0
         ),
-        "known_cost_lower_bound_per_attempt_usd": measured_total
+        "known_cost_lower_bound_per_attempt_usd": measured_total_usd
         / stats.samples
         if stats.samples
         else 0.0,
         "unknown_cost_attempts": stats.unknown_cost_attempts,
-    }
-
-
-def stats_common(stats: Stats) -> dict[str, Any]:
-    samples = stats.samples
-    return {
-        "samples": samples,
-        "successes": stats.successes,
-        "wrong_predictions": stats.wrong_predictions,
-        "api_errors": stats.api_errors,
-        "failures": stats.failures,
-        "success_rate": stats.successes / samples if samples else 0.0,
-        "timing": {
-            "total_seconds": stats.total_seconds,
-            "seconds_per_item": stats.total_seconds / samples
-            if samples
-            else 0.0,
-        },
-        "usage": {
-            "input_tokens": stats.usage.input_tokens,
-            "cached_input_tokens": stats.usage.cached_input_tokens,
-            "cache_write_tokens": stats.usage.cache_write_tokens,
-            "cache_hit_tokens": stats.usage.cache_hit_tokens,
-            "cache_miss_tokens": stats.usage.cache_miss_tokens,
-            "output_tokens": stats.usage.output_tokens,
-            "api_requests_with_usage": stats.usage.requests,
-            "api_requests_per_item": stats.usage.requests / samples
-            if samples
-            else 0.0,
-        },
-        "cost_accounting": {
-            "known_cost_attempts": stats.known_cost_attempts,
-            "unknown_cost_attempts": stats.unknown_cost_attempts,
-            "known_cost_coverage": stats.known_cost_attempts / samples
-            if samples
-            else 0.0,
-            "note": (
-                "Measured usage is retained whenever available. "
-                "If unknown_cost_attempts is non-zero, "
-                "known_total_usd is a lower bound on true cost."
+        "descriptions": {
+            "known_total_usd": (
+                "Cost in USD calculated from all reported usage, including "
+                "partial usage from attempts with an unknown total cost. "
+                "A lower bound on total cost when unknown_cost_attempts is "
+                "non-zero."
+            ),
+            "complete_cost_attempts_total_usd": (
+                "Total cost in USD of attempts whose full cost is known, "
+                "including correct predictions, wrong predictions, and "
+                "errors with complete usage. Excludes all usage from "
+                "attempts with an unknown total cost."
+            ),
+            "known_cost_per_known_attempt_usd": (
+                "complete_cost_attempts_total_usd / known_cost_attempts. "
+                "Average cost in USD among attempts whose full cost is "
+                "known. Returns 0 when there are no such attempts; "
+                "the average is unavailable in that case."
+            ),
+            "known_cost_lower_bound_per_attempt_usd": (
+                "known_total_usd / samples. Lower bound on the average "
+                "cost in USD across all classification attempts, including "
+                "those with missing usage. Can be lower or higher than "
+                "known_cost_per_known_attempt_usd because the denominators "
+                "differ. Returns 0 when there are no attempts; the average "
+                "is unavailable in that case."
+            ),
+            "unknown_cost_attempts": (
+                "Number of classification attempts whose full cost could "
+                "not be determined. Their reported partial usage still "
+                "contributes to known_total_usd. One attempt classifies "
+                "one item and may make multiple API requests."
             ),
         },
-        "error_examples": stats.error_examples,
     }
 
 
 def strategy_output(
     provider: str, strategy: str, stats: Stats
 ) -> dict[str, Any]:
-    result = stats_common(stats)
+    result = stats.to_output()
     result["strategy"] = strategy
     if provider in OPENAI_MODELS:
         prices = OPENAI_PRICES[provider]
         result["model"] = OPENAI_MODELS[provider]
-        result["reasoning_effort"] = OPENAI_REASONING_EFFORT
+        result["reasoning_effort"] = RESPONSES_REASONING_EFFORT
         result["cost"] = {
             **known_cost_summary(
                 openai_cost(stats.usage, prices),
@@ -737,8 +960,21 @@ def strategy_output(
             ),
             "prices_usd_per_1m_tokens": prices,
         }
+    elif provider == "openai_luna_decisions":
+        result["model"] = OPENAI_MODELS["openai_luna"]
+        result["api"] = "decisions"
+        result["cost"] = {
+            **known_cost_summary(
+                openai_decisions_cost(stats.usage),
+                openai_decisions_cost(stats.complete_cost_usage),
+                stats,
+            ),
+            "input_price_usd_per_1m_tokens": OPENAI_DECISIONS_INPUT_PRICE,
+            "output_price_usd_per_1m_tokens": 0.0,
+        }
     elif provider == "deepseek_flash":
         result["model"] = DEEPSEEK_MODEL
+        result["reasoning_effort"] = RESPONSES_REASONING_EFFORT
         result["cost"] = {
             "peak": {
                 **known_cost_summary(
@@ -795,6 +1031,7 @@ def build_output(
             "tests_in_input_file": test_count,
             "multilingual_prompt_note": MULTILINGUAL_NOTE,
             "request_timeout_seconds": REQUEST_TIMEOUT_SECONDS,
+            "classification_target": "leaf_category",
             "sampling": (
                 "number_samples is the number of complete dataset "
                 "iterations. In every iteration, each strategy classifies "
@@ -872,19 +1109,13 @@ def create_classifiers(
             classifiers.append(
                 OpenAIClassifier(categories, strategy, provider)
             )
+        elif provider == "openai_luna_decisions":
+            classifiers.append(OpenAIDecisionsClassifier(categories, strategy))
         elif provider == "deepseek_flash":
             classifiers.append(DeepSeekClassifier(categories, strategy))
         else:
-            classifiers.append(JevClassifier(categories))
+            classifiers.append(JevClassifier(categories, strategy))
     return classifiers
-
-
-def category_output(category: Category) -> dict[str, Any]:
-    return {
-        "category_id": category.id,
-        "code": category.code,
-        "title": category.title,
-    }
 
 
 def classify_test(
@@ -903,8 +1134,8 @@ def classify_test(
         result = classifier.classify(test.title)
         elapsed = time.perf_counter() - started
         predicted = by_id[result.category_id]
-        stats.record_prediction(elapsed, result.usage, expected, predicted)
         correct = predicted.id == expected.id
+        stats.record_prediction(elapsed, result.usage, correct=correct)
         requests = result.usage.requests
         status = "correct" if correct else "wrong_prediction"
         console_status = "OK" if correct else f"FAIL predicted={predicted.id}"
@@ -931,10 +1162,8 @@ def classify_test(
         "strategy": classifier.strategy,
         "classifier": classifier.key,
         "title": test.title,
-        "expected": category_output(expected),
-        "predicted": category_output(predicted)
-        if predicted is not None
-        else None,
+        "expected": expected.to_output(),
+        "predicted": predicted.to_output() if predicted is not None else None,
         "correct": correct,
         "status": status,
         "elapsed_seconds": elapsed,
@@ -998,6 +1227,13 @@ def main() -> None:
 
     categories = load_categories(args.category_file)
     tests = load_tests(args.input_file, {c.id for c in categories})
+    leaf_ids = {c.id for c in categories if not c.children_ids}
+    for test in tests:
+        if test.category_id not in leaf_ids:
+            raise ValueError(
+                f"input CSV references non-leaf category_id "
+                f"{test.category_id}; expected categories must be leaves."
+            )
     classifiers = create_classifiers(categories, args.classifiers)
     stats, prediction_log = run_benchmark(
         classifiers, tests, categories, args.number_samples

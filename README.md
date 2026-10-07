@@ -3,20 +3,22 @@
 Benchmark category classification against the official **COICOP 2018** taxonomy using:
 
 - OpenAI **GPT-6 Luna** (`gpt-6-luna`) — direct + recursive
+- OpenAI **GPT-6 Luna Decisions API** (beta) — direct + recursive + recursive with subtree context
 - OpenAI **GPT-6 Sol** (`gpt-6-sol`) — direct + recursive
 - DeepSeek **V4.1 Flash** (`deepseek-flash`) — direct + recursive
-- TypeSafe AI **Jev** (`jev-latest`) — recursive
+- TypeSafe AI **Jev** (`jev-latest`) — recursive + recursive with subtree context
 
 The project uses [`uv`](https://docs.astral.sh/uv/) for Python/dependency management.
 
 ## Experiment matrix
 
-| Backend | Direct, all categories | Recursive tree walk |
-|---|---:|---:|
-| OpenAI Luna | yes | yes |
-| OpenAI Sol | yes | yes |
-| DeepSeek Flash | yes | yes |
-| TypeSafe Jev | no | yes |
+| Backend | Direct, all leaves | Recursive, current options | Recursive, subtree context |
+|---|---:|---:|---:|
+| OpenAI Luna Responses | yes | yes | no |
+| OpenAI Luna Decisions (beta) | yes | yes | yes |
+| OpenAI Sol | yes | yes | no |
+| DeepSeek Flash | yes | yes | no |
+| TypeSafe Jev | no | yes | yes |
 
 Every classification prompt explicitly states that **the item title may be in any language and is not necessarily English**.
 
@@ -29,7 +31,13 @@ export DEEPSEEK_API_KEY="..."
 export TYPESAFE_API_KEY="..."
 ```
 
-Model IDs can be overridden with `OPENAI_LUNA_MODEL`, `OPENAI_SOL_MODEL`, `DEEPSEEK_MODEL`, and `TYPESAFE_MODEL`. OpenAI Luna, OpenAI Sol, and DeepSeek Flash all use `none` reasoning effort for each strategy.
+Model IDs can be overridden with `OPENAI_LUNA_MODEL`, `OPENAI_SOL_MODEL`, `DEEPSEEK_MODEL`, and `TYPESAFE_MODEL`. OpenAI Luna Responses, OpenAI Sol, and DeepSeek Flash all use `none` reasoning effort for each strategy. Decisions shares `OPENAI_LUNA_MODEL`; the beta currently supports only `gpt-6-luna` and has no reasoning-effort parameter.
+
+`RESPONSES_REASONING_EFFORT` is the shared setting for OpenAI and DeepSeek
+Responses requests and is reported for both providers. DeepSeek's
+[thinking-mode documentation](https://api-docs.deepseek.com/guides/thinking_mode/)
+confirms that `reasoning.effort: "none"` disables thinking mode. This provides
+a common baseline for comparing classification latency, accuracy, and cost.
 
 All provider clients use an explicit **600-second HTTP timeout**. For recursive
 classification, this applies to each API request. The timeout is recorded as
@@ -124,6 +132,10 @@ Titles may be German, English, or any other language. Rows with a missing/invali
 ```bash
 uv run python benchmark.py --number-samples 5
 uv run python benchmark.py --number-samples 5 --classifiers openai_luna.direct openai_sol.recursive
+# Compare the two Jev context variants:
+uv run python benchmark.py --number-samples 5 --classifiers typesafe_jev.recursive typesafe_jev.recursive_subtree --output-file output_jev_context.json
+# Run all three Luna Decisions variants:
+uv run python benchmark.py --number-samples 5 --classifiers openai_luna_decisions.direct openai_luna_decisions.recursive openai_luna_decisions.recursive_subtree --output-file output_luna_decisions.json
 ```
 
 Defaults:
@@ -131,26 +143,37 @@ Defaults:
 - `--input-file input.csv`
 - `--output-file output.json`
 - `--category-file category_input.json`
-- `--classifiers MODEL.STRATEGY ...` selects model/strategy pairs; all seven run by default. Use `--help` to see valid pairs.
+- `--classifiers MODEL.STRATEGY ...` selects model/strategy pairs; all eleven run by default. Use `--help` to see valid pairs.
 
 `--number-samples N` means **N complete passes over the entire input CSV**. Every strategy classifies every row once per pass. For example, with 30 input rows and `--number-samples 5`, each strategy performs 150 classifications.
 
-With `R` rows in `input.csv`, every selected strategy performs `N × R` classification attempts. Across the seven default strategies, the run performs `7 × N × R` classification attempts in total. For example, with 30 rows and `N=5`:
+With `R` rows in `input.csv`, every selected strategy performs `N × R` classification attempts. Across the eleven default strategies, the run performs `11 × N × R` classification attempts in total. For example, with 30 rows and `N=5`:
 
 - OpenAI direct: 150
 - OpenAI recursive: 150
+- OpenAI Luna Decisions direct: 150
+- OpenAI Luna Decisions recursive: 150
+- OpenAI Luna Decisions recursive with subtree context: 150
 - OpenAI Sol direct: 150
 - OpenAI Sol recursive: 150
 - DeepSeek direct: 150
 - DeepSeek recursive: 150
 - Jev recursive: 150
-- Total across strategies: 1050
+- Jev recursive with subtree context: 150
+- Total across strategies: 1650
 
 A recursive classification attempt can contain several API requests; request counts and per-item request averages are reported separately.
 
 ## Direct vs recursive classification
 
-OpenAI and DeepSeek use the Responses API with identical classification instructions,
+All strategies return only leaf categories in the supplied taxonomy. Leaves
+are categories with no children, including the optional food detail retained
+in our tree; they need not occur at the same depth. The CLI rejects input rows
+whose expected category is an intermediate node before creating provider
+clients. Output configuration records `classification_target: "leaf_category"`.
+
+The standard OpenAI and DeepSeek strategies use the Responses API with identical
+classification instructions,
 category/title input, JSON schema (including the allowed category IDs), `none`
 reasoning effort, and a 128-token output limit. Both responses are validated locally
 against the same rules. DeepSeek cache-hit and cache-miss costs are derived from
@@ -164,22 +187,67 @@ results using the shared prompt and output constraints.
 
 ### Direct
 
-OpenAI/DeepSeek receive the entire COICOP category list and choose one category in a single API request.
+OpenAI/DeepSeek receive all leaf categories and choose one in a single API
+request. The JSON schema and local validation allow only leaf IDs.
 
 ### Recursive
 
 All recursive implementations share the classification wording, multilingual
-guidance, current-category context, and stopping instructions. Jev receives its
-answer options through native `Choice.criteria`; OpenAI and DeepSeek receive
-the category list and JSON output instructions.
+guidance, current-category context, and leaf-only target. Jev receives its
+answer options through native `Choice.criteria`; Luna Decisions receives native
+`choice` options; the Responses strategies receive the category list and JSON
+output instructions.
 
 All recursive implementations use the same tree semantics:
 
 1. choose one root category;
-2. at the selected category, choose either the **current category itself** (stop) or one of its direct children;
-3. continue until the model stops or reaches a leaf.
+2. at each intermediate category, choose one of its direct children;
+3. finish automatically when the selected category has no children.
 
-This makes OpenAI recursive, DeepSeek recursive, and Jev recursive directly comparable at the decision-strategy level.
+The standard `recursive` strategy supplies only the options for the current
+decision and, after the root decision, the current category. This makes OpenAI
+recursive, DeepSeek recursive, and Jev recursive directly comparable at the
+decision-strategy level.
+
+### Recursive with subtree context
+
+`typesafe_jev.recursive_subtree` and `openai_luna_decisions.recursive_subtree`
+use the same recursive walk to a leaf, but add an indented category tree
+to the choice instructions:
+
+- Before choosing a root, the context contains the entire tree, including all roots and descendants.
+- At each later decision, the context contains the current category and all its descendants. Other branches and ancestors are omitted.
+- The selectable options remain the roots initially, then the direct children of the current category. The current category and deeper descendants provide context and cannot be selected at that step.
+
+Indentation follows the actual parent/child links, including when collapsed
+categories skip COICOP code levels. The extra context lets the model compare
+what each branch contains before descending. It uses more input tokens per request; the
+benchmark reports accuracy, latency, token usage and cost independently for each
+variant. Jev's 255-option Choice limit applies to selectable options, not the
+number of categories described in the context.
+
+### Luna Decisions API (beta)
+
+The [Decisions API](https://developers.openai.com/api/docs/guides/decisions)
+evaluates typed questions at `/v1/decisions`. The benchmark asks one native
+`choice` question named `category`, with the same COICOP descriptions as Jev,
+and validates the returned choice locally. It adds three independent strategies:
+
+- `openai_luna_decisions.recursive`: current-step options, matching Jev recursive.
+- `openai_luna_decisions.recursive_subtree`: the same options plus the current subtree, matching Jev subtree context.
+- `openai_luna_decisions.direct`: all leaf categories are supplied as choices in one request.
+
+The [API reference](https://developers.openai.com/api/reference/resources/decisions/methods/create)
+defines a list of choice options without a published category-count limit. The
+direct variant sends all leaves without splitting them into batches;
+preview access and acceptance of that list still depend on the API. A refusal or
+an invalid answer counts as an API error, retaining any measured usage. Missing
+input usage marks the cost as incomplete.
+
+The adapter uses the OpenAI SDK's public `post` interface because the locked SDK
+version predates `client.decisions`. It uses the existing `OPENAI_API_KEY`,
+600-second timeout, and disabled automatic retries. Decisions does not take the
+Responses API's JSON-schema, output-token-limit, or reasoning parameters.
 
 ## Output structure
 
@@ -192,6 +260,11 @@ Each strategy gets its own independent statistics object:
       "direct": { "...": "..." },
       "recursive": { "...": "..." }
     },
+    "openai_luna_decisions": {
+      "direct": { "...": "..." },
+      "recursive": { "...": "..." },
+      "recursive_subtree": { "...": "..." }
+    },
     "openai_sol": {
       "direct": { "...": "..." },
       "recursive": { "...": "..." }
@@ -201,7 +274,8 @@ Each strategy gets its own independent statistics object:
       "recursive": { "...": "..." }
     },
     "typesafe_jev": {
-      "recursive": { "...": "..." }
+      "recursive": { "...": "..." },
+      "recursive_subtree": { "...": "..." }
     }
   }
 }
@@ -251,6 +325,19 @@ Correct and wrong model responses both count their full measured cost. If an API
 
 For recursive classification, successful earlier subcalls remain counted even if a later subcall fails.
 
+Each cost block and `cost_accounting` block includes a `descriptions` map
+explaining its metrics. The cost descriptions include the formulas and
+denominators for both averages: the lower bound uses all classification
+attempts, while the average over known costs uses only attempts whose full
+cost is known. Either average can be higher. An attempt classifies one item
+and may make multiple API requests.
+
+Luna Decisions uses its own [input-only pricing](https://developers.openai.com/api/docs/guides/decisions#pricing-and-availability):
+**$0.10 per 1M input tokens**, without separate cache-read, cache-write or output
+charges. Its cost is reported separately from Luna Responses. Estimates use
+standard, short-context pricing; regional and long-context multipliers are not
+included.
+
 DeepSeek reports **both peak and off-peak counterfactual costs** from the exact same measured token usage:
 
 | Token type | Peak | Off-peak |
@@ -273,5 +360,6 @@ The tests are local and do not call any paid model API.
 
 - UN COICOP 2018: https://unstats.un.org/unsd/classifications/coicop
 - OpenAI models: https://developers.openai.com/api/docs/models
+- OpenAI Decisions: https://developers.openai.com/api/docs/guides/decisions
 - DeepSeek pricing: https://api-docs.deepseek.com/quick_start/pricing/
 - TypeSafe Choice: https://docs.typesafe.ai/primitives/choice

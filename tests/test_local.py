@@ -20,9 +20,8 @@ from benchmark import (
     load_tests,
     OPENAI_MODELS,
     OPENAI_PRICES,
-    OPENAI_REASONING_EFFORT,
+    RESPONSES_REASONING_EFFORT,
     openai_cost,
-    stats_common,
 )
 
 
@@ -221,18 +220,14 @@ def test_load_categories_reads_explicit_tree_metadata(tmp_path: Path) -> None:
     assert categories[1].is_leaf is True
 
 
-def test_exact_accuracy_gives_no_credit_for_parent_prediction() -> None:
-    categories = sample_categories()
-    by_id = {c.id: c for c in categories}
+def test_success_rate_counts_wrong_predictions_and_api_errors() -> None:
     stats = Stats()
-    expected = by_id[2]  # Food -> Food products -> Bread
-    predicted = by_id[1]  # Food -> Food products
-    stats.record_prediction(0.1, Usage(input_tokens=10), expected, predicted)
-    stats.record_prediction(0.1, Usage(input_tokens=10), expected, expected)
+    stats.record_prediction(0.1, Usage(input_tokens=10), correct=False)
+    stats.record_prediction(0.1, Usage(input_tokens=10), correct=True)
     stats.record_error(0.1, RuntimeError("timeout"))
 
     assert stats.wrong_predictions == 1
-    output = stats_common(stats)
+    output = stats.to_output()
     assert output["success_rate"] == 1 / 3
     assert "hierarchy_accuracy" not in output
 
@@ -245,12 +240,14 @@ def test_deepseek_offpeak_is_half_peak() -> None:
 
 
 def test_failure_cost_accounting_distinguishes_known_and_unknown() -> None:
-    categories = sample_categories()
-    by_id = {c.id: c for c in categories}
     stats = Stats()
 
-    stats.record_prediction(0.1, Usage(input_tokens=100, output_tokens=10), by_id[2], by_id[2])
-    stats.record_prediction(0.2, Usage(input_tokens=110, output_tokens=11), by_id[2], by_id[3])
+    stats.record_prediction(
+        0.1, Usage(input_tokens=100, output_tokens=10), correct=True
+    )
+    stats.record_prediction(
+        0.2, Usage(input_tokens=110, output_tokens=11), correct=False
+    )
     stats.record_error(
         0.3,
         ClassificationError(
@@ -275,6 +272,7 @@ def test_known_cost_summary_marks_total_as_lower_bound_when_needed() -> None:
     stats.wrong_predictions = 1
     stats.api_errors = 2
     summary = known_cost_summary(0.12, 0.09, stats)
+    descriptions = summary.pop("descriptions")
     assert summary == {
         "known_total_usd": 0.12,
         "complete_cost_attempts_total_usd": 0.09,
@@ -282,13 +280,17 @@ def test_known_cost_summary_marks_total_as_lower_bound_when_needed() -> None:
         "known_cost_lower_bound_per_attempt_usd": 0.03,
         "unknown_cost_attempts": 1,
     }
+    assert set(descriptions) == set(summary)
+    assert all(
+        isinstance(value, str) and value.strip()
+        for value in descriptions.values()
+    )
 
 
 def test_partial_usage_from_unknown_cost_error_not_in_complete_average() -> None:
-    categories = sample_categories()
     stats = Stats()
     stats.record_prediction(
-        0.1, Usage(input_tokens=100, output_tokens=10), categories[2], categories[2]
+        0.1, Usage(input_tokens=100, output_tokens=10), correct=True
     )
     stats.record_error(
         0.2,
@@ -363,7 +365,12 @@ def test_number_samples_means_full_dataset_iterations(tmp_path: Path) -> None:
     assert config["tests_in_input_file"] == 30
     assert config["classifications_per_strategy"] == 150
     assert config["request_timeout_seconds"] == 600.0
+    assert config["classification_target"] == "leaf_category"
     assert "complete dataset iterations" in config["sampling"]
+    for provider in ("openai_luna", "deepseek_flash"):
+        assert output["models"][provider]["direct"]["reasoning_effort"] == (
+            RESPONSES_REASONING_EFFORT
+        )
 
 
 def test_build_output_prediction_log_is_separate_top_level_element(tmp_path: Path) -> None:
@@ -427,6 +434,61 @@ def test_selected_sol_strategy_has_own_model_effort_and_price(tmp_path: Path) ->
     assert list(output["models"]) == ["openai_sol"]
     sol = output["models"]["openai_sol"]["recursive"]
     assert sol["model"] == OPENAI_MODELS["openai_sol"] == "gpt-6-sol"
-    assert sol["reasoning_effort"] == OPENAI_REASONING_EFFORT == "none"
+    assert sol["reasoning_effort"] == RESPONSES_REASONING_EFFORT == "none"
     assert sol["cost"]["prices_usd_per_1m_tokens"] == OPENAI_PRICES["openai_sol"]
     assert openai_cost(Usage(input_tokens=1_000_000), OPENAI_PRICES["openai_sol"]) == 2.0
+
+
+def test_jev_variants_have_independent_results_and_costs(tmp_path: Path) -> None:
+    args = argparse.Namespace(
+        number_samples=1,
+        input_file=tmp_path / "input.csv",
+        category_file=tmp_path / "category_input.json",
+    )
+    stats = {
+        "typesafe_jev.recursive": Stats(successes=1, usage=Usage(input_tokens=100)),
+        "typesafe_jev.recursive_subtree": Stats(wrong_predictions=1, usage=Usage(input_tokens=1000)),
+    }
+    output = build_output(stats, args, test_count=1)
+    jev = output["models"]["typesafe_jev"]
+    assert list(jev) == ["recursive", "recursive_subtree"]
+    assert jev["recursive"]["success_rate"] == 1.0
+    assert jev["recursive_subtree"]["success_rate"] == 0.0
+    assert jev["recursive_subtree"]["strategy"] == "recursive_subtree"
+    assert jev["recursive_subtree"]["model"] == jev["recursive"]["model"]
+    assert jev["recursive_subtree"]["cost"]["known_total_usd"] == (
+        10 * jev["recursive"]["cost"]["known_total_usd"]
+    )
+
+
+def test_decisions_variants_have_separate_input_only_costs(tmp_path: Path) -> None:
+    import benchmark
+
+    usage = Usage(
+        input_tokens=1_000_000, cached_input_tokens=100_000,
+        cache_write_tokens=200_000, output_tokens=1_000_000,
+    )
+    assert benchmark.openai_decisions_cost(usage) == 0.10
+    args = argparse.Namespace(
+        number_samples=1,
+        input_file=tmp_path / "input.csv",
+        category_file=tmp_path / "category_input.json",
+    )
+    stats = {
+        "openai_luna.direct": Stats(successes=1, usage=usage),
+        "openai_luna_decisions.direct": Stats(successes=1, usage=usage),
+        "openai_luna_decisions.recursive": Stats(wrong_predictions=1),
+        "openai_luna_decisions.recursive_subtree": Stats(api_errors=1),
+    }
+    output = build_output(stats, args, test_count=1)
+    decisions = output["models"]["openai_luna_decisions"]
+    assert list(decisions) == ["direct", "recursive", "recursive_subtree"]
+    for result in decisions.values():
+        assert result["model"] == OPENAI_MODELS["openai_luna"]
+        assert result["api"] == "decisions"
+        assert "reasoning_effort" not in result
+        assert result["cost"]["input_price_usd_per_1m_tokens"] == 0.10
+        assert result["cost"]["output_price_usd_per_1m_tokens"] == 0.0
+    direct = output["models"]["openai_luna"]["direct"]
+    assert direct["cost"]["known_total_usd"] > decisions["direct"]["cost"]["known_total_usd"]
+    assert decisions["direct"]["cost"]["known_total_usd"] == 0.10
