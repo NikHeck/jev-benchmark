@@ -18,7 +18,7 @@ from benchmark import (
     known_cost_summary,
     load_categories,
     load_tests,
-    OPENAI_MODELS,
+    PROVIDERS,
     OPENAI_PRICES,
     RESPONSES_REASONING_EFFORT,
     openai_cost,
@@ -433,10 +433,14 @@ def test_selected_sol_strategy_has_own_model_effort_and_price(tmp_path: Path) ->
     output = build_output({"openai_sol.recursive": Stats()}, args, test_count=1)
     assert list(output["models"]) == ["openai_sol"]
     sol = output["models"]["openai_sol"]["recursive"]
-    assert sol["model"] == OPENAI_MODELS["openai_sol"] == "gpt-6-sol"
-    assert sol["reasoning_effort"] == RESPONSES_REASONING_EFFORT == "none"
+    assert sol["model"] == PROVIDERS["openai_sol"].model == "gpt-6.1-sol"
+    assert sol["reasoning_effort"] == PROVIDERS["openai_sol"].reasoning_effort == "low"
     assert sol["cost"]["prices_usd_per_1m_tokens"] == OPENAI_PRICES["openai_sol"]
     assert openai_cost(Usage(input_tokens=1_000_000), OPENAI_PRICES["openai_sol"]) == 2.0
+    assert openai_cost(
+        Usage(input_tokens=1_000_000, cached_input_tokens=1_000_000),
+        OPENAI_PRICES["openai_sol"],
+    ) == 0.10
 
 
 def test_jev_variants_have_independent_results_and_costs(tmp_path: Path) -> None:
@@ -476,19 +480,18 @@ def test_decisions_variants_have_separate_input_only_costs(tmp_path: Path) -> No
     )
     stats = {
         "openai_luna.direct": Stats(successes=1, usage=usage),
-        "openai_luna_decisions.direct": Stats(successes=1, usage=usage),
-        "openai_luna_decisions.recursive": Stats(wrong_predictions=1),
+        "openai_luna_decisions.recursive": Stats(successes=1, usage=usage),
         "openai_luna_decisions.recursive_subtree": Stats(api_errors=1),
     }
     output = build_output(stats, args, test_count=1)
     decisions = output["models"]["openai_luna_decisions"]
-    assert list(decisions) == ["direct", "recursive", "recursive_subtree"]
+    assert list(decisions) == ["recursive", "recursive_subtree"]
     for result in decisions.values():
-        assert result["model"] == OPENAI_MODELS["openai_luna"]
+        assert result["model"] == PROVIDERS["openai_luna_decisions"].model
         assert result["api"] == "decisions"
         assert "reasoning_effort" not in result
         assert result["cost"]["input_price_usd_per_1m_tokens"] == 0.10
         assert result["cost"]["output_price_usd_per_1m_tokens"] == 0.0
     direct = output["models"]["openai_luna"]["direct"]
-    assert direct["cost"]["known_total_usd"] > decisions["direct"]["cost"]["known_total_usd"]
-    assert decisions["direct"]["cost"]["known_total_usd"] == 0.10
+    assert direct["cost"]["known_total_usd"] > decisions["recursive"]["cost"]["known_total_usd"]
+    assert decisions["recursive"]["cost"]["known_total_usd"] == 0.10

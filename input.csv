@@ -7,7 +7,7 @@ category_id,title
 374,ebelin Haarschmuck 18St
 633,KATJES EASYLIFE
 633,WUNDERLAND SAUER
-636,GEMUESESTAEBCHEN
+636,Gemüsestäbchen
 340,Sprachkurs Spanisch
 415,dmBio 4-Korn Flocken 500g
 634,VEGANE MAULT.
@@ -52,7 +52,7 @@ category_id,title
 167,Dr. Beckmann Fleckenteufel
 414,Manner Original Neapolitaner Schnitten
 633,HARIBO Mäusespeck
-240,Gondelticket Stubai
+240,Gondelticket Stubai Sommer
 344,Brüderla Schäufele
 436,Saure Zipfel im Glas
 636,Kartoffel Knedle
@@ -75,7 +75,7 @@ category_id,title
 294,Männertreu 1Stk
 294,Kröten-Binse 2Stk
 294,Gänsefingerkraut
-294,Natternkopf
+294,Natternkopf drei Kübel
 329,Laminiergerät
 133,Wackeldackel
 130,Fließentisch
@@ -99,10 +99,7 @@ category_id,title
 414,Liebesknochen
 157,Weidenkorb
 138,Spieldecke
-,Fat Monkey Sprossenwand
-,Mitgliedsbeitrag DAV Sektion Dresden Jahr 2023
-,Rechtsschutzversicherung
-,ADAC Beitrag
-,ADFC Beitrag
-,DAV Familienmitgliedschaft
-,Gebuehr DAV Huette Warth
+289,Fat Monkey Sprossenwand
+362,Rechtsschutzversicherung
+310,DAV Familienmitgliedschaft
+351,Gebuehr DAV Huette Warth

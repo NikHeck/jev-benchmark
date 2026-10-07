@@ -11,21 +11,79 @@ import csv
 import json
 import os
 import time
-from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Protocol
 
-OPENAI_MODELS = {
-    "openai_luna": os.getenv("OPENAI_LUNA_MODEL", "gpt-6-luna"),
-    "openai_sol": os.getenv("OPENAI_SOL_MODEL", "gpt-6-sol"),
-}
 RESPONSES_REASONING_EFFORT = "none"
 OPENAI_DECISIONS_INPUT_PRICE = 0.10
-DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL", "deepseek-flash")
-TYPESAFE_MODEL = os.getenv("TYPESAFE_MODEL", "jev-latest")
 REQUEST_TIMEOUT_SECONDS = 600.0
+
+
+@dataclass(frozen=True)
+class ProviderConfig:
+    """Provider settings shared by requests, strategy selection and reports."""
+
+    key: str
+    name: str
+    model: str
+    api: str
+    api_key_env: str
+    strategies: tuple[str, ...]
+    base_url: str | None = None
+    reasoning_effort: str | None = None
+
+
+PROVIDERS = {
+    config.key: config
+    for config in (
+        ProviderConfig(
+            key="openai_luna",
+            name="OpenAI",
+            model=os.getenv("OPENAI_LUNA_MODEL", "gpt-6-luna"),
+            api="responses",
+            api_key_env="OPENAI_API_KEY",
+            strategies=("direct", "recursive"),
+            reasoning_effort=RESPONSES_REASONING_EFFORT,
+        ),
+        ProviderConfig(
+            key="openai_luna_decisions",
+            name="OpenAI Decisions",
+            model=os.getenv("OPENAI_LUNA_MODEL", "gpt-6-luna"),
+            api="decisions",
+            api_key_env="OPENAI_API_KEY",
+            strategies=("recursive", "recursive_subtree"),
+        ),
+        ProviderConfig(
+            key="openai_sol",
+            name="OpenAI",
+            model=os.getenv("OPENAI_SOL_MODEL", "gpt-6.1-sol"),
+            api="responses",
+            api_key_env="OPENAI_API_KEY",
+            strategies=("direct", "recursive"),
+            reasoning_effort="low",
+        ),
+        ProviderConfig(
+            key="deepseek_flash",
+            name="DeepSeek",
+            model=os.getenv("DEEPSEEK_MODEL", "deepseek-flash"),
+            api="responses",
+            api_key_env="DEEPSEEK_API_KEY",
+            strategies=("direct", "recursive"),
+            base_url="https://api.deepseek.com",
+            reasoning_effort=RESPONSES_REASONING_EFFORT,
+        ),
+        ProviderConfig(
+            key="typesafe_jev",
+            name="Jev",
+            model=os.getenv("TYPESAFE_MODEL", "jev-latest"),
+            api="jev",
+            api_key_env="TYPESAFE_API_KEY",
+            strategies=("recursive", "recursive_subtree"),
+        ),
+    )
+}
 
 # USD per 1M tokens. Verify before long benchmark runs;
 # provider prices can change.
@@ -38,18 +96,12 @@ OPENAI_PRICES = {
     },
     "openai_sol": {
         "input": 2.00,
-        "cached_input": 0.20,
+        "cached_input": 0.10,
         "cache_write": 2.50,
         "output": 10.00,
     },
 }
-STRATEGIES = {
-    "openai_luna": ("direct", "recursive"),
-    "openai_luna_decisions": ("direct", "recursive", "recursive_subtree"),
-    "openai_sol": ("direct", "recursive"),
-    "deepseek_flash": ("direct", "recursive"),
-    "typesafe_jev": ("recursive", "recursive_subtree"),
-}
+STRATEGIES = {key: config.strategies for key, config in PROVIDERS.items()}
 CLASSIFIER_CHOICES = tuple(
     f"{provider}.{strategy}"
     for provider, strategies in STRATEGIES.items()
@@ -294,7 +346,7 @@ def build_current_category_context(current: Category) -> str:
     )
 
 
-def build_flat_prompt(categories: list[Category]) -> str:
+def build_category_prompt(categories: list[Category]) -> str:
     rows = ["AVAILABLE COICOP CATEGORIES (id | code | title):"]
     rows.extend(f"{c.id} | {c.code} | {c.title}" for c in categories)
     return "\n".join(rows)
@@ -318,12 +370,6 @@ def build_choice_instructions(
             + subtree_context
         )
     return instructions
-
-
-def build_option_prompt(categories: list[Category]) -> str:
-    rows = ["AVAILABLE OPTIONS (id | code | title):"]
-    rows.extend(f"{c.id} | {c.code} | {c.title}" for c in categories)
-    return "\n".join(rows)
 
 
 def coicop_sort_key(code: str) -> tuple[int, ...]:
@@ -433,22 +479,29 @@ def load_tests(path: Path, valid_ids: set[int]) -> list[TestCase]:
     return tests
 
 
-class TreeMixin:
-    def _init_tree(self, categories: list[Category]) -> None:
-        self.categories = categories
-        self.leaves = [c for c in categories if not c.children_ids]
-        self.by_id = {c.id: c for c in categories}
+@dataclass
+class CategoryTree:
+    """Shared taxonomy indexes, traversal and subtree rendering."""
+
+    categories: list[Category]
+    by_id: dict[int, Category] = field(init=False)
+    leaves: list[Category] = field(init=False)
+    roots: list[Category] = field(init=False)
+
+    def __post_init__(self) -> None:
+        self.by_id = {c.id: c for c in self.categories}
+        self.leaves = [c for c in self.categories if not c.children_ids]
         self.roots = sorted(
-            (c for c in categories if c.parent_id is None),
+            (c for c in self.categories if c.parent_id is None),
             key=lambda c: coicop_sort_key(c.code),
         )
 
-    def _next_options(self, current: Category) -> list[Category]:
+    def children(self, current: Category) -> list[Category]:
         children = [self.by_id[cid] for cid in current.children_ids]
         children.sort(key=lambda c: coicop_sort_key(c.code))
         return children
 
-    def _build_subtree_context(self, current: Category | None) -> str:
+    def subtree_context(self, current: Category | None) -> str:
         rows = [
             "COICOP SUBTREE CONTEXT (id | code | title; "
             "indentation shows parent/child relationships):"
@@ -459,35 +512,97 @@ class TreeMixin:
                 f"{'  ' * depth}{category.id} | "
                 f"{category.code} | {category.title}"
             )
-            for child in self._next_options(category):
+            for child in self.children(category):
                 append_category(child, depth + 1)
 
         for root in self.roots if current is None else [current]:
             append_category(root, 0)
         return "\n".join(rows)
 
-    def _classify_recursive(
+
+class ChoiceAdapter(Protocol):
+    """Make one decision and report its usage, without traversing the tree."""
+
+    config: ProviderConfig
+
+    def choose(
         self,
         title: str,
-        choose: Callable[
-            [str, list[Category], Category | None], tuple[int, Usage]
-        ],
-        failure_context: str,
+        candidates: list[Category],
+        current: Category | None,
         *,
-        local_validation: bool = False,
+        recursive: bool,
+        subtree_context: str | None = None,
+    ) -> ClassificationResult: ...
+
+
+@dataclass
+class TreeClassifier:
+    """Run a classification strategy independently of its API format."""
+
+    tree: CategoryTree
+    adapter: ChoiceAdapter
+    strategy: str
+
+    def __post_init__(self) -> None:
+        if self.strategy not in self.adapter.config.strategies:
+            raise ValueError(
+                f"Unsupported {self.adapter.config.name} strategy: "
+                f"{self.strategy}"
+            )
+
+    @property
+    def provider(self) -> str:
+        return self.adapter.config.key
+
+    @property
+    def key(self) -> str:
+        return f"{self.provider}.{self.strategy}"
+
+    def _choose(
+        self,
+        title: str,
+        candidates: list[Category],
+        current: Category | None,
     ) -> ClassificationResult:
+        result = self.adapter.choose(
+            title,
+            candidates,
+            current,
+            recursive=self.strategy != "direct",
+            subtree_context=self.tree.subtree_context(current)
+            if self.strategy == "recursive_subtree"
+            else None,
+        )
+        valid_ids = [c.id for c in candidates]
+        if (
+            type(result.category_id) is not int
+            or result.category_id not in valid_ids
+        ):
+            raise ClassificationError(
+                f"{self.adapter.config.name} returned category_id "
+                f"{result.category_id!r} which is not one of {valid_ids}",
+                usage=result.usage,
+                cost_complete=True,
+            )
+        return result
+
+    def classify(self, title: str) -> ClassificationResult:
         """Walk the tree and retain billed usage if a later decision fails."""
+        if self.strategy == "direct":
+            return self._choose(title, self.tree.leaves, None)
+
         total = Usage(requests=0)
         try:
-            selected_id, usage = choose(title, self.roots, None)
-            total.add(usage)
-            selected = self.by_id[selected_id]
+            result = self._choose(title, self.tree.roots, None)
+            total.add(result.usage)
+            selected = self.tree.by_id[result.category_id]
             while selected.children_ids:
-                next_id, usage = choose(
-                    title, self._next_options(selected), selected
+                result = self._choose(
+                    title, self.tree.children(selected), selected
                 )
-                total.add(usage)
-                selected = self.by_id[next_id]
+                total.add(result.usage)
+                selected = self.tree.by_id[result.category_id]
             return ClassificationResult(selected.id, total)
         except ClassificationError as exc:
             if exc.usage is not None:
@@ -496,15 +611,10 @@ class TreeMixin:
                 str(exc), usage=total, cost_complete=exc.cost_complete
             ) from exc
         except Exception as exc:
-            if local_validation and isinstance(exc, ValueError):
-                raise ClassificationError(
-                    f"{failure_context} failed local validation: {exc}",
-                    usage=total,
-                    cost_complete=True,
-                ) from exc
             if total.requests > 0:
                 raise ClassificationError(
-                    f"{failure_context} failed after partial billed usage: "
+                    f"{self.adapter.config.name} recursive classification "
+                    "failed after partial billed usage: "
                     f"{exc}",
                     usage=total,
                     cost_complete=False,
@@ -512,23 +622,37 @@ class TreeMixin:
             raise
 
 
-class JsonClassifier(TreeMixin):
-    """Share prompts and structured-output requests between JSON providers."""
+def create_openai_client(config: ProviderConfig) -> Any:
+    from openai import OpenAI
 
-    strategy: str
-    failure_context: str
-    flat_prompt: str
-    model: str
-    provider_name: str
+    return OpenAI(
+        api_key=require_env(config.api_key_env),
+        base_url=config.base_url,
+        max_retries=0,
+        timeout=REQUEST_TIMEOUT_SECONDS,
+    )
 
-    def _request(
+
+class ResponsesAdapter:
+    """Make one structured-output decision using OpenAI or DeepSeek."""
+
+    def __init__(self, config: ProviderConfig) -> None:
+        self.config = config
+        self.client = create_openai_client(config)
+
+    def choose(
         self,
         title: str,
         candidates: list[Category],
-        prompt: str,
+        current: Category | None,
+        *,
         recursive: bool,
-    ) -> tuple[int, Usage]:
+        subtree_context: str | None = None,
+    ) -> ClassificationResult:
         valid_ids = [c.id for c in candidates]
+        prompt = build_category_prompt(candidates)
+        if current is not None:
+            prompt = build_current_category_context(current) + "\n" + prompt
         instructions = build_classification_instructions(
             recursive=recursive
         ) + (
@@ -536,8 +660,8 @@ class JsonClassifier(TreeMixin):
             '{"category_id": 123}.'
         )
         response = self.client.responses.create(
-            model=self.model,
-            reasoning={"effort": RESPONSES_REASONING_EFFORT},
+            model=self.config.model,
+            reasoning={"effort": self.config.reasoning_effort},
             instructions=instructions,
             input=f"{prompt}\n\nTITLE TO CLASSIFY:\n{title}",
             text={
@@ -577,98 +701,62 @@ class JsonClassifier(TreeMixin):
                 )
         except (ValueError, TypeError) as exc:
             raise ClassificationError(
-                f"{self.provider_name} returned an unusable classification: "
+                f"{self.config.name} returned an unusable classification: "
                 f"{exc}",
                 usage=usage,
                 cost_complete=True,
             ) from exc
-        return category_id, usage
+        return ClassificationResult(category_id, usage)
 
     def _response_usage(self, response: Any) -> Usage:
         u = response.usage
         details = getattr(u, "input_tokens_details", None)
+        input_tokens = int(getattr(u, "input_tokens", 0) or 0)
+        cached = int(getattr(details, "cached_tokens", 0) or 0)
+        if self.config.key == "deepseek_flash":
+            return Usage(
+                input_tokens=input_tokens,
+                cache_hit_tokens=cached,
+                cache_miss_tokens=input_tokens - cached,
+                output_tokens=int(getattr(u, "output_tokens", 0) or 0),
+            )
         return Usage(
-            input_tokens=int(getattr(u, "input_tokens", 0) or 0),
-            cached_input_tokens=int(getattr(details, "cached_tokens", 0) or 0),
+            input_tokens=input_tokens,
+            cached_input_tokens=cached,
             cache_write_tokens=int(
                 getattr(details, "cache_write_tokens", 0) or 0
             ),
             output_tokens=int(getattr(u, "output_tokens", 0) or 0),
         )
 
-    def _choose_recursive(
-        self, title: str, candidates: list[Category], current: Category | None
-    ) -> tuple[int, Usage]:
-        prompt = build_option_prompt(candidates)
-        if current is not None:
-            prompt = build_current_category_context(current) + "\n" + prompt
-        return self._request(title, candidates, prompt, recursive=True)
 
-    def classify(self, title: str) -> ClassificationResult:
-        if self.strategy == "direct":
-            category_id, usage = self._request(
-                title, self.leaves, self.flat_prompt, recursive=False
-            )
-            return ClassificationResult(category_id, usage)
-        return self._classify_recursive(
-            title, self._choose_recursive, self.failure_context
-        )
-
-
-class OpenAIClassifier(JsonClassifier):
-    failure_context = "OpenAI recursive classification"
-    provider_name = "OpenAI"
-
-    def __init__(
-        self,
-        categories: list[Category],
-        strategy: str,
-        provider: str = "openai_luna",
-    ) -> None:
-        self.provider = provider
-        self.model = OPENAI_MODELS[provider]
-        self.strategy = strategy
-        self.key = f"{self.provider}.{strategy}"
-        self._init_tree(categories)
-        from openai import OpenAI
-
-        self.client = OpenAI(
-            api_key=require_env("OPENAI_API_KEY"),
-            max_retries=0,
-            timeout=REQUEST_TIMEOUT_SECONDS,
-        )
-        self.flat_prompt = build_flat_prompt(self.leaves)
-
-
-class OpenAIDecisionsClassifier(TreeMixin):
+class DecisionsAdapter:
     """Evaluate native choice questions through the Decisions preview API."""
 
-    provider = "openai_luna_decisions"
+    def __init__(self, config: ProviderConfig) -> None:
+        self.config = config
+        self.client = create_openai_client(config)
 
-    def __init__(self, categories: list[Category], strategy: str) -> None:
-        if strategy not in STRATEGIES[self.provider]:
-            raise ValueError(f"Unsupported Decisions strategy: {strategy}")
-        self.strategy = strategy
-        self.model = OPENAI_MODELS["openai_luna"]
-        self.key = f"{self.provider}.{strategy}"
-        self._init_tree(categories)
-        from openai import OpenAI
-
-        self.client = OpenAI(
-            api_key=require_env("OPENAI_API_KEY"),
-            max_retries=0,
-            timeout=REQUEST_TIMEOUT_SECONDS,
-        )
-
-    def _choice(
-        self, title: str, candidates: list[Category], current: Category | None
-    ) -> tuple[int, Usage]:
+    def choose(
+        self,
+        title: str,
+        candidates: list[Category],
+        current: Category | None,
+        *,
+        recursive: bool,
+        subtree_context: str | None = None,
+    ) -> ClassificationResult:
+        if len(candidates) > 255:
+            raise ClassificationError(
+                "OpenAI Decisions supports at most 255 options; "
+                f"this node has {len(candidates)}.",
+                usage=Usage(requests=0),
+                cost_complete=True,
+            )
         instructions = build_choice_instructions(
             current,
-            recursive=self.strategy != "direct",
-            subtree_context=self._build_subtree_context(current)
-            if self.strategy == "recursive_subtree"
-            else None,
+            recursive=recursive,
+            subtree_context=subtree_context,
         )
         # The installed SDK predates client.decisions. Its public HTTP
         # interface keeps SDK authentication, timeouts and retry handling.
@@ -676,7 +764,7 @@ class OpenAIDecisionsClassifier(TreeMixin):
             "/decisions",
             cast_to=dict,
             body={
-                "model": self.model,
+                "model": self.config.model,
                 "input": title,
                 "questions": [
                     {
@@ -743,89 +831,48 @@ class OpenAIDecisionsClassifier(TreeMixin):
                 usage=usage,
                 cost_complete=True,
             ) from exc
-        return category_id, usage
-
-    def classify(self, title: str) -> ClassificationResult:
-        if self.strategy == "direct":
-            category_id, usage = self._choice(title, self.leaves, None)
-            return ClassificationResult(category_id, usage)
-        return self._classify_recursive(
-            title, self._choice, "OpenAI Decisions classification"
-        )
+        return ClassificationResult(category_id, usage)
 
 
-class DeepSeekClassifier(JsonClassifier):
-    provider = "deepseek_flash"
-    failure_context = "DeepSeek recursive classification"
-    provider_name = "DeepSeek"
+class JevAdapter:
+    """Make one native choice decision using Jev."""
 
-    def __init__(self, categories: list[Category], strategy: str) -> None:
-        self.strategy = strategy
-        self.model = DEEPSEEK_MODEL
-        self.key = f"{self.provider}.{strategy}"
-        self._init_tree(categories)
-        from openai import OpenAI
-
-        self.client = OpenAI(
-            api_key=require_env("DEEPSEEK_API_KEY"),
-            base_url="https://api.deepseek.com",
-            max_retries=0,
-            timeout=REQUEST_TIMEOUT_SECONDS,
-        )
-        self.flat_prompt = build_flat_prompt(self.leaves)
-
-    def _response_usage(self, response: Any) -> Usage:
-        u = response.usage
-        input_tokens = int(getattr(u, "input_tokens", 0) or 0)
-        details = getattr(u, "input_tokens_details", None)
-        hit = int(getattr(details, "cached_tokens", 0) or 0)
-        return Usage(
-            input_tokens=input_tokens,
-            cache_hit_tokens=hit,
-            cache_miss_tokens=input_tokens - hit,
-            output_tokens=int(getattr(u, "output_tokens", 0) or 0),
-        )
-
-
-class JevClassifier(TreeMixin):
-    provider = "typesafe_jev"
-
-    def __init__(
-        self, categories: list[Category], strategy: str = "recursive"
-    ) -> None:
-        if strategy not in STRATEGIES[self.provider]:
-            raise ValueError(f"Unsupported Jev strategy: {strategy}")
-        self.strategy = strategy
-        self.key = f"{self.provider}.{strategy}"
-        require_env("TYPESAFE_API_KEY")
+    def __init__(self, config: ProviderConfig) -> None:
+        self.config = config
+        require_env(config.api_key_env)
         from typesafe_sdk import Choice, RetryPolicy, TypeSafeClient
 
-        self._init_tree(categories)
         self._choice_type = Choice
         self.client = TypeSafeClient(
             retry=RetryPolicy(max_retries=0), timeout=REQUEST_TIMEOUT_SECONDS
         )
 
-    def _choice(
-        self, title: str, candidates: list[Category], current: Category | None
-    ) -> tuple[int, Usage]:
+    def choose(
+        self,
+        title: str,
+        candidates: list[Category],
+        current: Category | None,
+        *,
+        recursive: bool,
+        subtree_context: str | None = None,
+    ) -> ClassificationResult:
         if len(candidates) > 255:
-            raise ValueError(
+            raise ClassificationError(
                 "Jev Choice supports at most 255 options; "
-                f"this node has {len(candidates)}."
+                f"this node has {len(candidates)}.",
+                usage=Usage(requests=0),
+                cost_complete=True,
             )
         criteria = {
             f"id_{c.id}": f"COICOP {c.code}: {c.title}" for c in candidates
         }
         instructions = build_choice_instructions(
             current,
-            recursive=True,
-            subtree_context=self._build_subtree_context(current)
-            if self.strategy == "recursive_subtree"
-            else None,
+            recursive=recursive,
+            subtree_context=subtree_context,
         )
         response = self.client.system_one(
-            model=TYPESAFE_MODEL,
+            model=self.config.model,
             state=title,
             questions={
                 "category": self._choice_type(
@@ -853,12 +900,7 @@ class JevClassifier(TreeMixin):
                 usage=usage,
                 cost_complete=True,
             ) from exc
-        return category_id, usage
-
-    def classify(self, title: str) -> ClassificationResult:
-        return self._classify_recursive(
-            title, self._choice, "Jev classification", local_validation=True
-        )
+        return ClassificationResult(category_id, usage)
 
 
 def usd(tokens: int, price_per_million: float) -> float:
@@ -948,10 +990,12 @@ def strategy_output(
 ) -> dict[str, Any]:
     result = stats.to_output()
     result["strategy"] = strategy
-    if provider in OPENAI_MODELS:
+    config = PROVIDERS[provider]
+    result["model"] = config.model
+    if config.reasoning_effort is not None:
+        result["reasoning_effort"] = config.reasoning_effort
+    if provider in OPENAI_PRICES:
         prices = OPENAI_PRICES[provider]
-        result["model"] = OPENAI_MODELS[provider]
-        result["reasoning_effort"] = RESPONSES_REASONING_EFFORT
         result["cost"] = {
             **known_cost_summary(
                 openai_cost(stats.usage, prices),
@@ -961,7 +1005,6 @@ def strategy_output(
             "prices_usd_per_1m_tokens": prices,
         }
     elif provider == "openai_luna_decisions":
-        result["model"] = OPENAI_MODELS["openai_luna"]
         result["api"] = "decisions"
         result["cost"] = {
             **known_cost_summary(
@@ -973,8 +1016,6 @@ def strategy_output(
             "output_price_usd_per_1m_tokens": 0.0,
         }
     elif provider == "deepseek_flash":
-        result["model"] = DEEPSEEK_MODEL
-        result["reasoning_effort"] = RESPONSES_REASONING_EFFORT
         result["cost"] = {
             "peak": {
                 **known_cost_summary(
@@ -998,7 +1039,6 @@ def strategy_output(
             },
         }
     else:
-        result["model"] = TYPESAFE_MODEL
         result["cost"] = {
             **known_cost_summary(
                 usd(stats.usage.input_tokens, TYPESAFE_INPUT_PRICE),
@@ -1102,19 +1142,24 @@ def create_classifiers(
     categories: list[Category], keys: list[str] | tuple[str, ...]
 ) -> list[Classifier]:
     """Create classifiers once, preserving order and removing duplicates."""
+    tree = CategoryTree(categories)
+    adapter_types = {
+        "responses": ResponsesAdapter,
+        "decisions": DecisionsAdapter,
+        "jev": JevAdapter,
+    }
     classifiers: list[Classifier] = []
     for key in dict.fromkeys(keys):
         provider, strategy = key.split(".")
-        if provider in OPENAI_MODELS:
-            classifiers.append(
-                OpenAIClassifier(categories, strategy, provider)
+        config = PROVIDERS.get(provider)
+        if config is None:
+            raise ValueError(f"Unknown provider: {provider}")
+        if strategy not in config.strategies:
+            raise ValueError(
+                f"Unsupported {config.name} strategy: {strategy}"
             )
-        elif provider == "openai_luna_decisions":
-            classifiers.append(OpenAIDecisionsClassifier(categories, strategy))
-        elif provider == "deepseek_flash":
-            classifiers.append(DeepSeekClassifier(categories, strategy))
-        else:
-            classifiers.append(JevClassifier(categories, strategy))
+        adapter = adapter_types[config.api](config)
+        classifiers.append(TreeClassifier(tree, adapter, strategy))
     return classifiers
 
 

@@ -1,6 +1,7 @@
 """Exercise provider adapters through the real SDK without making API calls."""
 
 import json
+from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -9,7 +10,11 @@ import openai
 import pytest
 
 import benchmark
-from benchmark import Category, ClassificationError, DeepSeekClassifier, JevClassifier, OpenAIClassifier, OpenAIDecisionsClassifier
+from benchmark import Category, ClassificationError
+
+
+def make_classifier(provider, tree, strategy="recursive"):
+    return benchmark.create_classifiers(tree, [f"{provider}.{strategy}"])[0]
 
 
 @pytest.fixture
@@ -79,16 +84,16 @@ def categories():
 def test_providers_send_identical_prompts_and_constraints(provider_http, strategy, decisions, option_ids):
     calls, responses = provider_http
     classifiers = [
-        OpenAIClassifier(categories(), strategy, "openai_luna"),
-        OpenAIClassifier(categories(), strategy, "openai_sol"),
-        DeepSeekClassifier(categories(), strategy),
+        make_classifier("openai_luna", categories(), strategy),
+        make_classifier("openai_sol", categories(), strategy),
+        make_classifier("deepseek_flash", categories(), strategy),
     ]
     payloads = []
     for classifier in classifiers:
         responses.extend(response(json.dumps({"category_id": id_})) for id_ in decisions)
         result = classifier.classify("Kaffee")
         assert result.category_id == decisions[-1]
-        assert not classifier.by_id[result.category_id].children_ids
+        assert not classifier.tree.by_id[result.category_id].children_ids
         assert result.usage.requests == len(decisions)
         payloads.append(calls[-len(decisions):])
 
@@ -96,11 +101,11 @@ def test_providers_send_identical_prompts_and_constraints(provider_http, strateg
         requests = []
         for classifier, batch in zip(classifiers, payloads):
             payload = batch[step].copy()
-            assert payload.pop("model") == classifier.model
+            assert payload.pop("model") == classifier.adapter.config.model
+            assert payload.pop("reasoning") == {"effort": classifier.adapter.config.reasoning_effort}
             requests.append(payload)
         assert requests[0] == requests[1] == requests[2]
         payload = requests[0]
-        assert payload["reasoning"] == {"effort": "none"}
         assert payload["max_output_tokens"] == 128
         assert payload["store"] is False
         assert benchmark.MULTILINGUAL_NOTE in payload["instructions"]
@@ -115,14 +120,28 @@ def test_providers_send_identical_prompts_and_constraints(provider_http, strateg
         assert format_["schema"]["additionalProperties"] is False
 
 
-@pytest.mark.parametrize("classifier_type", [OpenAIClassifier, DeepSeekClassifier])
+def test_provider_configuration_drives_requests_and_report(provider_http, monkeypatch):
+    calls, responses = provider_http
+    config = replace(
+        benchmark.PROVIDERS["deepseek_flash"], reasoning_effort="low"
+    )
+    monkeypatch.setitem(benchmark.PROVIDERS, config.key, config)
+    responses.append(response())
+    make_classifier(config.key, categories(), "direct").classify("item")
+    assert calls[0]["reasoning"] == {"effort": "low"}
+    output = benchmark.strategy_output(config.key, "direct", benchmark.Stats())
+    assert output["reasoning_effort"] == "low"
+    assert benchmark.PROVIDERS["openai_luna"].reasoning_effort == "none"
+
+
+@pytest.mark.parametrize("provider", ["openai_luna", "deepseek_flash"])
 @pytest.mark.parametrize("decisions", [[0, 2, 3], [0, 1]])
-def test_jev_shares_recursive_wording_with_native_choices(provider_http, monkeypatch, classifier_type, decisions):
+def test_jev_shares_recursive_wording_with_native_choices(provider_http, monkeypatch, provider, decisions):
     import typesafe_sdk
 
     calls, responses = provider_http
     responses.extend(response(json.dumps({"category_id": id_})) for id_ in decisions)
-    json_result = classifier_type(categories(), "recursive").classify("Kaffee")
+    json_result = make_classifier(provider, categories(), "recursive").classify("Kaffee")
     jev_calls = []
     remaining = iter(decisions)
 
@@ -141,14 +160,14 @@ def test_jev_shares_recursive_wording_with_native_choices(provider_http, monkeyp
         return SimpleNamespace(system_one=system_one)
 
     monkeypatch.setattr(typesafe_sdk, "TypeSafeClient", make_jev_client)
-    jev_result = JevClassifier(categories()).classify("Kaffee")
+    jev_result = make_classifier("typesafe_jev", categories()).classify("Kaffee")
     assert jev_result.category_id == json_result.category_id == decisions[-1]
     assert jev_result.usage.requests == json_result.usage.requests == len(decisions)
 
     by_id = {c.id: c for c in categories()}
     for step, (json_call, jev_call) in enumerate(zip(calls, jev_calls)):
         assert jev_call["state"] == "Kaffee"
-        assert jev_call["model"] == benchmark.TYPESAFE_MODEL
+        assert jev_call["model"] == benchmark.PROVIDERS["typesafe_jev"].model
         question = jev_call["questions"]["category"]
         assert isinstance(question, typesafe_sdk.Choice)
         classification_wording = json_call["instructions"].split(" Return JSON only,", 1)[0]
@@ -190,6 +209,43 @@ def jev_client(monkeypatch):
     return calls, decisions
 
 
+@pytest.mark.parametrize("strategy", ["recursive", "recursive_subtree"])
+@pytest.mark.parametrize("at_root", [False, True])
+@pytest.mark.parametrize("provider", ["typesafe_jev", "openai_luna_decisions"])
+def test_native_choice_option_limit_preserves_cost_without_sending_an_extra_request(
+    provider_http, jev_client, provider, strategy, at_root
+):
+    jev_calls, decisions = jev_client
+    http_calls, responses = provider_http
+    calls = jev_calls if provider == "typesafe_jev" else http_calls
+    if at_root:
+        tree = [
+            Category(id_, str(id_ + 1), "Root", None, 1, (), True)
+            for id_ in range(256)
+        ]
+    else:
+        tree = [Category(0, "01", "Food", None, 1, tuple(range(1, 257)), False)]
+        tree.extend(
+            Category(id_, f"01.{id_}", "Child", 0, 2, (), True)
+            for id_ in range(1, 257)
+        )
+        if provider == "typesafe_jev":
+            decisions.append(0)
+        else:
+            responses.append(decision_response("id_0"))
+
+    classifier = make_classifier(provider, tree, strategy)
+    with pytest.raises(ClassificationError, match="at most 255 options") as captured:
+        classifier.classify("item")
+    expected_requests = 0 if at_root else 1
+    assert len(calls) == expected_requests
+    assert captured.value.cost_complete is True
+    assert captured.value.usage.requests == expected_requests
+    assert captured.value.usage.input_tokens == 10 * expected_requests
+    output_per_request = 2 if provider == "typesafe_jev" else 0
+    assert captured.value.usage.output_tokens == output_per_request * expected_requests
+
+
 @pytest.mark.parametrize("decisions, expected_contexts, option_ids", [
     ([0, 2, 3], [[0, 1, 2, 3, 4, 5], [0, 1, 2, 3], [2, 3]], [[0, 4], [1, 2], [3]]),
     ([0, 1], [[0, 1, 2, 3, 4, 5], [0, 1, 2, 3]], [[0, 4], [1, 2]]),
@@ -205,7 +261,7 @@ def test_jev_subtree_context_narrows_without_changing_choices(
         # A collapsed pass-through category skips a COICOP code level.
         Category(5, "02.1.1", "Spirits", 4, 3, (), True),
     ]
-    classifier = JevClassifier(tree, "recursive_subtree")
+    classifier = make_classifier("typesafe_jev", tree, "recursive_subtree")
     result = classifier.classify("Kaffee")
     assert classifier.key == "typesafe_jev.recursive_subtree"
     assert result.category_id == decisions[-1]
@@ -216,7 +272,7 @@ def test_jev_subtree_context_narrows_without_changing_choices(
     by_id = {c.id: c for c in tree}
     for step, (call, expected_ids, choices) in enumerate(zip(calls, expected_contexts, option_ids)):
         assert call["state"] == "Kaffee"
-        assert call["model"] == benchmark.TYPESAFE_MODEL
+        assert call["model"] == benchmark.PROVIDERS["typesafe_jev"].model
         question = call["questions"]["category"]
         assert question.criteria == {
             f"id_{id_}": f"COICOP {by_id[id_].code}: {by_id[id_].title}" for id_ in choices
@@ -244,7 +300,7 @@ def test_jev_subtree_context_narrows_without_changing_choices(
 def test_jev_rejects_options_outside_direct_children(jev_client, decisions, strategy):
     calls, remaining = jev_client
     remaining.extend(decisions)
-    classifier = JevClassifier(categories(), strategy)
+    classifier = make_classifier("typesafe_jev", categories(), strategy)
     with pytest.raises(ClassificationError, match="not in the supplied options") as captured:
         classifier.classify("Coffee")
     if strategy == "recursive_subtree":
@@ -267,7 +323,7 @@ def test_jev_subtree_context_can_include_more_than_255_categories(jev_client):
             Category(id_, f"{parent.code}.{index}", f"Item {id_}", parent.id, 3, (), True)
             for index, id_ in enumerate(parent.children_ids, start=1)
         )
-    result = JevClassifier(tree, "recursive_subtree").classify("item")
+    result = make_classifier("typesafe_jev", tree, "recursive_subtree").classify("item")
     assert result.category_id == 3
     assert result.usage.requests == 3
     assert [len(call["questions"]["category"].criteria) for call in calls] == [1, 2, 130]
@@ -304,8 +360,8 @@ def test_decisions_matches_jev_choices_context_and_leaf_results(
         Category(4, "02", "Alcohol", None, 1, (5,), False),
         Category(5, "02.1.1", "Spirits", 4, 3, (), True),
     ]
-    jev_result = JevClassifier(tree, strategy).classify("Kaffee")
-    classifier = OpenAIDecisionsClassifier(tree, strategy)
+    jev_result = make_classifier("typesafe_jev", tree, strategy).classify("Kaffee")
+    classifier = make_classifier("openai_luna_decisions", tree, strategy)
     result = classifier.classify("Kaffee")
     assert classifier.key == f"openai_luna_decisions.{strategy}"
     assert result.category_id == jev_result.category_id == decisions[-1]
@@ -314,7 +370,7 @@ def test_decisions_matches_jev_choices_context_and_leaf_results(
     assert result.usage.output_tokens == 0
     for call, jev_call in zip(calls, jev_calls):
         assert set(call) == {"model", "input", "questions"}
-        assert call["model"] == benchmark.OPENAI_MODELS["openai_luna"]
+        assert call["model"] == benchmark.PROVIDERS["openai_luna"].model
         assert call["input"] == jev_call["state"]
         assert len(call["questions"]) == 1
         question = call["questions"][0]
@@ -325,22 +381,35 @@ def test_decisions_matches_jev_choices_context_and_leaf_results(
         assert {c["value"]: c["description"] for c in question["choices"]} == jev_question.criteria
 
 
-def test_decisions_direct_supplies_all_leaves_in_one_request(provider_http):
+@pytest.mark.parametrize("strategy", ["recursive", "recursive_subtree"])
+def test_decisions_recursive_choices_fit_limit_with_full_taxonomy(provider_http, strategy):
     calls, responses = provider_http
     tree_path = Path(__file__).resolve().parents[1] / "category_input.json"
     tree = benchmark.load_categories(tree_path)
     leaves = [c for c in tree if not c.children_ids]
     assert len(leaves) > 255
-    responses.append(decision_response(f"id_{tree[-1].id}"))
-    result = OpenAIDecisionsClassifier(tree, "direct").classify("item")
-    assert result.category_id == tree[-1].id
-    assert result.usage.requests == 1
-    assert len(calls) == 1
-    question = calls[0]["questions"][0]
-    assert question["instructions"] == benchmark.build_classification_instructions(recursive=False)
-    assert question["choices"] == [
-        {"value": f"id_{c.id}", "description": f"COICOP {c.code}: {c.title}"} for c in leaves
-    ]
+    by_id = {c.id: c for c in tree}
+    leaf = next(c for c in leaves if c.code == "01.1.4.4.5")
+    path = [leaf]
+    while path[-1].parent_id is not None:
+        path.append(by_id[path[-1].parent_id])
+    path.reverse()
+    responses.extend(decision_response(f"id_{c.id}") for c in path)
+    classifier = make_classifier("openai_luna_decisions", tree, strategy)
+    result = classifier.classify("Unsweetened oat drink")
+    assert result.category_id == leaf.id
+    assert result.usage.requests == len(path)
+    assert len(calls) == len(path)
+    for index, call in enumerate(calls):
+        current = None if index == 0 else path[index - 1]
+        candidates = classifier.tree.roots if current is None else classifier.tree.children(current)
+        question = call["questions"][0]
+        assert len(question["choices"]) <= 255
+        assert question["choices"] == [
+            {"value": f"id_{c.id}", "description": f"COICOP {c.code}: {c.title}"} for c in candidates
+        ]
+        if strategy == "recursive_subtree":
+            assert classifier.tree.subtree_context(current) in question["instructions"]
 
 
 @pytest.mark.parametrize("answers", [
@@ -361,7 +430,8 @@ def test_decisions_unusable_answers_retain_billed_usage(provider_http, answers):
     payload = decision_response()
     payload["answers"] = answers
     responses.append(payload)
-    classifier = OpenAIDecisionsClassifier(categories(), "direct")
+    leaves = [replace(c, parent_id=None) for c in categories() if c.is_leaf]
+    classifier = make_classifier("openai_luna_decisions", leaves)
     with pytest.raises(ClassificationError, match="unusable classification") as captured:
         classifier.classify("Coffee")
     assert captured.value.cost_complete is True
@@ -374,7 +444,7 @@ def test_decisions_unusable_answers_retain_billed_usage(provider_http, answers):
 def test_decisions_rejects_options_outside_direct_children(provider_http, strategy, decisions):
     _, responses = provider_http
     responses.extend(decision_response(f"id_{id_}") for id_ in decisions)
-    classifier = OpenAIDecisionsClassifier(categories(), strategy)
+    classifier = make_classifier("openai_luna_decisions", categories(), strategy)
     with pytest.raises(ClassificationError, match="not in the supplied options") as captured:
         classifier.classify("Coffee")
     assert captured.value.cost_complete is True
@@ -390,7 +460,7 @@ def test_decisions_missing_usage_preserves_previous_cost_as_lower_bound(provider
     payload = decision_response("id_1")
     payload["usage"] = usage
     responses.extend([decision_response("id_0"), payload])
-    classifier = OpenAIDecisionsClassifier(categories(), "recursive_subtree")
+    classifier = make_classifier("openai_luna_decisions", categories(), "recursive_subtree")
     with pytest.raises(ClassificationError, match="input usage") as captured:
         classifier.classify("Bread")
     assert captured.value.cost_complete is False
@@ -408,7 +478,8 @@ def test_decisions_invalid_usage_details_retain_input_cost(provider_http, usage_
     payload = decision_response()
     payload["usage"].update(usage_details)
     responses.append(payload)
-    classifier = OpenAIDecisionsClassifier(categories(), "direct")
+    leaves = [replace(c, parent_id=None) for c in categories() if c.is_leaf]
+    classifier = make_classifier("openai_luna_decisions", leaves)
     with pytest.raises(ClassificationError) as captured:
         classifier.classify("Coffee")
     assert captured.value.cost_complete is True
@@ -416,17 +487,17 @@ def test_decisions_invalid_usage_details_retain_input_cost(provider_http, usage_
     assert captured.value.usage.requests == 1
 
 
-@pytest.mark.parametrize("classifier_type", [OpenAIClassifier, DeepSeekClassifier])
+@pytest.mark.parametrize("provider", ["openai_luna", "deepseek_flash"])
 @pytest.mark.parametrize("cached", [0, 4, 10, None])
-def test_responses_usage_preserves_provider_costs(provider_http, classifier_type, cached):
+def test_responses_usage_preserves_provider_costs(provider_http, provider, cached):
     _, responses = provider_http
     responses.append(response(cached=cached))
-    classifier = classifier_type(categories(), "direct")
+    classifier = make_classifier(provider, categories(), "direct")
     usage = classifier.classify("Bread").usage
     assert usage.input_tokens == 10
     assert usage.output_tokens == 2
     assert usage.requests == 1
-    if classifier_type is DeepSeekClassifier:
+    if provider == "deepseek_flash":
         assert usage.cache_hit_tokens == (cached or 0)
         assert usage.cache_miss_tokens == 10 - (cached or 0)
         prices = benchmark.DEEPSEEK_PEAK_PRICES
@@ -439,7 +510,7 @@ def test_responses_usage_preserves_provider_costs(provider_http, classifier_type
         assert usage.cache_write_tokens == 1
 
 
-@pytest.mark.parametrize("classifier_type", [OpenAIClassifier, DeepSeekClassifier])
+@pytest.mark.parametrize("provider", ["openai_luna", "deepseek_flash"])
 @pytest.mark.parametrize("bad_response", [
     response("invalid JSON"),
     response("[]"),
@@ -455,10 +526,10 @@ def test_responses_usage_preserves_provider_costs(provider_http, classifier_type
     response(status="failed"),
     response(refusal=True),
 ])
-def test_unusable_output_retains_billed_usage(provider_http, classifier_type, bad_response):
+def test_unusable_output_retains_billed_usage(provider_http, provider, bad_response):
     _, responses = provider_http
     responses.append(bad_response)
-    classifier = classifier_type(categories(), "direct")
+    classifier = make_classifier(provider, categories(), "direct")
     with pytest.raises(ClassificationError, match="unusable classification") as captured:
         classifier.classify("Bread")
     assert captured.value.cost_complete is True
@@ -467,12 +538,12 @@ def test_unusable_output_retains_billed_usage(provider_http, classifier_type, ba
     assert captured.value.usage.requests == 1
 
 
-@pytest.mark.parametrize("classifier_type", [OpenAIClassifier, DeepSeekClassifier])
+@pytest.mark.parametrize("provider", ["openai_luna", "deepseek_flash"])
 @pytest.mark.parametrize("decisions", [[0, 3], [0, 0], [0, 2, 2]])
-def test_recursive_request_rejects_ids_outside_direct_children(provider_http, classifier_type, decisions):
+def test_recursive_request_rejects_ids_outside_direct_children(provider_http, provider, decisions):
     _, responses = provider_http
     responses.extend(response(json.dumps({"category_id": id_})) for id_ in decisions)
-    classifier = classifier_type(categories(), "recursive")
+    classifier = make_classifier(provider, categories(), "recursive")
     with pytest.raises(ClassificationError, match="not one of") as captured:
         classifier.classify("Coffee")
     assert captured.value.cost_complete is True

@@ -7,12 +7,11 @@ import pytest
 import benchmark
 from benchmark import (
     Category,
+    CategoryTree,
     ClassificationError,
     ClassificationResult,
-    DeepSeekClassifier,
-    JevClassifier,
-    OpenAIClassifier,
-    OpenAIDecisionsClassifier,
+    PROVIDERS,
+    TreeClassifier,
     Usage,
     run_benchmark,
 )
@@ -27,62 +26,44 @@ def categories() -> list[Category]:
     ]
 
 
-def stub_classifier(classifier_type, decisions, strategy="recursive", tree=None):
+def stub_classifier(provider, decisions, strategy="recursive", tree=None):
     """Use the real strategies with local decisions instead of SDK clients."""
-    classifier = object.__new__(classifier_type)
-    classifier.strategy = strategy
-    classifier._init_tree(categories() if tree is None else tree)
-    classifier.flat_prompt = benchmark.build_flat_prompt(classifier.leaves)
     remaining = iter(decisions)
     calls = []
 
-    def choose(title, candidates, current):
+    def choose(title, candidates, current, *, recursive, subtree_context=None):
         calls.append((title, [c.id for c in candidates], current.id if current else None))
         decision = next(remaining)
         if isinstance(decision, Exception):
             raise decision
-        return decision, Usage(input_tokens=10, output_tokens=2)
+        return ClassificationResult(decision, Usage(input_tokens=10, output_tokens=2))
 
-    if classifier_type in (JevClassifier, OpenAIDecisionsClassifier):
-        classifier._choice = choose
-    else:
-        def request(title, candidates, prompt, recursive):
-            current = classifier.by_id[candidates[0].parent_id] if recursive and prompt.startswith("CURRENT") else None
-            if recursive:
-                expected_prompt = benchmark.build_option_prompt(candidates)
-                if current:
-                    expected_prompt = (
-                        f"CURRENT COICOP CATEGORY: {current.id} | {current.code} | {current.title}\n"
-                        + expected_prompt
-                    )
-                assert prompt == expected_prompt
-            else:
-                assert prompt == classifier.flat_prompt
-            return choose(title, candidates, current)
-
-        classifier._request = request
+    adapter = SimpleNamespace(config=PROVIDERS[provider], choose=choose)
+    classifier = TreeClassifier(
+        CategoryTree(categories() if tree is None else tree), adapter, strategy
+    )
     return classifier, calls
 
 
-@pytest.mark.parametrize("classifier_type", [OpenAIClassifier, DeepSeekClassifier, JevClassifier, OpenAIDecisionsClassifier])
+@pytest.mark.parametrize("provider", list(PROVIDERS))
 @pytest.mark.parametrize("decisions, expected, options", [
     ([0, 2, 3], 3, [([0], None), ([1, 2], 0), ([3], 2)]),
     ([0, 1], 1, [([0], None), ([1, 2], 0)]),
 ])
-def test_recursive_strategies_share_child_options_and_finish_at_leaves(classifier_type, decisions, expected, options):
-    classifier, calls = stub_classifier(classifier_type, decisions)
+def test_recursive_strategies_share_child_options_and_finish_at_leaves(provider, decisions, expected, options):
+    classifier, calls = stub_classifier(provider, decisions)
     result = classifier.classify("item")
     assert result.category_id == expected
-    assert not classifier.by_id[result.category_id].children_ids
+    assert not classifier.tree.by_id[result.category_id].children_ids
     assert [(ids, current) for _, ids, current in calls] == options
     assert result.usage.requests == len(decisions)
     assert result.usage.input_tokens == 10 * len(decisions)
 
 
-@pytest.mark.parametrize("classifier_type", [OpenAIClassifier, DeepSeekClassifier, JevClassifier, OpenAIDecisionsClassifier])
-def test_recursive_strategy_finishes_immediately_at_a_leaf_root(classifier_type):
+@pytest.mark.parametrize("provider", list(PROVIDERS))
+def test_recursive_strategy_finishes_immediately_at_a_leaf_root(provider):
     classifier, calls = stub_classifier(
-        classifier_type, [0], tree=[Category(0, "01", "Food", None, 1, (), True)]
+        provider, [0], tree=[Category(0, "01", "Food", None, 1, (), True)]
     )
     result = classifier.classify("item")
     assert result.category_id == 0
@@ -90,11 +71,11 @@ def test_recursive_strategy_finishes_immediately_at_a_leaf_root(classifier_type)
     assert result.usage.requests == 1
 
 
-@pytest.mark.parametrize("classifier_type", [OpenAIClassifier, DeepSeekClassifier, JevClassifier, OpenAIDecisionsClassifier])
+@pytest.mark.parametrize("provider", list(PROVIDERS))
 @pytest.mark.parametrize("cost_complete", [False, True])
-def test_recursive_failure_retains_previous_and_failed_request_usage(classifier_type, cost_complete):
+def test_recursive_failure_retains_previous_and_failed_request_usage(provider, cost_complete):
     error = ClassificationError("bad response", usage=Usage(input_tokens=7), cost_complete=cost_complete)
-    classifier, _ = stub_classifier(classifier_type, [0, error])
+    classifier, _ = stub_classifier(provider, [0, error])
     with pytest.raises(ClassificationError) as captured:
         classifier.classify("item")
     assert str(captured.value) == "bad response"
@@ -103,35 +84,59 @@ def test_recursive_failure_retains_previous_and_failed_request_usage(classifier_
     assert captured.value.usage.requests == 2
 
 
-@pytest.mark.parametrize("classifier_type", [OpenAIClassifier, DeepSeekClassifier, JevClassifier, OpenAIDecisionsClassifier])
-def test_recursive_transport_failure_marks_partial_cost_unknown(classifier_type):
-    classifier, _ = stub_classifier(classifier_type, [0, RuntimeError("timeout")])
+@pytest.mark.parametrize("provider", list(PROVIDERS))
+def test_recursive_transport_failure_marks_partial_cost_unknown(provider):
+    classifier, _ = stub_classifier(provider, [0, RuntimeError("timeout")])
     with pytest.raises(ClassificationError, match="partial billed usage") as captured:
         classifier.classify("item")
     assert captured.value.cost_complete is False
     assert captured.value.usage.requests == 1
 
 
-@pytest.mark.parametrize("classifier_type", [OpenAIClassifier, DeepSeekClassifier, JevClassifier, OpenAIDecisionsClassifier])
-def test_first_transport_failure_is_not_wrapped(classifier_type):
+@pytest.mark.parametrize("provider", list(PROVIDERS))
+def test_first_transport_failure_is_not_wrapped(provider):
     error = RuntimeError("timeout")
-    classifier, _ = stub_classifier(classifier_type, [error])
+    classifier, _ = stub_classifier(provider, [error])
     with pytest.raises(RuntimeError) as captured:
         classifier.classify("item")
     assert captured.value is error
 
 
-def test_jev_local_validation_failure_has_complete_partial_cost():
-    classifier, _ = stub_classifier(JevClassifier, [0, ValueError("too many options")])
-    with pytest.raises(ClassificationError, match="local validation") as captured:
+def test_local_validation_failure_retains_previous_usage_without_a_request():
+    error = ClassificationError(
+        "too many options", usage=Usage(requests=0), cost_complete=True
+    )
+    classifier, _ = stub_classifier("typesafe_jev", [0, error])
+    with pytest.raises(ClassificationError, match="too many options") as captured:
         classifier.classify("item")
     assert captured.value.cost_complete is True
     assert captured.value.usage.requests == 1
+    assert captured.value.usage.input_tokens == 10
 
 
-@pytest.mark.parametrize("classifier_type", [OpenAIClassifier, DeepSeekClassifier, OpenAIDecisionsClassifier])
-def test_direct_strategy_uses_only_leaves_in_one_request(classifier_type):
-    classifier, calls = stub_classifier(classifier_type, [3], strategy="direct")
+@pytest.mark.parametrize("decisions", [[3], [0, 0], [0, 3], [0, True]])
+def test_runner_rejects_invalid_adapter_choices_and_retains_usage(decisions):
+    classifier, calls = stub_classifier("openai_luna", decisions)
+    with pytest.raises(ClassificationError, match="not one of") as captured:
+        classifier.classify("item")
+    assert captured.value.cost_complete is True
+    assert captured.value.usage.requests == len(decisions)
+    assert captured.value.usage.input_tokens == 10 * len(decisions)
+    assert len(calls) == len(decisions)
+
+
+def test_direct_runner_rejects_an_intermediate_adapter_choice():
+    classifier, _ = stub_classifier("openai_luna", [0], strategy="direct")
+    with pytest.raises(ClassificationError, match="not one of") as captured:
+        classifier.classify("item")
+    assert captured.value.cost_complete is True
+    assert captured.value.usage.requests == 1
+    assert captured.value.usage.input_tokens == 10
+
+
+@pytest.mark.parametrize("provider", ["openai_luna", "openai_sol", "deepseek_flash"])
+def test_direct_strategy_uses_only_leaves_in_one_request(provider):
+    classifier, calls = stub_classifier(provider, [3], strategy="direct")
     result = classifier.classify("item")
     assert result.category_id == 3
     assert calls == [("item", [1, 3], None)]
@@ -186,20 +191,43 @@ def test_runner_preserves_order_exact_scoring_and_prediction_log(monkeypatch):
 
 
 def test_classifier_selection_keeps_order_and_deduplicates(monkeypatch):
-    monkeypatch.setattr(benchmark, "OpenAIClassifier", lambda cats, strategy, provider: (provider, strategy))
-    monkeypatch.setattr(benchmark, "DeepSeekClassifier", lambda cats, strategy: ("deepseek_flash", strategy))
-    monkeypatch.setattr(benchmark, "JevClassifier", lambda cats, strategy: ("typesafe_jev", strategy))
-    monkeypatch.setattr(benchmark, "OpenAIDecisionsClassifier", lambda cats, strategy: ("openai_luna_decisions", strategy))
-    assert benchmark.create_classifiers(categories(), [
+    def stub_adapter(api):
+        return lambda config: SimpleNamespace(config=config, api=api)
+
+    monkeypatch.setattr(benchmark, "ResponsesAdapter", stub_adapter("responses"))
+    monkeypatch.setattr(benchmark, "JevAdapter", stub_adapter("jev"))
+    monkeypatch.setattr(benchmark, "DecisionsAdapter", stub_adapter("decisions"))
+    classifiers = benchmark.create_classifiers(categories(), [
         "typesafe_jev.recursive_subtree", "openai_sol.direct", "typesafe_jev.recursive_subtree",
-        "typesafe_jev.recursive", "openai_luna_decisions.direct", "deepseek_flash.recursive",
+        "typesafe_jev.recursive", "deepseek_flash.recursive",
         "openai_luna_decisions.recursive", "openai_luna_decisions.recursive_subtree",
-        "openai_luna_decisions.direct",
-    ]) == [
+        "openai_luna_decisions.recursive",
+    ])
+    assert [(c.provider, c.strategy) for c in classifiers] == [
         ("typesafe_jev", "recursive_subtree"), ("openai_sol", "direct"),
-        ("typesafe_jev", "recursive"), ("openai_luna_decisions", "direct"), ("deepseek_flash", "recursive"),
+        ("typesafe_jev", "recursive"), ("deepseek_flash", "recursive"),
         ("openai_luna_decisions", "recursive"), ("openai_luna_decisions", "recursive_subtree"),
     ]
+    assert all(c.tree is classifiers[0].tree for c in classifiers)
+    assert all(c.adapter.api == c.adapter.config.api for c in classifiers)
+
+
+@pytest.mark.parametrize("key, message", [
+    ("unknown.direct", "Unknown provider"),
+    ("typesafe_jev.direct", "Unsupported Jev strategy"),
+    ("openai_luna_decisions.direct", "Unsupported OpenAI Decisions strategy"),
+    ("openai_luna.recursive_subtree", "Unsupported OpenAI strategy"),
+])
+def test_invalid_classifier_selection_is_rejected_before_creating_clients(
+    monkeypatch, key, message
+):
+    def unexpected_client(config):
+        pytest.fail("Provider clients must not be created for invalid selections")
+
+    for adapter in ("ResponsesAdapter", "DecisionsAdapter", "JevAdapter"):
+        monkeypatch.setattr(benchmark, adapter, unexpected_client)
+    with pytest.raises(ValueError, match=message):
+        benchmark.create_classifiers(categories(), [key])
 
 
 def test_main_rejects_nonleaf_expected_category_before_creating_clients(tmp_path, monkeypatch):
@@ -232,3 +260,12 @@ def test_subtree_strategy_is_available_for_native_choice_apis(monkeypatch):
     ])
     with pytest.raises(SystemExit):
         benchmark.parse_args()
+
+
+def test_cli_rejects_decisions_direct(monkeypatch):
+    monkeypatch.setattr("sys.argv", [
+        "benchmark.py", "--number-samples", "1", "--classifiers", "openai_luna_decisions.direct",
+    ])
+    with pytest.raises(SystemExit) as captured:
+        benchmark.parse_args()
+    assert captured.value.code == 2
