@@ -1,4 +1,5 @@
 This repo includes a benchmark comparing Jev, OpenAI and Deepseek models for classification of household expenses.
+I would about this in a blog post [underwheLLMing: Jev is for Swabians](https://nik-heck.com/posts/jev-underwhellming/)
 
 Copy `.env.template` to `.env`, add your API keys, then run `source .env`.
 
